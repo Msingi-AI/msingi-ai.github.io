@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply - Msingi AI Research Team</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.1/firebase-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.1/firebase-auth.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <!-- Same logo SVG as before -->
+                    <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
+                        <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
+                        <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
+                        <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
+                        <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
+                        <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
+                        <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                        <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                        <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
+                            fill="none" stroke="#4F46E5" stroke-width="2"/>
+                        <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
+                        <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
+                        <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
+                    </svg>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="/research" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Application Form Section -->
+    <div class="pt-24 min-h-screen">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <div class="px-6 py-8">
+                    <h2 class="text-2xl font-bold text-gray-900 text-center mb-8">Join Our Research Team</h2>
+                    
+                    <!-- Replace YOUR_FORM_ID with the actual form ID from Formspree -->
+                    <form action="https://formspree.io/f/meookvoy" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        <!-- Personal Information -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-medium text-gray-900">Personal Information</h3>
+                            
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                                
+                                <div>
+                                    <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email" name="_replyto" required
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+
+                        <!-- Position Information -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-medium text-gray-900">Position Details</h3>
+                            
+                            <div>
+                                <label for="position" class="block text-sm font-medium text-gray-700">Position Applied For</label>
+                                <select id="position" name="position" required
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="">Select a position</option>
+                                    <option value="research_scientist">Research Scientist</option>
+                                    <option value="ml_engineer">ML Engineer</option>
+                                    <option value="language_specialist">Language Specialist</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="experience" class="block text-sm font-medium text-gray-700">Years of Experience</label>
+                                <input type="number" id="experience" name="experience" min="0" max="50" required
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+
+                            <div>
+                                <label for="languages" class="block text-sm font-medium text-gray-700">African Languages Spoken (comma-separated)</label>
+                                <input type="text" id="languages" name="languages"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-medium text-gray-900">Additional Information</h3>
+                            
+                            <div>
+                                <label for="resume" class="block text-sm font-medium text-gray-700">Resume/CV</label>
+                                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required
+                                    class="mt-1 block w-full">
+                            </div>
+
+                            <div>
+                                <label for="coverLetter" class="block text-sm font-medium text-gray-700">Cover Letter</label>
+                                <textarea id="coverLetter" name="coverLetter" rows="4" required
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="portfolio" class="block text-sm font-medium text-gray-700">Portfolio/GitHub URL (optional)</label>
+                                <input type="url" id="portfolio" name="portfolio"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+
+                        <!-- Hidden field for email subject -->
+                        <input type="hidden" name="_subject" value="New Msingi AI Application">
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button type="submit"
+                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Submit Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold">Msingi AI</h3>
+                    <p class="mt-4 text-gray-400">
+                        Leading the future of AI research in Africa.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold">Quick Links</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Research Areas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold">Connect</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">GitHub</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>© 2024 Msingi AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
