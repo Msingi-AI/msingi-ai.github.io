@@ -1,10 +1,9 @@
 // Function to get base URL for assets
 function getBaseUrl() {
     // Check if we're on GitHub Pages or localhost
-    if (window.location.hostname.includes('github.io')) {
+    const hostname = window.location.hostname;
+    if (hostname.includes('github.io')) {
         return '/msingi-ai.github.io';
-    } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        return '';
     }
     return '';
 }
@@ -75,7 +74,7 @@ function createPostContent(postData) {
                     ${marked.parse(postData.content || '')}
                 </div>
                 <div class="mt-8 pt-8 border-t border-gray-200">
-                    <a href="blog.html" class="text-indigo-600 hover:text-indigo-700">
+                    <a href="${getBaseUrl()}/blog.html" class="text-indigo-600 hover:text-indigo-700">
                         ← Back to Blog
                     </a>
                 </div>
@@ -89,7 +88,7 @@ function showError(container, message) {
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600">${message}</p>
-            <a href="blog.html" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <a href="${getBaseUrl()}/blog.html" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Back to Blog
             </a>
         </div>

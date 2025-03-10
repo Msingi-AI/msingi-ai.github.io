@@ -1,10 +1,9 @@
 // Function to get base URL for assets
 function getBaseUrl() {
     // Check if we're on GitHub Pages or localhost
-    if (window.location.hostname.includes('github.io')) {
+    const hostname = window.location.hostname;
+    if (hostname.includes('github.io')) {
         return '/msingi-ai.github.io';
-    } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        return '';
     }
     return '';
 }
