@@ -6,8 +6,9 @@ function getBaseUrl() {
 // Function to get asset URL
 function getAssetUrl(path) {
     const base = getBaseUrl();
+    // Remove any double slashes that might occur when joining paths
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${base}${cleanPath}`;
+    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
 }
 
 // Function to update navigation links
@@ -23,7 +24,7 @@ function updateNavigationLinks() {
     // Update logo link
     const logoLink = document.querySelector('.logo-link');
     if (logoLink) {
-        logoLink.href = getAssetUrl('/');
+        logoLink.href = getAssetUrl('/index.html');
     }
 }
 

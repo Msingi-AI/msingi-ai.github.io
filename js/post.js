@@ -6,8 +6,9 @@ function getBaseUrl() {
 // Function to get asset URL
 function getAssetUrl(path) {
     const base = getBaseUrl();
+    // Remove any double slashes that might occur when joining paths
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${base}${cleanPath}`;
+    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
 }
 
 // Function to format date
@@ -33,7 +34,7 @@ function createPostContent(postData, markdown) {
 
     try {
         const formattedDate = formatDate(postData.date);
-        const blogUrl = getAssetUrl('blog.html');
+        const blogUrl = getAssetUrl('/blog.html');
         
         // Initialize marked with options if not already done
         if (typeof marked !== 'undefined') {
@@ -77,11 +78,11 @@ function createPostContent(postData, markdown) {
 
 // Function to show error message
 function showError(container, message) {
-    const blogUrl = getAssetUrl('blog.html');
+    const blogUrl = getAssetUrl('/blog.html');
     container.innerHTML = `
         <div class="text-center py-12">
-            <p class="text-red-600">${message}</p>
-            <a href="${blogUrl}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <p class="text-red-600 mb-4">${message}</p>
+            <a href="${blogUrl}" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Back to Blog
             </a>
         </div>
@@ -91,7 +92,7 @@ function showError(container, message) {
 // Function to fetch post data from index.json
 async function fetchPostData(filename) {
     try {
-        const indexUrl = getAssetUrl('posts/index.json');
+        const indexUrl = getAssetUrl('/posts/index.json');
         console.log('Fetching index:', indexUrl);
         const response = await fetch(indexUrl);
         
@@ -116,7 +117,7 @@ async function fetchPostData(filename) {
 // Function to fetch markdown content
 async function fetchMarkdownContent(filename) {
     try {
-        const url = getAssetUrl(`posts/${filename}`);
+        const url = getAssetUrl(`/posts/${filename}`);
         console.log('Fetching markdown:', url);
         const response = await fetch(url);
         

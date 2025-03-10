@@ -6,6 +6,17 @@
     <title>Msingi AI Blog Post</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
+    <!-- Load marked.js before our scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
+    <!-- Initialize marked -->
+    <script>
+        marked.use({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+    </script>
     <!-- Base URL handling -->
     <script>
         // Function to get base URL for assets
@@ -16,8 +27,9 @@
         // Function to get asset URL
         function getAssetUrl(path) {
             const base = getBaseUrl();
+            // Remove any double slashes that might occur when joining paths
             const cleanPath = path.startsWith('/') ? path : `/${path}`;
-            return `${base}${cleanPath}`;
+            return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
         }
 
         // Function to update all links and scripts
@@ -39,17 +51,6 @@
 
         // Run path updates when DOM is ready
         document.addEventListener('DOMContentLoaded', updatePaths);
-    </script>
-    <!-- Load marked.js before our scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
-    <!-- Initialize marked -->
-    <script>
-        marked.use({
-            breaks: true,
-            gfm: true,
-            headerIds: true,
-            mangle: false
-        });
     </script>
     <!-- Load our scripts -->
     <script src="js/navigation.js"></script>

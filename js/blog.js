@@ -6,8 +6,9 @@ function getBaseUrl() {
 // Function to get asset URL
 function getAssetUrl(path) {
     const base = getBaseUrl();
+    // Remove any double slashes that might occur when joining paths
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${base}${cleanPath}`;
+    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
 }
 
 // Function to parse markdown frontmatter
@@ -89,7 +90,7 @@ function createPostCard(postData, filename) {
 
     try {
         const formattedDate = formatDate(postData.date);
-        const postUrl = getAssetUrl(`post.html?post=${encodeURIComponent(filename)}`);
+        const postUrl = getAssetUrl(`/post.html?post=${encodeURIComponent(filename)}`);
         
         return `
             <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -126,11 +127,11 @@ function createPostCard(postData, filename) {
 
 // Function to show error message
 function showError(container, message) {
-    const blogUrl = getAssetUrl('blog.html');
+    const blogUrl = getAssetUrl('/blog.html');
     container.innerHTML = `
         <div class="text-center py-12">
-            <p class="text-red-600">${message}</p>
-            <a href="${blogUrl}" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <p class="text-red-600 mb-4">${message}</p>
+            <a href="${blogUrl}" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Try Again
             </a>
         </div>
@@ -192,7 +193,7 @@ async function loadBlogPosts() {
         }
 
         console.log('Fetching posts index...');
-        const indexUrl = getAssetUrl('posts/index.json');
+        const indexUrl = getAssetUrl('/posts/index.json');
         console.log('Index URL:', indexUrl);
         
         const response = await fetch(indexUrl);
@@ -229,7 +230,7 @@ async function loadBlogPosts() {
                     successfulPosts++;
                 }
             } catch (error) {
-                console.error(`Error processing post ${post.filename}:`, error);
+                console.error(`Error processing post ${post?.filename}:`, error);
                 continue;
             }
         }
