@@ -10,7 +10,9 @@ function getBaseUrl() {
 
 // Function to get asset URL
 function getAssetUrl(path) {
-    return `${getBaseUrl()}${path}`;
+    // Ensure path starts with a forward slash
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${getBaseUrl()}${cleanPath}`;
 }
 
 // Function to format date
@@ -64,7 +66,7 @@ function createPostContent(postData, markdown) {
                         ${marked.parse(markdown || '')}
                     </div>
                     <div class="mt-8 pt-8 border-t border-gray-200">
-                        <a href="${getBaseUrl()}/blog.html" class="text-indigo-600 hover:text-indigo-700">
+                        <a href="${getAssetUrl('blog.html')}" class="text-indigo-600 hover:text-indigo-700">
                             ← Back to Blog
                         </a>
                     </div>
@@ -82,7 +84,7 @@ function showError(container, message) {
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600">${message}</p>
-            <a href="${getBaseUrl()}/blog.html" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <a href="${getAssetUrl('blog.html')}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Back to Blog
             </a>
         </div>
@@ -92,7 +94,7 @@ function showError(container, message) {
 // Function to fetch post data from index.json
 async function fetchPostData(filename) {
     try {
-        const indexUrl = getAssetUrl('/posts/index.json');
+        const indexUrl = getAssetUrl('posts/index.json');
         console.log('Fetching index:', indexUrl);
         const response = await fetch(indexUrl);
         
@@ -117,7 +119,7 @@ async function fetchPostData(filename) {
 // Function to fetch markdown content
 async function fetchMarkdownContent(filename) {
     try {
-        const url = getAssetUrl(`/posts/${filename}`);
+        const url = getAssetUrl(`posts/${filename}`);
         console.log('Fetching markdown:', url);
         const response = await fetch(url);
         

@@ -20,7 +20,7 @@
             return '';
         }
 
-        // Update featured post link when DOM loads
+        // Update navigation links when DOM loads
         window.addEventListener('DOMContentLoaded', function() {
             // Initialize marked
             if (typeof marked !== 'undefined') {
@@ -34,12 +34,14 @@
                 console.error('marked library not loaded');
             }
 
-            // Update featured post link
-            const featuredLink = document.getElementById('featured-post-link');
-            if (featuredLink) {
-                const currentHref = featuredLink.getAttribute('href');
-                featuredLink.href = `${getBaseUrl()}${currentHref}`;
-            }
+            // Update navigation links
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => {
+                const currentHref = link.getAttribute('href');
+                if (currentHref && currentHref.startsWith('/')) {
+                    link.href = `${getBaseUrl()}${currentHref}`;
+                }
+            });
         });
     </script>
     <!-- Load our scripts after marked is initialized -->

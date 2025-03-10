@@ -10,7 +10,9 @@ function getBaseUrl() {
 
 // Function to get asset URL
 function getAssetUrl(path) {
-    return `${getBaseUrl()}${path}`;
+    // Ensure path starts with a forward slash
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${getBaseUrl()}${cleanPath}`;
 }
 
 // Function to parse markdown frontmatter
@@ -92,16 +94,10 @@ function createPostCard(postData, filename) {
 
     try {
         const formattedDate = formatDate(postData.date);
-        const titleSlug = postData.title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/(^-|-$)/g, '');
-        
-        const excerpt = postData.excerpt || getExcerpt(postData.content);
         
         return `
             <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                <a href="${getBaseUrl()}/post.html?post=${filename}" class="block">
+                <a href="${getAssetUrl('post.html')}?post=${filename}" class="block">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-600 mb-4">
                             <time datetime="${postData.date || ''}">${formattedDate}</time>
@@ -112,7 +108,7 @@ function createPostCard(postData, filename) {
                             ${postData.title}
                         </h2>
                         <p class="text-gray-600 line-clamp-3">
-                            ${excerpt}
+                            ${postData.excerpt || ''}
                         </p>
                         <div class="mt-4">
                             <span class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
@@ -137,9 +133,9 @@ function showError(container, message) {
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600">${message}</p>
-            <button onclick="loadBlogPosts()" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <a href="${getAssetUrl('blog.html')}" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Try Again
-            </button>
+            </a>
         </div>
     `;
 }
@@ -199,7 +195,7 @@ async function loadBlogPosts() {
         }
 
         console.log('Fetching posts index...');
-        const indexUrl = getAssetUrl('/posts/index.json');
+        const indexUrl = getAssetUrl('posts/index.json');
         console.log('Index URL:', indexUrl);
         const response = await fetch(indexUrl);
         
