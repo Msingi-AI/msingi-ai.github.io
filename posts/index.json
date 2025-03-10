@@ -1,18 +1,20 @@
 {
   "posts": [
     {
-      "filename": "first-post.md",
       "title": "Pan-African Transfer Learning - Building AI That Understands Africa",
-      "date": "2025-03-10",
       "author": "Kiplangat Korir",
-      "excerpt": "Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape."
+      "date": "2025-03-10",
+      "excerpt": "Today, we're excited to announce Msingi AI's ambitious research initiative focused on Pan-African Transfer Learning. This groundbreaking project aims to revolutionize how AI models learn and adapt across Africa's diverse linguistic and cultural landscape.",
+      "filename": "first-post.md",
+      "readingTime": "10 min read"
     },
     {
+      "title": "Join the Msingi AI Data Challenge",
+      "author": "Kiplangat Korir",
+      "date": "2025-03-15",
+      "excerpt": "We're launching an exciting data challenge to help build better AI models for African languages. Join us in this initiative to improve machine translation and natural language processing for African languages.",
       "filename": "data-challenge.md",
-      "title": "MsingiAI Data Challenge - Building Africa's Language Resources",
-      "date": "2025-03-10",
-      "author": "Msingi AI Research Team",
-      "excerpt": "Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies."
+      "readingTime": "8 min read"
     }
   ]
 }

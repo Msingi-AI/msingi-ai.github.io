@@ -1,6 +1,10 @@
 // Function to get base URL for assets
 function getBaseUrl() {
-    return window.location.hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
+    const hostname = window.location.hostname;
+    if (hostname.includes('github.io')) {
+        return '/msingi-ai.github.io';
+    }
+    return '';
 }
 
 // Function to get asset URL
@@ -8,7 +12,9 @@ function getAssetUrl(path) {
     const base = getBaseUrl();
     // Remove any double slashes that might occur when joining paths
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
+    const url = `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
+    console.log('Generated URL:', url); // Debug log
+    return url;
 }
 
 // Function to parse markdown frontmatter
@@ -196,12 +202,33 @@ async function loadBlogPosts() {
         const indexUrl = getAssetUrl('/posts/index.json');
         console.log('Index URL:', indexUrl);
         
-        const response = await fetch(indexUrl);
+        // Add cache-busting parameter for development
+        const fetchUrl = indexUrl + (window.location.hostname === 'localhost' ? `?t=${Date.now()}` : '');
+        console.log('Fetch URL:', fetchUrl);
+        
+        const response = await fetch(fetchUrl, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
         if (!response.ok) {
+            console.error('Response status:', response.status);
+            console.error('Response headers:', response.headers);
+            const text = await response.text();
+            console.error('Response text:', text);
             throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
         
-        const data = await response.json();
+        let data;
+        try {
+            data = await response.json();
+        } catch (error) {
+            console.error('JSON parse error:', error);
+            console.error('Response text:', await response.text());
+            throw new Error('Failed to parse posts index as JSON');
+        }
+
         console.log('Posts index data:', data);
         
         const posts = data.posts || [];
