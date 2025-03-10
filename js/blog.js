@@ -1,18 +1,13 @@
 // Function to get base URL for assets
 function getBaseUrl() {
-    // Check if we're on GitHub Pages or localhost
-    const hostname = window.location.hostname;
-    if (hostname.includes('github.io')) {
-        return '/msingi-ai.github.io';
-    }
-    return '';
+    return window.location.hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
 }
 
 // Function to get asset URL
 function getAssetUrl(path) {
-    // Ensure path starts with a forward slash
+    const base = getBaseUrl();
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${getBaseUrl()}${cleanPath}`;
+    return `${base}${cleanPath}`;
 }
 
 // Function to parse markdown frontmatter
@@ -94,10 +89,11 @@ function createPostCard(postData, filename) {
 
     try {
         const formattedDate = formatDate(postData.date);
+        const postUrl = getAssetUrl(`post.html?post=${encodeURIComponent(filename)}`);
         
         return `
             <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                <a href="${getAssetUrl('post.html')}?post=${filename}" class="block">
+                <a href="${postUrl}" class="block">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-600 mb-4">
                             <time datetime="${postData.date || ''}">${formattedDate}</time>
@@ -130,10 +126,11 @@ function createPostCard(postData, filename) {
 
 // Function to show error message
 function showError(container, message) {
+    const blogUrl = getAssetUrl('blog.html');
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600">${message}</p>
-            <a href="${getAssetUrl('blog.html')}" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <a href="${blogUrl}" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Try Again
             </a>
         </div>
@@ -197,26 +194,27 @@ async function loadBlogPosts() {
         console.log('Fetching posts index...');
         const indexUrl = getAssetUrl('posts/index.json');
         console.log('Index URL:', indexUrl);
-        const response = await fetch(indexUrl);
         
+        const response = await fetch(indexUrl);
         if (!response.ok) {
-            throw new Error(`Failed to fetch posts index: ${response.status}`);
+            throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
         
         const data = await response.json();
         console.log('Posts index data:', data);
+        
         const posts = data.posts || [];
-
         if (posts.length === 0) {
             console.log('No posts found in index');
             postsContainer.innerHTML = '<p class="text-center text-gray-600 py-12">No blog posts available.</p>';
             return;
         }
 
-        // Clear container and create grid for post cards
+        // Create grid for post cards
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
         const grid = postsContainer.firstChild;
 
+        // Process each post
         let successfulPosts = 0;
         for (const post of posts) {
             try {
@@ -225,7 +223,6 @@ async function loadBlogPosts() {
                     continue;
                 }
 
-                // Use the post data from index.json directly
                 const postCard = createPostCard(post, post.filename);
                 if (postCard) {
                     grid.innerHTML += postCard;
@@ -233,18 +230,18 @@ async function loadBlogPosts() {
                 }
             } catch (error) {
                 console.error(`Error processing post ${post.filename}:`, error);
-                // Continue with other posts if one fails
                 continue;
             }
         }
 
-        // If no posts were successfully loaded, show error
+        // Show error if no posts could be loaded
         if (successfulPosts === 0) {
             throw new Error('No posts could be loaded successfully');
         }
+
     } catch (error) {
         console.error('Error loading blog posts:', error);
-        showError(postsContainer, 'Error loading blog posts. Please try again.');
+        showError(postsContainer, `Error loading blog posts: ${error.message}`);
     }
 }
 

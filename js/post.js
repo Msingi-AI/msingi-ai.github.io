@@ -1,18 +1,13 @@
 // Function to get base URL for assets
 function getBaseUrl() {
-    // Check if we're on GitHub Pages or localhost
-    const hostname = window.location.hostname;
-    if (hostname.includes('github.io')) {
-        return '/msingi-ai.github.io';
-    }
-    return '';
+    return window.location.hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
 }
 
 // Function to get asset URL
 function getAssetUrl(path) {
-    // Ensure path starts with a forward slash
+    const base = getBaseUrl();
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${getBaseUrl()}${cleanPath}`;
+    return `${base}${cleanPath}`;
 }
 
 // Function to format date
@@ -38,6 +33,7 @@ function createPostContent(postData, markdown) {
 
     try {
         const formattedDate = formatDate(postData.date);
+        const blogUrl = getAssetUrl('blog.html');
         
         // Initialize marked with options if not already done
         if (typeof marked !== 'undefined') {
@@ -66,7 +62,7 @@ function createPostContent(postData, markdown) {
                         ${marked.parse(markdown || '')}
                     </div>
                     <div class="mt-8 pt-8 border-t border-gray-200">
-                        <a href="${getAssetUrl('blog.html')}" class="text-indigo-600 hover:text-indigo-700">
+                        <a href="${blogUrl}" class="text-indigo-600 hover:text-indigo-700">
                             ← Back to Blog
                         </a>
                     </div>
@@ -81,10 +77,11 @@ function createPostContent(postData, markdown) {
 
 // Function to show error message
 function showError(container, message) {
+    const blogUrl = getAssetUrl('blog.html');
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600">${message}</p>
-            <a href="${getAssetUrl('blog.html')}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <a href="${blogUrl}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Back to Blog
             </a>
         </div>
@@ -99,7 +96,7 @@ async function fetchPostData(filename) {
         const response = await fetch(indexUrl);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch index: ${response.status}`);
+            throw new Error(`Failed to fetch index: ${response.status} ${response.statusText}`);
         }
         
         const data = await response.json();
@@ -124,7 +121,7 @@ async function fetchMarkdownContent(filename) {
         const response = await fetch(url);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch markdown: ${response.status}`);
+            throw new Error(`Failed to fetch markdown: ${response.status} ${response.statusText}`);
         }
         
         const text = await response.text();
@@ -159,6 +156,14 @@ async function loadPost() {
         if (!postFilename) {
             throw new Error('No post specified');
         }
+
+        // Show loading state
+        postContainer.innerHTML = `
+            <div class="text-center py-12">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
+                <p class="mt-4 text-gray-600">Loading post...</p>
+            </div>
+        `;
 
         // Fetch post data and markdown content in parallel
         console.log('Fetching post data and content...');
