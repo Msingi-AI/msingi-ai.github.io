@@ -15,26 +15,34 @@ function getAssetUrl(path) {
 
 // Function to parse markdown frontmatter
 function parseFrontMatter(markdown) {
-    if (!markdown) return null;
-    
-    const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-    if (!match) {
-        console.error('No frontmatter found in markdown');
-        return { content: markdown };
+    if (!markdown) {
+        console.error('Empty markdown content');
+        return null;
     }
-
-    const frontMatter = {};
-    match[1].split('\n').forEach(line => {
-        const [key, value] = line.split(': ');
-        if (key && value) {
-            frontMatter[key.trim()] = value.trim();
+    
+    try {
+        const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+        if (!match) {
+            console.error('No frontmatter found in markdown');
+            return { content: markdown };
         }
-    });
 
-    return {
-        ...frontMatter,
-        content: match[2].trim()
-    };
+        const frontMatter = {};
+        match[1].split('\n').forEach(line => {
+            const [key, value] = line.split(': ');
+            if (key && value) {
+                frontMatter[key.trim()] = value.trim();
+            }
+        });
+
+        return {
+            ...frontMatter,
+            content: match[2].trim()
+        };
+    } catch (error) {
+        console.error('Error parsing frontmatter:', error);
+        return null;
+    }
 }
 
 // Function to format date
@@ -56,18 +64,23 @@ function formatDate(dateString) {
 function getExcerpt(content, maxLength = 200) {
     if (!content) return '';
     
-    const plainText = content
-        .replace(/#+\s[^\n]+/g, '') // Remove headers
-        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
-        .replace(/[*_`]/g, '') // Remove markdown formatting
-        .replace(/\s+/g, ' ') // Normalize whitespace
-        .trim();
-    
-    if (plainText.length <= maxLength) {
-        return plainText;
+    try {
+        const plainText = content
+            .replace(/#+\s[^\n]+/g, '') // Remove headers
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
+            .replace(/[*_`]/g, '') // Remove markdown formatting
+            .replace(/\s+/g, ' ') // Normalize whitespace
+            .trim();
+        
+        if (plainText.length <= maxLength) {
+            return plainText;
+        }
+        
+        return plainText.substring(0, maxLength).trim() + '...';
+    } catch (error) {
+        console.error('Error creating excerpt:', error);
+        return '';
     }
-    
-    return plainText.substring(0, maxLength).trim() + '...';
 }
 
 // Function to create post card HTML
@@ -77,41 +90,46 @@ function createPostCard(postData, filename) {
         return '';
     }
 
-    const formattedDate = formatDate(postData.date);
-    const titleSlug = postData.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
-    
-    const excerpt = postData.excerpt || getExcerpt(postData.content);
-    
-    return `
-        <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="${getBaseUrl()}/post.html?post=${filename}#${titleSlug}" class="block">
-                <div class="p-6">
-                    <div class="flex items-center text-sm text-gray-600 mb-4">
-                        <time datetime="${postData.date || ''}">${formattedDate}</time>
-                        <span class="mx-2">·</span>
-                        <span>By ${postData.author || 'Unknown'}</span>
+    try {
+        const formattedDate = formatDate(postData.date);
+        const titleSlug = postData.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+        
+        const excerpt = postData.excerpt || getExcerpt(postData.content);
+        
+        return `
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                <a href="${getBaseUrl()}/post.html?post=${filename}" class="block">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-600 mb-4">
+                            <time datetime="${postData.date || ''}">${formattedDate}</time>
+                            <span class="mx-2">·</span>
+                            <span>By ${postData.author || 'Unknown'}</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600">
+                            ${postData.title}
+                        </h2>
+                        <p class="text-gray-600 line-clamp-3">
+                            ${excerpt}
+                        </p>
+                        <div class="mt-4">
+                            <span class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
+                                Read more
+                                <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600">
-                        ${postData.title}
-                    </h2>
-                    <p class="text-gray-600 line-clamp-3">
-                        ${excerpt}
-                    </p>
-                    <div class="mt-4">
-                        <span class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
-                            Read more
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </a>
-        </article>
-    `;
+                </a>
+            </article>
+        `;
+    } catch (error) {
+        console.error('Error creating post card:', error);
+        return '';
+    }
 }
 
 // Function to show error message
@@ -136,6 +154,9 @@ async function fetchMarkdownPost(filename) {
             throw new Error(`Failed to fetch ${filename}: ${response.status}`);
         }
         const text = await response.text();
+        if (!text.trim()) {
+            throw new Error(`Empty content in ${filename}`);
+        }
         console.log('Successfully fetched markdown:', filename);
         return text;
     } catch (error) {
@@ -163,6 +184,20 @@ async function loadBlogPosts() {
     `;
 
     try {
+        // Initialize marked with options
+        if (typeof marked !== 'undefined') {
+            console.log('Configuring marked parser...');
+            marked.use({
+                breaks: true,
+                gfm: true,
+                headerIds: true,
+                mangle: false
+            });
+        } else {
+            console.error('marked library not loaded');
+            throw new Error('Markdown parser not available');
+        }
+
         console.log('Fetching posts index...');
         const indexUrl = getAssetUrl('/posts/index.json');
         console.log('Index URL:', indexUrl);
@@ -186,6 +221,7 @@ async function loadBlogPosts() {
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
         const grid = postsContainer.firstChild;
 
+        let successfulPosts = 0;
         for (const post of posts) {
             try {
                 if (!post || !post.filename) {
@@ -193,19 +229,11 @@ async function loadBlogPosts() {
                     continue;
                 }
 
-                console.log('Processing post:', post.filename);
-                const markdown = await fetchMarkdownPost(post.filename);
-                const postData = parseFrontMatter(markdown);
-                
-                if (!postData || !postData.title) {
-                    console.error('Failed to parse frontmatter for:', post.filename);
-                    continue;
-                }
-
-                console.log('Creating post card for:', post.filename);
-                const postCard = createPostCard(postData, post.filename);
+                // Use the post data from index.json directly
+                const postCard = createPostCard(post, post.filename);
                 if (postCard) {
                     grid.innerHTML += postCard;
+                    successfulPosts++;
                 }
             } catch (error) {
                 console.error(`Error processing post ${post.filename}:`, error);
@@ -215,7 +243,7 @@ async function loadBlogPosts() {
         }
 
         // If no posts were successfully loaded, show error
-        if (!grid.children.length) {
+        if (successfulPosts === 0) {
             throw new Error('No posts could be loaded successfully');
         }
     } catch (error) {
@@ -227,13 +255,5 @@ async function loadBlogPosts() {
 // Load posts when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing blog system...');
-    
-    // Update featured post link for GitHub Pages
-    const featuredLink = document.getElementById('featured-post-link');
-    if (featuredLink) {
-        const currentHref = featuredLink.getAttribute('href');
-        featuredLink.href = `${getBaseUrl()}/${currentHref}`;
-    }
-    
     loadBlogPosts();
 });

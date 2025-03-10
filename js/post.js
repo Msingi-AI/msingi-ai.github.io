@@ -13,30 +13,6 @@ function getAssetUrl(path) {
     return `${getBaseUrl()}${path}`;
 }
 
-// Function to parse markdown frontmatter
-function parseFrontMatter(markdown) {
-    if (!markdown) return null;
-    
-    const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-    if (!match) {
-        console.error('No frontmatter found in markdown');
-        return { content: markdown };
-    }
-
-    const frontMatter = {};
-    match[1].split('\n').forEach(line => {
-        const [key, value] = line.split(': ');
-        if (key && value) {
-            frontMatter[key.trim()] = value.trim();
-        }
-    });
-
-    return {
-        ...frontMatter,
-        content: match[2].trim()
-    };
-}
-
 // Function to format date
 function formatDate(dateString) {
     try {
@@ -53,34 +29,52 @@ function formatDate(dateString) {
 }
 
 // Function to create post HTML
-function createPostContent(postData) {
+function createPostContent(postData, markdown) {
     if (!postData || !postData.title) {
         throw new Error('Invalid post data: missing title');
     }
 
-    const formattedDate = formatDate(postData.date);
-    
-    return `
-        <article class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div class="p-8">
-                <div class="mb-8">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-4">${postData.title}</h1>
-                    <div class="flex items-center text-gray-600">
-                        <span class="mr-4">By ${postData.author || 'Unknown'}</span>
-                        <time datetime="${postData.date || ''}">${formattedDate}</time>
+    try {
+        const formattedDate = formatDate(postData.date);
+        
+        // Initialize marked with options if not already done
+        if (typeof marked !== 'undefined') {
+            marked.use({
+                breaks: true,
+                gfm: true,
+                headerIds: true,
+                mangle: false
+            });
+        } else {
+            console.error('marked library not loaded');
+            throw new Error('Markdown parser not available');
+        }
+        
+        return `
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <div class="mb-8">
+                        <h1 class="text-4xl font-bold text-gray-900 mb-4">${postData.title}</h1>
+                        <div class="flex items-center text-gray-600">
+                            <span class="mr-4">By ${postData.author || 'Unknown'}</span>
+                            <time datetime="${postData.date || ''}">${formattedDate}</time>
+                        </div>
+                    </div>
+                    <div class="prose prose-indigo max-w-none">
+                        ${marked.parse(markdown || '')}
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <a href="${getBaseUrl()}/blog.html" class="text-indigo-600 hover:text-indigo-700">
+                            ← Back to Blog
+                        </a>
                     </div>
                 </div>
-                <div class="prose prose-indigo max-w-none">
-                    ${marked.parse(postData.content || '')}
-                </div>
-                <div class="mt-8 pt-8 border-t border-gray-200">
-                    <a href="${getBaseUrl()}/blog.html" class="text-indigo-600 hover:text-indigo-700">
-                        ← Back to Blog
-                    </a>
-                </div>
-            </div>
-        </article>
-    `;
+            </article>
+        `;
+    } catch (error) {
+        console.error('Error creating post content:', error);
+        throw error;
+    }
 }
 
 // Function to show error message
@@ -93,6 +87,56 @@ function showError(container, message) {
             </a>
         </div>
     `;
+}
+
+// Function to fetch post data from index.json
+async function fetchPostData(filename) {
+    try {
+        const indexUrl = getAssetUrl('/posts/index.json');
+        console.log('Fetching index:', indexUrl);
+        const response = await fetch(indexUrl);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch index: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const post = data.posts.find(p => p.filename === filename);
+        
+        if (!post) {
+            throw new Error(`Post not found: ${filename}`);
+        }
+        
+        return post;
+    } catch (error) {
+        console.error('Error fetching post data:', error);
+        throw error;
+    }
+}
+
+// Function to fetch markdown content
+async function fetchMarkdownContent(filename) {
+    try {
+        const url = getAssetUrl(`/posts/${filename}`);
+        console.log('Fetching markdown:', url);
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch markdown: ${response.status}`);
+        }
+        
+        const text = await response.text();
+        if (!text.trim()) {
+            throw new Error('Empty markdown content');
+        }
+        
+        // Remove frontmatter
+        const content = text.replace(/^---\n[\s\S]*?\n---\n/, '').trim();
+        return content;
+    } catch (error) {
+        console.error('Error fetching markdown:', error);
+        throw error;
+    }
 }
 
 // Function to load and display post
@@ -114,34 +158,19 @@ async function loadPost() {
             throw new Error('No post specified');
         }
 
-        console.log('Fetching post:', postFilename);
-        const response = await fetch(getAssetUrl(`/posts/${postFilename}`));
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch post: ${response.status}`);
-        }
-        
-        const markdown = await response.text();
-        const postData = parseFrontMatter(markdown);
-        
-        if (!postData || !postData.title) {
-            throw new Error('Failed to parse post content');
-        }
+        // Fetch post data and markdown content in parallel
+        console.log('Fetching post data and content...');
+        const [postData, markdown] = await Promise.all([
+            fetchPostData(postFilename),
+            fetchMarkdownContent(postFilename)
+        ]);
 
         // Update page title
         document.title = `${postData.title} - Msingi AI Blog`;
         
         // Display post content
-        postContainer.innerHTML = createPostContent(postData);
-        
-        // Update URL to include post title as hash
-        if (postData.title) {
-            const titleSlug = postData.title
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/(^-|-$)/g, '');
-            history.replaceState(null, '', `?post=${postFilename}#${titleSlug}`);
-        }
+        console.log('Creating post content...');
+        postContainer.innerHTML = createPostContent(postData, markdown);
         
     } catch (error) {
         console.error('Error loading post:', error);
@@ -149,7 +178,7 @@ async function loadPost() {
     }
 }
 
-// Load post when the page loads
+// Initialize when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing post system...');
     loadPost();
