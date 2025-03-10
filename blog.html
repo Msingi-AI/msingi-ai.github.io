@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Msingi AI Blog - Latest News and Research</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="js/blog.js"></script>
+    <script>
+        // Initialize marked with options
+        marked.use({
+            breaks: true,
+            gfm: true
+        });
+    </script>
+    <script src="js/blog.js" defer></script>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
@@ -71,7 +78,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2">
                     <div class="p-8 md:p-12">
                         <div class="uppercase tracking-wide text-sm text-indigo-700 font-semibold">Research</div>
-                        <a href="#" class="block mt-1">
+                        <a href="#first-post" class="block mt-1">
                             <h3 class="text-2xl font-bold text-gray-900 hover:text-indigo-600">
                                 Pan-African Transfer Learning - Building AI That Understands Africa
                             </h3>
@@ -82,10 +89,10 @@
                         <div class="mt-6">
                             <div class="flex items-center">
                                 <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center">
-                                    <span class="text-white font-medium">JN</span>
+                                    <span class="text-white font-medium">KK</span>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Dr. Janet Nkatha</p>
+                                    <p class="text-sm font-medium text-gray-900">Kiplangat Korir</p>
                                     <div class="flex space-x-1 text-sm text-gray-500">
                                         <time datetime="2025-03-10">March 10, 2025</time>
                                         <span>· 10 min read</span>
@@ -94,7 +101,7 @@
                             </div>
                         </div>
                         <div class="mt-6">
-                            <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                            <a href="#first-post" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                                 Read Full Article
                             </a>
                         </div>
@@ -115,9 +122,9 @@
     <div class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Recent Posts</h2>
-            <div id="blog-posts" class="grid gap-10 lg:grid-cols-1 mx-auto max-w-3xl">
+            <div id="blog-posts" class="space-y-8 mx-auto max-w-3xl">
                 <!-- Blog posts will be dynamically loaded here -->
-                <div id="loading" class="text-center text-gray-600">
+                <div id="loading" class="text-center text-gray-600 py-12">
                     Loading blog posts...
                 </div>
             </div>
