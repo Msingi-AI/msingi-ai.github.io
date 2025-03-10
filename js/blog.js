@@ -1,12 +1,22 @@
 // Function to fetch and parse markdown content
 async function fetchMarkdownPost(filename) {
-    const response = await fetch(`/posts/${filename}`);
-    const text = await response.text();
-    return text;
+    try {
+        const response = await fetch(`/posts/${filename}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${filename}`);
+        }
+        const text = await response.text();
+        return text;
+    } catch (error) {
+        console.error('Error fetching markdown:', error);
+        return null;
+    }
 }
 
 // Function to parse markdown frontmatter
 function parseFrontMatter(markdown) {
+    if (!markdown) return null;
+    
     const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
     if (!match) return { content: markdown };
 
@@ -20,63 +30,89 @@ function parseFrontMatter(markdown) {
 
     return {
         ...frontMatter,
-        content: match[2]
+        content: match[2].trim()
     };
 }
 
-// Function to convert markdown to HTML
-function markdownToHtml(markdown) {
-    // Basic markdown conversion (you can expand this or use a library like marked)
-    return markdown
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-        .replace(/\n\n/g, '</p><p>')
-        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+// Function to format date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
+// Function to create post HTML
+function createPostElement(postData) {
+    const article = document.createElement('article');
+    article.className = 'bg-white rounded-lg shadow-lg overflow-hidden';
+    
+    const formattedDate = formatDate(postData.date);
+    
+    article.innerHTML = `
+        <div class="p-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <div class="sm:flex sm:items-center">
+                    <p class="text-sm text-indigo-600">
+                        <time datetime="${postData.date}">${formattedDate}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <h2 class="text-xl font-bold text-gray-900">${postData.title}</h2>
+                <p class="mt-1 text-sm text-gray-600">By ${postData.author}</p>
+            </div>
+            <div class="mt-6 prose prose-indigo">${marked.parse(postData.content)}</div>
+        </div>
+    `;
+    
+    return article;
 }
 
 // Function to load and display blog posts
 async function loadBlogPosts() {
+    const postsContainer = document.getElementById('blog-posts');
+    const loadingElement = document.getElementById('loading');
+    
+    if (!postsContainer) return;
+
     try {
         const response = await fetch('/posts/index.json');
-        const posts = await response.json();
+        if (!response.ok) {
+            throw new Error('Failed to fetch posts index');
+        }
         
-        const postsContainer = document.getElementById('blog-posts');
-        if (!postsContainer) return;
+        const data = await response.json();
+        const posts = data.posts || [];
+        
+        // Clear loading message
+        if (loadingElement) {
+            loadingElement.remove();
+        }
+
+        if (posts.length === 0) {
+            postsContainer.innerHTML = '<p class="text-center text-gray-600">No blog posts available.</p>';
+            return;
+        }
 
         for (const post of posts) {
             const markdown = await fetchMarkdownPost(post.filename);
-            const { title, date, author, excerpt, content } = parseFrontMatter(markdown);
-            
-            const postElement = document.createElement('article');
-            postElement.className = 'flex flex-col bg-white rounded-lg shadow-lg overflow-hidden mb-10';
-            postElement.innerHTML = `
-                <div class="flex-1 p-6 flex flex-col justify-between">
-                    <div class="flex-1">
-                        <p class="text-sm font-medium text-indigo-600">
-                            <time datetime="${date}">${new Date(date).toLocaleDateString()}</time>
-                        </p>
-                        <a href="#" class="block mt-2">
-                            <p class="text-xl font-semibold text-gray-900">${title}</p>
-                            <p class="mt-3 text-base text-gray-500">${excerpt || ''}</p>
-                        </a>
-                    </div>
-                    <div class="mt-6">
-                        <p class="text-sm font-medium text-gray-900">
-                            By ${author}
-                        </p>
-                    </div>
-                    <div class="mt-4 prose">${markdownToHtml(content)}</div>
-                </div>
-            `;
-            
+            if (!markdown) continue;
+
+            const postData = parseFrontMatter(markdown);
+            if (!postData) continue;
+
+            const postElement = createPostElement(postData);
             postsContainer.appendChild(postElement);
         }
     } catch (error) {
         console.error('Error loading blog posts:', error);
+        if (loadingElement) {
+            loadingElement.textContent = 'Error loading blog posts. Please try again later.';
+            loadingElement.className = 'text-center text-red-600';
+        }
     }
 }
 
