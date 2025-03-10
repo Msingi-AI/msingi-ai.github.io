@@ -10,14 +10,35 @@
     <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
     <!-- Initialize marked with options -->
     <script>
+        // Function to get base URL for assets
+        function getBaseUrl() {
+            // Check if we're on GitHub Pages or localhost
+            const hostname = window.location.hostname;
+            if (hostname.includes('github.io')) {
+                return '/msingi-ai.github.io';
+            }
+            return '';
+        }
+
+        // Update featured post link when DOM loads
         window.addEventListener('DOMContentLoaded', function() {
+            // Initialize marked
             if (typeof marked !== 'undefined') {
                 marked.use({
                     breaks: true,
-                    gfm: true
+                    gfm: true,
+                    headerIds: true,
+                    mangle: false
                 });
             } else {
                 console.error('marked library not loaded');
+            }
+
+            // Update featured post link
+            const featuredLink = document.getElementById('featured-post-link');
+            if (featuredLink) {
+                const currentHref = featuredLink.getAttribute('href');
+                featuredLink.href = `${getBaseUrl()}${currentHref}`;
             }
         });
     </script>
