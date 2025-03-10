@@ -55,6 +55,10 @@ function formatDate(dateString) {
 
 // Function to create post HTML
 function createPostContent(postData) {
+    if (!postData || !postData.title) {
+        throw new Error('Invalid post data: missing title');
+    }
+
     const formattedDate = formatDate(postData.date);
     
     return `
@@ -63,12 +67,12 @@ function createPostContent(postData) {
                 <div class="mb-8">
                     <h1 class="text-4xl font-bold text-gray-900 mb-4">${postData.title}</h1>
                     <div class="flex items-center text-gray-600">
-                        <span class="mr-4">By ${postData.author}</span>
-                        <time datetime="${postData.date}">${formattedDate}</time>
+                        <span class="mr-4">By ${postData.author || 'Unknown'}</span>
+                        <time datetime="${postData.date || ''}">${formattedDate}</time>
                     </div>
                 </div>
                 <div class="prose prose-indigo max-w-none">
-                    ${marked.parse(postData.content)}
+                    ${marked.parse(postData.content || '')}
                 </div>
                 <div class="mt-8 pt-8 border-t border-gray-200">
                     <a href="blog.html" class="text-indigo-600 hover:text-indigo-700">
@@ -121,7 +125,7 @@ async function loadPost() {
         const markdown = await response.text();
         const postData = parseFrontMatter(markdown);
         
-        if (!postData) {
+        if (!postData || !postData.title) {
             throw new Error('Failed to parse post content');
         }
 
@@ -132,11 +136,13 @@ async function loadPost() {
         postContainer.innerHTML = createPostContent(postData);
         
         // Update URL to include post title as hash
-        const titleSlug = postData.title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/(^-|-$)/g, '');
-        history.replaceState(null, '', `?post=${postFilename}#${titleSlug}`);
+        if (postData.title) {
+            const titleSlug = postData.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            history.replaceState(null, '', `?post=${postFilename}#${titleSlug}`);
+        }
         
     } catch (error) {
         console.error('Error loading post:', error);

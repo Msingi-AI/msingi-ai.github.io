@@ -55,6 +55,8 @@ function formatDate(dateString) {
 
 // Function to get excerpt from content
 function getExcerpt(content, maxLength = 200) {
+    if (!content) return '';
+    
     const plainText = content
         .replace(/#+\s[^\n]+/g, '') // Remove headers
         .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
@@ -71,6 +73,11 @@ function getExcerpt(content, maxLength = 200) {
 
 // Function to create post card HTML
 function createPostCard(postData, filename) {
+    if (!postData || !postData.title) {
+        console.error('Invalid post data:', postData);
+        return '';
+    }
+
     const formattedDate = formatDate(postData.date);
     const titleSlug = postData.title
         .toLowerCase()
@@ -81,12 +88,12 @@ function createPostCard(postData, filename) {
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="post.html?post=${filename}#${titleSlug}" class="block">
+            <a href="${getBaseUrl()}/post.html?post=${filename}#${titleSlug}" class="block">
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-600 mb-4">
-                        <time datetime="${postData.date}">${formattedDate}</time>
+                        <time datetime="${postData.date || ''}">${formattedDate}</time>
                         <span class="mx-2">·</span>
-                        <span>By ${postData.author}</span>
+                        <span>By ${postData.author || 'Unknown'}</span>
                     </div>
                     <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600">
                         ${postData.title}
@@ -118,6 +125,24 @@ function showError(container, message) {
             </button>
         </div>
     `;
+}
+
+// Function to fetch markdown post
+async function fetchMarkdownPost(filename) {
+    try {
+        const url = getAssetUrl(`/posts/${filename}`);
+        console.log('Fetching markdown file:', url);
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log('Successfully fetched markdown:', filename);
+        return text;
+    } catch (error) {
+        console.error('Error fetching markdown:', error);
+        throw error;
+    }
 }
 
 // Function to load and display blog posts
@@ -164,22 +189,35 @@ async function loadBlogPosts() {
 
         for (const post of posts) {
             try {
+                if (!post || !post.filename) {
+                    console.error('Invalid post data in index:', post);
+                    continue;
+                }
+
                 console.log('Processing post:', post.filename);
                 const markdown = await fetchMarkdownPost(post.filename);
                 const postData = parseFrontMatter(markdown);
                 
-                if (!postData) {
+                if (!postData || !postData.title) {
                     console.error('Failed to parse frontmatter for:', post.filename);
                     continue;
                 }
 
                 console.log('Creating post card for:', post.filename);
-                grid.innerHTML += createPostCard(postData, post.filename);
+                const postCard = createPostCard(postData, post.filename);
+                if (postCard) {
+                    grid.innerHTML += postCard;
+                }
             } catch (error) {
                 console.error(`Error processing post ${post.filename}:`, error);
                 // Continue with other posts if one fails
                 continue;
             }
+        }
+
+        // If no posts were successfully loaded, show error
+        if (!grid.children.length) {
+            throw new Error('No posts could be loaded successfully');
         }
     } catch (error) {
         console.error('Error loading blog posts:', error);
@@ -190,23 +228,13 @@ async function loadBlogPosts() {
 // Load posts when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing blog system...');
+    
+    // Update featured post link for GitHub Pages
+    const featuredLink = document.getElementById('featured-post-link');
+    if (featuredLink) {
+        const currentHref = featuredLink.getAttribute('href');
+        featuredLink.href = `${getBaseUrl()}/${currentHref}`;
+    }
+    
     loadBlogPosts();
 });
-
-// Function to fetch and parse markdown content
-async function fetchMarkdownPost(filename) {
-    try {
-        const url = getAssetUrl(`/posts/${filename}`);
-        console.log('Fetching markdown file:', url);
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
-        }
-        const text = await response.text();
-        console.log('Successfully fetched markdown:', filename);
-        return text;
-    } catch (error) {
-        console.error('Error fetching markdown:', error);
-        throw error;
-    }
-}
