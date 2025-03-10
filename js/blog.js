@@ -14,24 +14,6 @@ function getAssetUrl(path) {
     return `${getBaseUrl()}${path}`;
 }
 
-// Function to fetch and parse markdown content
-async function fetchMarkdownPost(filename) {
-    try {
-        const url = getAssetUrl(`/posts/${filename}`);
-        console.log('Fetching markdown file:', url);
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
-        }
-        const text = await response.text();
-        console.log('Successfully fetched markdown:', filename);
-        return text;
-    } catch (error) {
-        console.error('Error fetching markdown:', error);
-        throw error;
-    }
-}
-
 // Function to parse markdown frontmatter
 function parseFrontMatter(markdown) {
     if (!markdown) return null;
@@ -71,32 +53,59 @@ function formatDate(dateString) {
     }
 }
 
-// Function to create post HTML
-function createPostElement(postData, filename) {
-    const article = document.createElement('article');
-    article.className = 'bg-white rounded-lg shadow-lg overflow-hidden mb-8';
-    article.id = filename.replace('.md', '');
+// Function to get excerpt from content
+function getExcerpt(content, maxLength = 200) {
+    const plainText = content
+        .replace(/#+\s[^\n]+/g, '') // Remove headers
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
+        .replace(/[*_`]/g, '') // Remove markdown formatting
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .trim();
     
+    if (plainText.length <= maxLength) {
+        return plainText;
+    }
+    
+    return plainText.substring(0, maxLength).trim() + '...';
+}
+
+// Function to create post card HTML
+function createPostCard(postData, filename) {
     const formattedDate = formatDate(postData.date);
+    const titleSlug = postData.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
     
-    article.innerHTML = `
-        <div class="p-8">
-            <div class="sm:flex sm:items-center sm:justify-between">
-                <div class="sm:flex sm:items-center">
-                    <p class="text-sm text-indigo-600">
+    const excerpt = postData.excerpt || getExcerpt(postData.content);
+    
+    return `
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+            <a href="post.html?post=${filename}#${titleSlug}" class="block">
+                <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-600 mb-4">
                         <time datetime="${postData.date}">${formattedDate}</time>
+                        <span class="mx-2">·</span>
+                        <span>By ${postData.author}</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600">
+                        ${postData.title}
+                    </h2>
+                    <p class="text-gray-600 line-clamp-3">
+                        ${excerpt}
                     </p>
+                    <div class="mt-4">
+                        <span class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
+                            Read more
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-4">
-                <h2 class="text-2xl font-bold text-gray-900">${postData.title}</h2>
-                <p class="mt-1 text-sm text-gray-600">By ${postData.author}</p>
-            </div>
-            <div class="mt-6 prose prose-indigo max-w-none">${marked.parse(postData.content)}</div>
-        </div>
+            </a>
+        </article>
     `;
-    
-    return article;
 }
 
 // Function to show error message
@@ -149,8 +158,9 @@ async function loadBlogPosts() {
             return;
         }
 
-        // Clear container and load posts
-        postsContainer.innerHTML = '';
+        // Clear container and create grid for post cards
+        postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
+        const grid = postsContainer.firstChild;
 
         for (const post of posts) {
             try {
@@ -163,24 +173,13 @@ async function loadBlogPosts() {
                     continue;
                 }
 
-                console.log('Creating post element for:', post.filename);
-                const postElement = createPostElement(postData, post.filename);
-                postsContainer.appendChild(postElement);
+                console.log('Creating post card for:', post.filename);
+                grid.innerHTML += createPostCard(postData, post.filename);
             } catch (error) {
                 console.error(`Error processing post ${post.filename}:`, error);
                 // Continue with other posts if one fails
                 continue;
             }
-        }
-
-        // If there's a hash in the URL, scroll to that post
-        if (window.location.hash) {
-            setTimeout(() => {
-                const targetPost = document.querySelector(window.location.hash);
-                if (targetPost) {
-                    targetPost.scrollIntoView({ behavior: 'smooth' });
-                }
-            }, 100);
         }
     } catch (error) {
         console.error('Error loading blog posts:', error);
@@ -193,3 +192,21 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing blog system...');
     loadBlogPosts();
 });
+
+// Function to fetch and parse markdown content
+async function fetchMarkdownPost(filename) {
+    try {
+        const url = getAssetUrl(`/posts/${filename}`);
+        console.log('Fetching markdown file:', url);
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log('Successfully fetched markdown:', filename);
+        return text;
+    } catch (error) {
+        console.error('Error fetching markdown:', error);
+        throw error;
+    }
+}
