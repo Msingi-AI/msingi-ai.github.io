@@ -1,52 +1,14 @@
 // Function to get base URL for assets
 function getBaseUrl() {
     const hostname = window.location.hostname;
-    if (hostname.includes('github.io')) {
-        return '/msingi-ai.github.io';
-    }
-    return '';
+    return hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
 }
 
 // Function to get asset URL
 function getAssetUrl(path) {
     const base = getBaseUrl();
-    // Remove any double slashes that might occur when joining paths
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    const url = `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
-    console.log('Generated URL:', url); // Debug log
-    return url;
-}
-
-// Function to parse markdown frontmatter
-function parseFrontMatter(markdown) {
-    if (!markdown) {
-        console.error('Empty markdown content');
-        return null;
-    }
-    
-    try {
-        const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-        if (!match) {
-            console.error('No frontmatter found in markdown');
-            return { content: markdown };
-        }
-
-        const frontMatter = {};
-        match[1].split('\n').forEach(line => {
-            const [key, value] = line.split(': ');
-            if (key && value) {
-                frontMatter[key.trim()] = value.trim();
-            }
-        });
-
-        return {
-            ...frontMatter,
-            content: match[2].trim()
-        };
-    } catch (error) {
-        console.error('Error parsing frontmatter:', error);
-        return null;
-    }
+    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
 }
 
 // Function to format date
@@ -64,29 +26,6 @@ function formatDate(dateString) {
     }
 }
 
-// Function to get excerpt from content
-function getExcerpt(content, maxLength = 200) {
-    if (!content) return '';
-    
-    try {
-        const plainText = content
-            .replace(/#+\s[^\n]+/g, '') // Remove headers
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
-            .replace(/[*_`]/g, '') // Remove markdown formatting
-            .replace(/\s+/g, ' ') // Normalize whitespace
-            .trim();
-        
-        if (plainText.length <= maxLength) {
-            return plainText;
-        }
-        
-        return plainText.substring(0, maxLength).trim() + '...';
-    } catch (error) {
-        console.error('Error creating excerpt:', error);
-        return '';
-    }
-}
-
 // Function to create post card HTML
 function createPostCard(postData, filename) {
     if (!postData || !postData.title) {
@@ -96,7 +35,7 @@ function createPostCard(postData, filename) {
 
     try {
         const formattedDate = formatDate(postData.date);
-        const postUrl = getAssetUrl(`/post.html?post=${encodeURIComponent(filename)}`);
+        const postUrl = `post.html?post=${encodeURIComponent(filename)}`;
         
         return `
             <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -133,36 +72,14 @@ function createPostCard(postData, filename) {
 
 // Function to show error message
 function showError(container, message) {
-    const blogUrl = getAssetUrl('/blog.html');
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600 mb-4">${message}</p>
-            <a href="${blogUrl}" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <button onclick="loadBlogPosts()" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Try Again
-            </a>
+            </button>
         </div>
     `;
-}
-
-// Function to fetch markdown post
-async function fetchMarkdownPost(filename) {
-    try {
-        const url = getAssetUrl(`/posts/${filename}`);
-        console.log('Fetching markdown file:', url);
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
-        }
-        const text = await response.text();
-        if (!text.trim()) {
-            throw new Error(`Empty content in ${filename}`);
-        }
-        console.log('Successfully fetched markdown:', filename);
-        return text;
-    } catch (error) {
-        console.error('Error fetching markdown:', error);
-        throw error;
-    }
 }
 
 // Function to load and display blog posts
@@ -184,48 +101,23 @@ async function loadBlogPosts() {
     `;
 
     try {
-        // Initialize marked with options
-        if (typeof marked !== 'undefined') {
-            console.log('Configuring marked parser...');
-            marked.use({
-                breaks: true,
-                gfm: true,
-                headerIds: true,
-                mangle: false
-            });
-        } else {
-            console.error('marked library not loaded');
-            throw new Error('Markdown parser not available');
-        }
-
+        // Fetch posts index
         console.log('Fetching posts index...');
-        const indexUrl = getAssetUrl('/posts/index.json');
-        console.log('Index URL:', indexUrl);
+        const indexPath = 'posts/index.json';
+        console.log('Index path:', indexPath);
         
-        // Add cache-busting parameter for development
-        const fetchUrl = indexUrl + (window.location.hostname === 'localhost' ? `?t=${Date.now()}` : '');
-        console.log('Fetch URL:', fetchUrl);
+        const response = await fetch(indexPath);
+        console.log('Response status:', response.status);
         
-        const response = await fetch(fetchUrl, {
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
         if (!response.ok) {
-            console.error('Response status:', response.status);
-            console.error('Response headers:', response.headers);
-            const text = await response.text();
-            console.error('Response text:', text);
             throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
-        
+
         let data;
         try {
             data = await response.json();
         } catch (error) {
             console.error('JSON parse error:', error);
-            console.error('Response text:', await response.text());
             throw new Error('Failed to parse posts index as JSON');
         }
 
@@ -273,7 +165,7 @@ async function loadBlogPosts() {
     }
 }
 
-// Load posts when the page loads
+// Initialize when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing blog system...');
     loadBlogPosts();

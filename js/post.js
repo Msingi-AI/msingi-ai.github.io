@@ -1,20 +1,14 @@
 // Function to get base URL for assets
 function getBaseUrl() {
     const hostname = window.location.hostname;
-    if (hostname.includes('github.io')) {
-        return '/msingi-ai.github.io';
-    }
-    return '';
+    return hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
 }
 
 // Function to get asset URL
 function getAssetUrl(path) {
     const base = getBaseUrl();
-    // Remove any double slashes that might occur when joining paths
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    const url = `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
-    console.log('Generated URL:', url); // Debug log
-    return url;
+    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
 }
 
 // Function to parse markdown frontmatter
@@ -71,13 +65,12 @@ function formatDate(dateString) {
 
 // Function to show error message
 function showError(container, message) {
-    const blogUrl = getAssetUrl('/blog.html');
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600 mb-4">${message}</p>
-            <a href="${blogUrl}" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <button onclick="window.location.href='blog.html'" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Back to Blog
-            </a>
+            </button>
         </div>
     `;
 }
@@ -93,20 +86,6 @@ async function loadPost() {
     }
 
     try {
-        // Initialize marked with options
-        if (typeof marked !== 'undefined') {
-            console.log('Configuring marked parser...');
-            marked.use({
-                breaks: true,
-                gfm: true,
-                headerIds: true,
-                mangle: false
-            });
-        } else {
-            console.error('marked library not loaded');
-            throw new Error('Markdown parser not available');
-        }
-
         // Get post filename from URL
         const urlParams = new URLSearchParams(window.location.search);
         const postFilename = urlParams.get('post');
@@ -117,24 +96,13 @@ async function loadPost() {
 
         // Fetch post content
         console.log('Fetching post:', postFilename);
-        const postUrl = getAssetUrl(`/posts/${postFilename}`);
-        console.log('Post URL:', postUrl);
+        const postPath = `posts/${postFilename}`;
+        console.log('Post path:', postPath);
         
-        // Add cache-busting parameter for development
-        const fetchUrl = postUrl + (window.location.hostname === 'localhost' ? `?t=${Date.now()}` : '');
-        console.log('Fetch URL:', fetchUrl);
-        
-        const response = await fetch(fetchUrl, {
-            headers: {
-                'Accept': 'text/markdown,text/plain'
-            }
-        });
+        const response = await fetch(postPath);
+        console.log('Response status:', response.status);
 
         if (!response.ok) {
-            console.error('Response status:', response.status);
-            console.error('Response headers:', response.headers);
-            const text = await response.text();
-            console.error('Response text:', text);
             throw new Error(`Failed to fetch post: ${response.status} ${response.statusText}`);
         }
 
@@ -168,7 +136,7 @@ async function loadPost() {
                         ` : ''}
                         ${metadata.readingTime ? `
                             <span class="mx-2">·</span>
-                            <span>${metadata.readingTime} read</span>
+                            <span>${metadata.readingTime}</span>
                         ` : ''}
                     </div>
                 </header>
@@ -176,12 +144,12 @@ async function loadPost() {
                     ${marked(content)}
                 </div>
                 <footer class="mt-12 pt-8 border-t border-gray-200">
-                    <a href="${getAssetUrl('/blog.html')}" class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
+                    <button onclick="window.location.href='blog.html'" class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
                         <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
                         Back to Blog
-                    </a>
+                    </button>
                 </footer>
             </article>
         `;
@@ -197,5 +165,22 @@ async function loadPost() {
 // Initialize when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing post system...');
+    // Initialize marked with options
+    if (typeof marked !== 'undefined') {
+        console.log('Configuring marked parser...');
+        marked.use({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+    } else {
+        console.error('marked library not loaded');
+        const postContainer = document.getElementById('post-content');
+        if (postContainer) {
+            showError(postContainer, 'Markdown parser not available');
+            return;
+        }
+    }
     loadPost();
 });
