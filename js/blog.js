@@ -1,9 +1,36 @@
+// Debug flag
+const DEBUG = true;
+
+// Function to log debug messages
+function debug(...args) {
+    if (DEBUG) {
+        console.log('[Blog Debug]:', ...args);
+    }
+}
+
 // Function to get base URL for assets
 function getBaseUrl() {
-    if (window.location.hostname.includes('github.io')) {
-        return '/msingi-ai.github.io';
+    const hostname = window.location.hostname;
+    debug('Current hostname:', hostname);
+    
+    // Check if we're on GitHub Pages
+    if (hostname.includes('github.io')) {
+        debug('Using GitHub Pages base URL');
+        return '/msingi-ai.github.io/';
     }
-    return '';
+    
+    // For local development
+    debug('Using local development base URL');
+    return './';
+}
+
+// Function to get asset URL with proper path handling
+function getAssetUrl(path) {
+    // Remove leading slash if path starts with one
+    const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+    const fullUrl = `${getBaseUrl()}${cleanPath}`;
+    debug('Generated URL:', fullUrl);
+    return fullUrl;
 }
 
 // Function to format date
@@ -24,11 +51,11 @@ function formatDate(dateString) {
 // Function to create post card HTML
 function createPostCard(post) {
     const formattedDate = formatDate(post.date);
-    const postUrl = `${getBaseUrl()}/posts/${post.url}`;
+    const htmlFilename = post.filename.replace('.md', '.html');
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="${postUrl}" class="block">
+            <a href="${getAssetUrl('posts/html/' + htmlFilename)}" class="block">
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-600 mb-4">
                         <time datetime="${post.date}">${formattedDate}</time>
@@ -56,7 +83,10 @@ function createPostCard(post) {
 }
 
 // Function to show error message
-function showError(container, message) {
+function showError(container, message, error = null) {
+    if (error) {
+        debug('Error details:', error);
+    }
     container.innerHTML = `
         <div class="text-center py-12">
             <p class="text-red-600">${message}</p>
@@ -69,7 +99,7 @@ function showError(container, message) {
 
 // Function to load and display blog posts
 async function loadBlogPosts() {
-    console.log('Starting to load blog posts...');
+    debug('Starting to load blog posts...');
     const postsContainer = document.getElementById('blog-posts');
     
     if (!postsContainer) {
@@ -86,18 +116,23 @@ async function loadBlogPosts() {
     `;
 
     try {
-        console.log('Fetching posts data...');
-        const response = await fetch(`${getBaseUrl()}/posts.json`);
+        debug('Fetching posts index...');
+        const indexUrl = getAssetUrl('posts/index.json');
+        debug('Index URL:', indexUrl);
+        
+        const response = await fetch(indexUrl);
+        debug('Response status:', response.status);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch posts: ${response.status}`);
+            throw new Error(`Failed to fetch posts index: ${response.status}`);
         }
         
-        const posts = await response.json();
-        console.log('Posts data:', posts);
+        const data = await response.json();
+        debug('Posts index data:', data);
+        const posts = data.posts || [];
 
-        if (!posts || posts.length === 0) {
-            console.log('No posts found');
+        if (posts.length === 0) {
+            debug('No posts found in index');
             postsContainer.innerHTML = '<p class="text-center text-gray-600 py-12">No blog posts available.</p>';
             return;
         }
@@ -106,19 +141,21 @@ async function loadBlogPosts() {
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
         const grid = postsContainer.firstChild;
 
-        // Create post cards
-        posts.forEach(post => {
-            console.log('Creating post card for:', post.title);
+        // Create post cards directly from index.json data
+        for (const post of posts) {
+            debug('Creating post card for:', post.filename);
             grid.innerHTML += createPostCard(post);
-        });
+        }
+        
+        debug('Successfully loaded all blog posts');
     } catch (error) {
         console.error('Error loading blog posts:', error);
-        showError(postsContainer, 'Error loading blog posts. Please try again.');
+        showError(postsContainer, 'Error loading blog posts. Please try again.', error);
     }
 }
 
 // Load posts when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing blog system...');
+    debug('DOM loaded, initializing blog system...');
     loadBlogPosts();
 });

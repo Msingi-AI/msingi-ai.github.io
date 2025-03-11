@@ -11,8 +11,10 @@ def format_date(date_str):
     except:
         return date_str
 
-def get_base_url():
-    return '/msingi-ai.github.io'
+def get_relative_url(path):
+    # For local development, use relative paths
+    # Since we're in posts/html, we need to go up two levels
+    return f"../../{path}" if path else "../.."
 
 def create_html_content(post_data, content):
     title = post_data.get('title', '')
@@ -35,7 +37,7 @@ def create_html_content(post_data, content):
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="{get_base_url()}/">
+                    <a href="{get_relative_url('')}">
                         <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
                             <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
@@ -54,11 +56,11 @@ def create_html_content(post_data, content):
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{get_base_url()}/" class="text-gray-700 hover:text-indigo-600">Home</a>
-                    <a href="{get_base_url()}/research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
-                    <a href="{get_base_url()}/community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
-                    <a href="{get_base_url()}/blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
-                    <a href="{get_base_url()}/data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
+                    <a href="{get_relative_url('')}" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="{get_relative_url('research.html')}" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="{get_relative_url('community.html')}" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="{get_relative_url('blog.html')}" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="{get_relative_url('data.html')}" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
                     <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
                 </div>
             </div>
@@ -81,7 +83,7 @@ def create_html_content(post_data, content):
                         {content}
                     </div>
                     <div class="mt-8 pt-8 border-t border-gray-200">
-                        <a href="{get_base_url()}/blog.html" class="text-indigo-600 hover:text-indigo-700">
+                        <a href="{get_relative_url('blog.html')}" class="text-indigo-600 hover:text-indigo-700">
                             ← Back to Blog
                         </a>
                     </div>
@@ -101,10 +103,10 @@ def create_html_content(post_data, content):
                 <div>
                     <h3 class="text-white text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="{get_base_url()}/research.html" class="text-gray-400 hover:text-white">Research</a></li>
-                        <li><a href="{get_base_url()}/blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
-                        <li><a href="{get_base_url()}/community.html" class="text-gray-400 hover:text-white">Community</a></li>
-                        <li><a href="{get_base_url()}/data.html" class="text-gray-400 hover:text-white">Data Challenge</a></li>
+                        <li><a href="{get_relative_url('research.html')}" class="text-gray-400 hover:text-white">Research</a></li>
+                        <li><a href="{get_relative_url('blog.html')}" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="{get_relative_url('community.html')}" class="text-gray-400 hover:text-white">Community</a></li>
+                        <li><a href="{get_relative_url('data.html')}" class="text-gray-400 hover:text-white">Data Challenge</a></li>
                     </ul>
                 </div>
                 <div>
