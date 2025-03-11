@@ -121,7 +121,7 @@ async function loadBlogPosts() {
 
     try {
         debug('Fetching posts index...');
-        const indexUrl = getAssetUrl('posts/index.json');
+        const indexUrl = getAssetUrl('posts/html/index.json');
         debug('Index URL:', indexUrl);
         
         const response = await fetch(indexUrl);
