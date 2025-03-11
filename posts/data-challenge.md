@@ -4,6 +4,7 @@ date: 2025-03-10
 author: Msingi AI Research Team
 excerpt: Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies.
 ---
+
 # MsingiAI Data Challenge: Building Africa's Language Resources
 
 The success of AI models like KANEX depends heavily on the quality and quantity of training data. Today, we're launching an ambitious initiative to create the largest open-source dataset of African languages, and we need your help.
