@@ -20,7 +20,7 @@ def create_html_content(post_data, content):
     title = post_data.get('title', '')
     author = post_data.get('author', '')
     date = post_data.get('date', '')
-    formatted_date = format_date(date)
+    formatted_date = format_date(str(date))
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -139,15 +139,17 @@ def convert_markdown_to_html():
     # Create posts/html directory if it doesn't exist
     os.makedirs('posts/html', exist_ok=True)
 
-    # Read posts index
-    with open('posts/index.json', 'r') as f:
-        index = json.load(f)
+    # Initialize posts list
+    posts = []
+
+    # Get all markdown files in the posts directory
+    md_files = [f for f in os.listdir('posts') if f.endswith('.md')]
 
     # Convert each post
-    for post in index.get('posts', []):
+    for md_file in md_files:
         try:
             # Read markdown file
-            md_path = os.path.join('posts', post['filename'])
+            md_path = os.path.join('posts', md_file)
             post_data = frontmatter.load(md_path)
             
             # Convert markdown to HTML
@@ -157,16 +159,34 @@ def convert_markdown_to_html():
             )
             
             # Create HTML file
-            html_filename = post['filename'].replace('.md', '.html')
+            html_filename = md_file.replace('.md', '.html')
             html_path = os.path.join('posts', 'html', html_filename)
             
             with open(html_path, 'w', encoding='utf-8') as f:
                 f.write(create_html_content(post_data.metadata, html_content))
             
-            print(f"Generated HTML for {post['filename']}")
+            # Add post metadata to posts list, ensuring date is a string
+            metadata = post_data.metadata
+            posts.append({
+                'filename': md_file,
+                'title': metadata.get('title', ''),
+                'date': str(metadata.get('date', '')),
+                'author': metadata.get('author', ''),
+                'excerpt': metadata.get('excerpt', '')
+            })
             
+            print(f"Generated HTML for {md_file}")
         except Exception as e:
-            print(f"Error processing {post['filename']}: {str(e)}")
+            print(f"Error processing {md_file}: {str(e)}")
+
+    # Sort posts by date (newest first)
+    posts.sort(key=lambda x: x['date'], reverse=True)
+
+    # Write posts index
+    index = {'posts': posts}
+    with open('posts/index.json', 'w', encoding='utf-8') as f:
+        json.dump(index, f, indent=2, ensure_ascii=False)
+    print("Generated posts/index.json")
 
 if __name__ == '__main__':
     convert_markdown_to_html()
