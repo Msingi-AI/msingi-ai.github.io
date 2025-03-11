@@ -30,7 +30,7 @@ function getAssetUrl(path) {
     // Remove leading slash if path starts with one
     const cleanPath = path.startsWith('/') ? path.substring(1) : path;
     // For GitHub Pages, ensure we have the correct base path
-    const fullUrl = baseUrl ? `${baseUrl}/${cleanPath}` : cleanPath;
+    const fullUrl = `${baseUrl}/${cleanPath}`;
     debug('Generated URL:', fullUrl, '(Base:', baseUrl, 'Path:', path, ')');
     return fullUrl;
 }
@@ -54,7 +54,7 @@ function formatDate(dateString) {
 function createPostCard(post) {
     const formattedDate = formatDate(post.date);
     const htmlFilename = post.filename.replace('.md', '.html');
-    const postUrl = getAssetUrl('posts/html/' + htmlFilename);
+    const postUrl = getAssetUrl(`posts/html/${htmlFilename}`);
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
