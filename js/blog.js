@@ -124,11 +124,8 @@ async function loadBlogPosts() {
         const indexUrl = getAssetUrl('posts/index.json');
         debug('Index URL:', indexUrl);
         
-        const response = await fetch(indexUrl, {
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
+        // First try to fetch as text to inspect the response
+        const response = await fetch(indexUrl);
         debug('Response status:', response.status);
         debug('Response type:', response.headers.get('content-type'));
         
@@ -136,16 +133,19 @@ async function loadBlogPosts() {
             throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
 
-        // Check if response is JSON
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            const text = await response.text();
-            debug('Invalid response type:', contentType);
-            debug('Response text:', text.substring(0, 100) + '...');
-            throw new Error('Server returned invalid content type. Expected JSON.');
+        // Get the response text first
+        const text = await response.text();
+        debug('Response text:', text.substring(0, 100) + '...');
+
+        // Try to parse as JSON
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            debug('Failed to parse JSON:', e);
+            throw new Error('Failed to parse server response as JSON. Please check the server configuration.');
         }
-        
-        const data = await response.json();
+
         debug('Posts index data:', data);
         const posts = data.posts || [];
 
