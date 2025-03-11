@@ -12,7 +12,6 @@ def format_date(date_str):
         return date_str
 
 def get_base_url():
-    # For GitHub Pages
     return '/msingi-ai.github.io'
 
 def create_html_content(post_data, content):
