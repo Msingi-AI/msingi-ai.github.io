@@ -31,7 +31,7 @@ function getAssetUrl(path) {
     const cleanPath = path.startsWith('/') ? path.substring(1) : path;
     // For GitHub Pages, ensure we have the correct base path
     const fullUrl = `${baseUrl}/${cleanPath}`;
-    debug('Generated URL:', fullUrl, '(Base:', baseUrl, 'Path:', path, ')');
+    debug('Generated URL:', fullUrl);
     return fullUrl;
 }
 
@@ -55,6 +55,7 @@ function createPostCard(post) {
     const formattedDate = formatDate(post.date);
     const htmlFilename = post.filename.replace('.md', '.html');
     const postUrl = getAssetUrl(`posts/html/${htmlFilename}`);
+    debug('Creating post card with URL:', postUrl);
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -123,16 +124,11 @@ async function loadBlogPosts() {
         const indexUrl = getAssetUrl('posts/index.json');
         debug('Index URL:', indexUrl);
         
-        const response = await fetch(indexUrl, {
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
-            }
-        });
+        const response = await fetch(indexUrl);
         debug('Response status:', response.status);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch posts index: ${response.status}`);
+            throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
         
         const data = await response.json();
@@ -158,7 +154,7 @@ async function loadBlogPosts() {
         debug('Successfully loaded all blog posts');
     } catch (error) {
         console.error('Error loading blog posts:', error);
-        showError(postsContainer, 'Error loading blog posts. Please try again.', error);
+        showError(postsContainer, `Error loading blog posts: ${error.message}`, error);
     }
 }
 
