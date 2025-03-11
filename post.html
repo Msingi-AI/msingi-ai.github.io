@@ -10,69 +10,72 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Initialize marked after it's loaded -->
     <script>
-        window.addEventListener('load', function() {
-            if (typeof marked !== 'undefined') {
-                marked.use({
-                    breaks: true,
-                    gfm: true,
-                    headerIds: true,
-                    mangle: false
-                });
-                console.log('Marked.js initialized with options');
-            } else {
-                console.error('Marked.js not loaded');
-            }
-        });
+        if (typeof marked !== 'undefined') {
+            marked.use({
+                breaks: true,
+                gfm: true,
+                headerIds: true,
+                mangle: false
+            });
+            console.log('Marked.js initialized with options');
+        } else {
+            console.error('Marked.js not loaded');
+        }
     </script>
     <!-- Load our scripts after marked.js -->
-    <script src="js/navigation.js" defer></script>
-    <script src="js/post.js" defer></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/post.js"></script>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="/" class="logo-link">
-                            <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
-                                <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
-                                <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
-                                <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
-                                <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
-                                <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
-                                <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
-                                <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
-                                <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
-                                    fill="none" stroke="#4F46E5" stroke-width="2"/>
-                                <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
-                                <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
-                                <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="/" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="research.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Research</a>
-                        <a href="blog.html" class="text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Blog</a>
-                        <a href="data.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Data Challenge</a>
-                        <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
-                        <a href="community.html" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">Community</a>
-                    </div>
+                <div class="flex items-center">
+                    <a href="/" class="logo-link">
+                        <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
+                            <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
+                            <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
+                                fill="none" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
+                            <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
+                            <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
+                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div id="post-content" class="max-w-4xl mx-auto">
-            <!-- Post content will be dynamically loaded here -->
-            <div class="text-center py-12">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
-                <p class="mt-4 text-gray-600">Loading post...</p>
+    <!-- Post Content -->
+    <div class="pt-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="post-content" class="py-16">
+                <!-- Post will be loaded here -->
+                <div class="text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
+                    <p class="mt-4 text-gray-600">Loading post...</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <a href="/blog.html" class="text-indigo-600 hover:text-indigo-700">
+                    ← Back to Blog
+                </a>
             </div>
         </div>
     </div>

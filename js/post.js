@@ -1,131 +1,205 @@
-// Function to get base URL for GitHub Pages or local development
+// Function to get base URL for assets
 function getBaseUrl() {
-    const isGitHubPages = window.location.hostname.includes('github.io');
-    return isGitHubPages ? '/msingi-ai.github.io' : '';
+    // Check if we're on GitHub Pages or localhost
+    const hostname = window.location.hostname;
+    console.log('Current hostname:', hostname);
+    if (hostname.includes('github.io')) {
+        console.log('Using GitHub Pages base URL');
+        return '/msingi-ai.github.io';
+    }
+    console.log('Using local base URL');
+    return '';
 }
 
-// Function to format date
-function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+// Function to get asset URL
+function getAssetUrl(path) {
+    // Remove leading slash if present since we add it in getBaseUrl
+    const normalizedPath = path.startsWith('/') ? path.substring(1) : path;
+    const baseUrl = getBaseUrl();
+    const url = baseUrl ? `${baseUrl}/${normalizedPath}` : normalizedPath;
+    console.log('Generated URL:', url);
+    return url;
 }
 
 // Function to parse markdown frontmatter
 function parseFrontMatter(markdown) {
-    const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-    if (!match) return { content: markdown };
-
-    const frontMatter = {};
-    const frontMatterText = match[1];
-    const content = match[2];
-
-    frontMatterText.split('\n').forEach(line => {
-        const [key, ...valueParts] = line.split(':');
-        if (key && valueParts.length) {
-            frontMatter[key.trim()] = valueParts.join(':').trim();
+    console.log('Parsing markdown:', markdown ? markdown.substring(0, 100) + '...' : 'null');
+    
+    if (!markdown) {
+        console.error('No markdown content provided');
+        return null;
+    }
+    
+    try {
+        // More flexible regex that handles different line endings and whitespace
+        const match = markdown.replace(/\r\n/g, '\n').match(/^---[\s]*\n([\s\S]*?)\n[\s]*---[\s]*\n([\s\S]*)$/);
+        if (!match) {
+            console.error('No frontmatter found in markdown');
+            console.log('Raw markdown start:', markdown.substring(0, 200));
+            return { content: markdown };
         }
-    });
 
-    return {
-        ...frontMatter,
-        content: content.trim()
-    };
+        const frontMatter = {};
+        const frontMatterText = match[1].trim();
+        console.log('Found frontmatter:', frontMatterText);
+        
+        const lines = frontMatterText.split('\n');
+        for (const line of lines) {
+            const colonIndex = line.indexOf(':');
+            if (colonIndex > 0) {
+                const key = line.slice(0, colonIndex).trim();
+                const value = line.slice(colonIndex + 1).trim();
+                if (key && value) {
+                    frontMatter[key] = value;
+                }
+            }
+        }
+
+        console.log('Parsed frontmatter:', frontMatter);
+        return {
+            ...frontMatter,
+            content: match[2].trim()
+        };
+    } catch (error) {
+        console.error('Error parsing frontmatter:', error);
+        console.log('Raw markdown that caused error:', markdown);
+        return null;
+    }
+}
+
+// Function to format date
+function formatDate(dateString) {
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    } catch (error) {
+        console.error('Error formatting date:', error);
+        return dateString;
+    }
 }
 
 // Function to create post HTML
-function createPostHTML(postData) {
-    const { title, author, date, content } = postData;
+function createPostContent(postData) {
+    if (!postData || !postData.title) {
+        throw new Error('Invalid post data: missing title');
+    }
+
+    const formattedDate = formatDate(postData.date);
     
     return `
-        <article class="prose prose-indigo lg:prose-lg mx-auto">
-            <header class="mb-8">
-                <h1 class="text-4xl font-bold text-gray-900 mb-4">${title || 'Untitled Post'}</h1>
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center">
-                            <span class="text-white font-semibold">${author ? author[0] : 'M'}</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-900">${author || 'Msingi AI Team'}</p>
-                        <time class="text-sm text-gray-500" datetime="${date}">${formatDate(date)}</time>
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-8">
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">${postData.title}</h1>
+                    <div class="flex items-center text-gray-600">
+                        <span class="mr-4">By ${postData.author || 'Unknown'}</span>
+                        <time datetime="${postData.date || ''}">${formattedDate}</time>
                     </div>
                 </div>
-            </header>
-            <div class="markdown-content">
-                ${marked(content)}
+                <div class="prose prose-indigo max-w-none">
+                    ${marked.parse(postData.content || '')}
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <a href="${getAssetUrl('blog.html')}" class="text-indigo-600 hover:text-indigo-700">
+                        ← Back to Blog
+                    </a>
+                </div>
             </div>
-            <footer class="mt-12 pt-6 border-t border-gray-200">
-                <a href="/blog.html" class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
-                    <svg class="mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
-                    </svg>
-                    Back to Blog
-                </a>
-            </footer>
         </article>
+    `;
+}
+
+// Function to show error message
+function showError(container, message) {
+    container.innerHTML = `
+        <div class="text-center py-12">
+            <p class="text-red-600">${message}</p>
+            <a href="${getAssetUrl('blog.html')}" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                Back to Blog
+            </a>
+        </div>
     `;
 }
 
 // Function to load and display post
 async function loadPost() {
+    console.log('Starting to load post...');
     const postContainer = document.getElementById('post-content');
-    if (!postContainer) return;
+    
+    if (!postContainer) {
+        console.error('Post container not found');
+        return;
+    }
 
     try {
-        // Get post filename from URL
+        // Get post filename from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const postFilename = urlParams.get('post');
-        if (!postFilename) throw new Error('No post specified');
+        
+        if (!postFilename) {
+            throw new Error('No post specified');
+        }
 
-        // Fetch post content
-        const baseUrl = getBaseUrl();
-        const response = await fetch(`${baseUrl}/posts/${postFilename}`);
-        if (!response.ok) throw new Error('Failed to fetch post');
+        console.log('Fetching post:', postFilename);
+        const response = await fetch(getAssetUrl(`posts/${postFilename}`));
+        
+        if (!response.ok) {
+            console.error(`Failed to fetch post: ${response.status}`);
+            throw new Error(`Failed to fetch post: ${response.status}`);
+        }
         
         const markdown = await response.text();
+        console.log('Markdown content:', markdown.substring(0, 100) + '...');
+        
         const postData = parseFrontMatter(markdown);
+        console.log('Parsed post data:', postData);
         
-        // Update page title
-        document.title = `${postData.title || 'Blog Post'} - Msingi AI`;
-        
-        // Render post
-        postContainer.innerHTML = createPostHTML(postData);
-        
-        // Fix relative URLs in content
-        const links = postContainer.getElementsByTagName('a');
-        Array.from(links).forEach(link => {
-            if (link.href.startsWith(window.location.origin)) {
-                link.href = `${baseUrl}${link.pathname}`;
-            }
-        });
-        
-        // Fix relative image URLs
-        const images = postContainer.getElementsByTagName('img');
-        Array.from(images).forEach(img => {
-            if (!img.src.startsWith('http')) {
-                img.src = `${baseUrl}${img.getAttribute('src')}`;
-            }
-        });
+        if (!postData || !postData.title) {
+            throw new Error('Failed to parse post content');
+        }
 
+        // Update page title
+        document.title = `${postData.title} - Msingi AI Blog`;
+        
+        // Display post content
+        postContainer.innerHTML = createPostContent(postData);
+        
+        // Update URL to include post title as hash
+        if (postData.title) {
+            const titleSlug = postData.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            history.replaceState(null, '', `?post=${postFilename}#${titleSlug}`);
+        }
+        
     } catch (error) {
         console.error('Error loading post:', error);
-        postContainer.innerHTML = `
-            <div class="text-center py-12">
-                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                </svg>
-                <h3 class="mt-2 text-sm font-medium text-gray-900">Error Loading Post</h3>
-                <p class="mt-1 text-sm text-gray-500">The post could not be loaded. Please try again later.</p>
-                <div class="mt-6">
-                    <a href="/blog.html" class="text-indigo-600 hover:text-indigo-700">
-                        Return to Blog
-                    </a>
-                </div>
-            </div>
-        `;
+        showError(postContainer, error.message || 'Error loading post. Please try again.');
     }
 }
 
-// Load post when the DOM is ready
-document.addEventListener('DOMContentLoaded', loadPost);
+// Initialize marked with options when the page loads
+window.addEventListener('load', function() {
+    if (typeof marked !== 'undefined') {
+        marked.use({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+        console.log('Marked.js initialized with options');
+    } else {
+        console.error('Marked.js not loaded');
+    }
+});
+
+// Load post when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing post system...');
+    loadPost();
+});
