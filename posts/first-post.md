@@ -4,7 +4,6 @@ date: 2025-03-11
 author: Kiplangat Korir
 excerpt: Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape.
 ---
-# Pan-African Transfer Learning: Building AI That Understands Africa
 
 Today, I'm incredibly excited to share Msingi AI's moonshot initiative: Pan-African Transfer Learning. This isn't just another research project – it's a fundamental reimagining of how AI models understand and adapt to Africa's extraordinary linguistic tapestry.
 

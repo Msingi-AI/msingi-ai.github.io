@@ -5,8 +5,6 @@ author: Msingi AI Research Team
 excerpt: Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies.
 ---
 
-# MsingiAI Data Challenge: Building Africa's Language Resources
-
 We've launched what might be the most important data initiative in African AI history - creating the largest open-source dataset of African languages. This isn't just another data collection effort; it's the foundation upon which the entire future of African language technology will be built.
 
 ## Why This Matters
