@@ -1,36 +1,24 @@
-// Function to get base URL for assets
+// Function to get base URL for navigation
 function getBaseUrl() {
-    const hostname = window.location.hostname;
-    return hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
+    // Check if we're on GitHub Pages or localhost
+    if (window.location.hostname.includes('github.io')) {
+        return '/msingi-ai.github.io';
+    } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return '';
+    }
+    return '';
 }
 
-// Function to get asset URL
-function getAssetUrl(path) {
-    const base = getBaseUrl();
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
+// Function to handle logo click
+function handleLogoClick(event) {
+    event.preventDefault();
+    window.location.href = `${getBaseUrl()}/`;
 }
 
-// Function to update navigation paths
-function updateNavigationPaths() {
-    // Update all navigation links
-    document.querySelectorAll('nav a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && !href.startsWith('http')) {
-            const cleanHref = href.startsWith('/') ? href : `/${href}`;
-            link.href = cleanHref;
-        }
-    });
-
-    // Update logo link
+// Add click event listener to logo when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
     const logoLink = document.querySelector('.logo-link');
     if (logoLink) {
-        logoLink.href = 'index.html';
+        logoLink.addEventListener('click', handleLogoClick);
     }
-}
-
-// Initialize when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing navigation...');
-    updateNavigationPaths();
 });

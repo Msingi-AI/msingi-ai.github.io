@@ -3,6 +3,7 @@ title: MsingiAI Data Challenge - Building Africa's Language Resources
 date: 2025-03-10
 author: Msingi AI Research Team
 excerpt: Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies.
+
 ---
 
 # MsingiAI Data Challenge: Building Africa's Language Resources

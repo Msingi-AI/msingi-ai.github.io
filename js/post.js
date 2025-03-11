@@ -1,50 +1,54 @@
 // Function to get base URL for assets
 function getBaseUrl() {
+    // Check if we're on GitHub Pages or localhost
     const hostname = window.location.hostname;
-    return hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
+    if (hostname.includes('github.io')) {
+        return '/msingi-ai.github.io';
+    }
+    return '';
 }
 
 // Function to get asset URL
 function getAssetUrl(path) {
-    const base = getBaseUrl();
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
+    return `${getBaseUrl()}${path}`;
 }
 
 // Function to parse markdown frontmatter
-function parseFrontmatter(markdown) {
+function parseFrontMatter(markdown) {
+    if (!markdown) {
+        console.error('No markdown content provided');
+        return null;
+    }
+    
     try {
-        const match = markdown.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+        const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
         if (!match) {
-            console.warn('No frontmatter found in markdown');
-            return {
-                metadata: {},
-                content: markdown
-            };
+            console.error('No frontmatter found in markdown');
+            return { content: markdown };
         }
 
-        const [, frontmatter, content] = match;
-        const metadata = {};
-        const lines = frontmatter.split('\n');
-
+        const frontMatter = {};
+        const frontMatterText = match[1];
+        const lines = frontMatterText.split('\n');
+        
         for (const line of lines) {
-            const [key, ...valueParts] = line.split(':');
-            if (key && valueParts.length > 0) {
-                const value = valueParts.join(':').trim();
-                metadata[key.trim()] = value;
+            const colonIndex = line.indexOf(':');
+            if (colonIndex > 0) {
+                const key = line.slice(0, colonIndex).trim();
+                const value = line.slice(colonIndex + 1).trim();
+                if (key && value) {
+                    frontMatter[key] = value;
+                }
             }
         }
 
         return {
-            metadata,
-            content: content.trim()
+            ...frontMatter,
+            content: match[2].trim()
         };
     } catch (error) {
         console.error('Error parsing frontmatter:', error);
-        return {
-            metadata: {},
-            content: markdown
-        };
+        return null;
     }
 }
 
@@ -63,14 +67,45 @@ function formatDate(dateString) {
     }
 }
 
+// Function to create post HTML
+function createPostContent(postData) {
+    if (!postData || !postData.title) {
+        throw new Error('Invalid post data: missing title');
+    }
+
+    const formattedDate = formatDate(postData.date);
+    
+    return `
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-8">
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">${postData.title}</h1>
+                    <div class="flex items-center text-gray-600">
+                        <span class="mr-4">By ${postData.author || 'Unknown'}</span>
+                        <time datetime="${postData.date || ''}">${formattedDate}</time>
+                    </div>
+                </div>
+                <div class="prose prose-indigo max-w-none">
+                    ${marked.parse(postData.content || '')}
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <a href="${getBaseUrl()}/blog.html" class="text-indigo-600 hover:text-indigo-700">
+                        ← Back to Blog
+                    </a>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
 // Function to show error message
 function showError(container, message) {
     container.innerHTML = `
         <div class="text-center py-12">
-            <p class="text-red-600 mb-4">${message}</p>
-            <button onclick="window.location.href='blog.html'" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            <p class="text-red-600">${message}</p>
+            <a href="${getBaseUrl()}/blog.html" class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
                 Back to Blog
-            </button>
+            </a>
         </div>
     `;
 }
@@ -86,7 +121,7 @@ async function loadPost() {
     }
 
     try {
-        // Get post filename from URL
+        // Get post filename from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const postFilename = urlParams.get('post');
         
@@ -94,93 +129,59 @@ async function loadPost() {
             throw new Error('No post specified');
         }
 
-        // Fetch post content
         console.log('Fetching post:', postFilename);
-        const postPath = `posts/${postFilename}`;
-        console.log('Post path:', postPath);
+        const response = await fetch(getAssetUrl(`/posts/${postFilename}`));
         
-        const response = await fetch(postPath);
-        console.log('Response status:', response.status);
-
         if (!response.ok) {
-            throw new Error(`Failed to fetch post: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to fetch post: ${response.status}`);
         }
-
+        
         const markdown = await response.text();
-        console.log('Markdown content length:', markdown.length);
-
-        // Parse frontmatter and content
-        const { metadata, content } = parseFrontmatter(markdown);
-        console.log('Post metadata:', metadata);
-
-        if (!metadata.title) {
-            console.warn('No title found in post metadata');
+        console.log('Markdown content:', markdown.substring(0, 100) + '...');
+        
+        const postData = parseFrontMatter(markdown);
+        console.log('Parsed post data:', postData);
+        
+        if (!postData || !postData.title) {
+            throw new Error('Failed to parse post content');
         }
 
         // Update page title
-        document.title = metadata.title ? `${metadata.title} - Msingi AI Blog` : 'Msingi AI Blog Post';
-
-        // Render post content
-        const formattedDate = formatDate(metadata.date);
-        const html = `
-            <article class="prose prose-lg mx-auto bg-white rounded-xl shadow-lg p-8 md:p-12">
-                <header class="mb-8">
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        ${metadata.title || 'Untitled Post'}
-                    </h1>
-                    <div class="flex items-center text-gray-600">
-                        <time datetime="${metadata.date || ''}">${formattedDate}</time>
-                        ${metadata.author ? `
-                            <span class="mx-2">·</span>
-                            <span>By ${metadata.author}</span>
-                        ` : ''}
-                        ${metadata.readingTime ? `
-                            <span class="mx-2">·</span>
-                            <span>${metadata.readingTime}</span>
-                        ` : ''}
-                    </div>
-                </header>
-                <div class="markdown-content">
-                    ${marked(content)}
-                </div>
-                <footer class="mt-12 pt-8 border-t border-gray-200">
-                    <button onclick="window.location.href='blog.html'" class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
-                        <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                        Back to Blog
-                    </button>
-                </footer>
-            </article>
-        `;
-
-        postContainer.innerHTML = html;
-
+        document.title = `${postData.title} - Msingi AI Blog`;
+        
+        // Display post content
+        postContainer.innerHTML = createPostContent(postData);
+        
+        // Update URL to include post title as hash
+        if (postData.title) {
+            const titleSlug = postData.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            history.replaceState(null, '', `?post=${postFilename}#${titleSlug}`);
+        }
+        
     } catch (error) {
         console.error('Error loading post:', error);
-        showError(postContainer, `Error loading post: ${error.message}`);
+        showError(postContainer, error.message || 'Error loading post. Please try again.');
     }
 }
 
-// Initialize when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing post system...');
-    // Initialize marked with options
+// Initialize marked with options when the page loads
+window.addEventListener('load', function() {
     if (typeof marked !== 'undefined') {
-        console.log('Configuring marked parser...');
         marked.use({
             breaks: true,
-            gfm: true,
-            headerIds: true,
-            mangle: false
+            gfm: true
         });
+        console.log('Marked.js initialized with options');
     } else {
-        console.error('marked library not loaded');
-        const postContainer = document.getElementById('post-content');
-        if (postContainer) {
-            showError(postContainer, 'Markdown parser not available');
-            return;
-        }
+        console.error('Marked.js not loaded');
     }
+});
+
+// Load post when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing post system...');
     loadPost();
 });

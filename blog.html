@@ -6,87 +6,90 @@
     <title>Msingi AI Blog - Latest News and Research</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
-    <!-- Base URL handling -->
+    <!-- Load marked.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Initialize marked after it's loaded -->
     <script>
-        // Function to get base URL for assets
-        function getBaseUrl() {
-            const hostname = window.location.hostname;
-            return hostname.includes('github.io') ? '/msingi-ai.github.io' : '';
-        }
-
-        // Function to get asset URL
-        function getAssetUrl(path) {
-            const base = getBaseUrl();
-            const cleanPath = path.startsWith('/') ? path : `/${path}`;
-            return `${base}${cleanPath}`.replace(/([^:]\/)\/+/g, '$1');
-        }
-
-        // Function to update all links and scripts
-        function updatePaths() {
-            // Update navigation links
-            document.querySelectorAll('nav a, a[href^="/"]').forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('/')) {
-                    link.href = getAssetUrl(href);
-                }
-            });
-
-            // Update script sources
-            document.querySelectorAll('script[src^="js/"]').forEach(script => {
-                const src = script.getAttribute('src');
-                script.src = getAssetUrl(src);
-            });
-
-            // Update featured post link
-            const featuredLink = document.getElementById('featured-post-link');
-            if (featuredLink) {
-                featuredLink.href = getAssetUrl('/post.html?post=first-post.md');
+        window.addEventListener('load', function() {
+            if (typeof marked !== 'undefined') {
+                marked.use({
+                    breaks: true,
+                    gfm: true,
+                    headerIds: true,
+                    mangle: false
+                });
+                console.log('Marked.js initialized with options');
+            } else {
+                console.error('Marked.js not loaded');
             }
-        }
-
-        // Run path updates when DOM is ready
-        document.addEventListener('DOMContentLoaded', updatePaths);
+        });
     </script>
-    <!-- Load marked.js before our scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
-    <!-- Load our scripts -->
-    <script src="js/navigation.js"></script>
-    <script src="js/blog.js"></script>
+    <!-- Load our scripts after marked.js -->
+    <script src="js/navigation.js" defer></script>
+    <script src="js/blog.js" defer></script>
 </head>
 <body class="bg-gray-50">
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
-                <div class="flex">
-                    <div class="flex-shrink-0 flex items-center">
-                        <a href="index.html" class="text-xl font-bold text-indigo-600 logo-link">
-                            Msingi AI
-                        </a>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="index.html" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">
-                            Home
-                        </a>
-                        <a href="blog.html" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">
-                            Blog
-                        </a>
-                        <a href="research.html" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">
-                            Research
-                        </a>
-                        <a href="community.html" class="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">
-                            Community
-                        </a>
-                    </div>
+                <div class="flex items-center">
+                    <a href="/" class="logo-link">
+                        <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
+                            <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
+                            <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
+                                fill="none" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
+                            <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
+                            <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
+                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Featured Post -->
-        <div class="mb-12">
+    <!-- Blog Header -->
+    <div class="pt-24 bg-gradient-to-r from-indigo-600 to-purple-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="py-16 text-center">
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
+                    Msingi AI Blog
+                </h1>
+                <p class="mt-6 text-xl text-indigo-100 max-w-3xl mx-auto">
+                    Insights, updates, and stories from the forefront of African AI research and development
+                </p>
+                <div class="mt-10">
+                    <a href="#featured" class="bg-white text-indigo-600 px-8 py-3 rounded-full font-medium hover:bg-indigo-50">
+                        Read Latest Posts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Post -->
+    <div id="featured" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Featured Article</h2>
+            
             <div class="bg-indigo-50 rounded-xl overflow-hidden shadow-xl transform transition duration-300 hover:shadow-2xl">
-                <a href="post.html?post=first-post.md" class="block" id="featured-post-link">
+                <a href="/post.html?post=first-post.md" class="block" id="featured-post-link">
                     <div class="grid grid-cols-1 lg:grid-cols-2">
                         <div class="p-8 md:p-12">
                             <div class="uppercase tracking-wide text-sm text-indigo-700 font-semibold">Research</div>
@@ -119,16 +122,24 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="hidden lg:block bg-cover bg-center" style="background-image: url('images/featured-post-bg.jpg')"></div>
+                        <div class="relative h-64 lg:h-auto bg-gradient-to-br from-indigo-500 to-purple-600">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="w-32 h-32 text-white opacity-25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </a>
             </div>
         </div>
+    </div>
 
-        <!-- Blog Posts Grid -->
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Posts</h2>
-            <div id="blog-posts" class="animate-fade-in">
+    <!-- Blog Posts -->
+    <div class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Latest Articles</h2>
+            <div id="blog-posts">
                 <!-- Blog posts will be loaded here -->
                 <div class="text-center py-12">
                     <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
@@ -136,12 +147,176 @@
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <footer class="bg-white mt-12 border-t border-gray-200">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p class="text-gray-500"> 2025 Msingi AI. All rights reserved.</p>
+    <!-- Categories Section -->
+    <div id="categories" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Categories</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+                <a href="#" class="group">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <div class="w-full h-full rounded-lg bg-indigo-100 group-hover:bg-indigo-200 flex items-center justify-center p-8">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-indigo-600">
+                                <rect x="2" y="3" width="20" height="18" rx="2" />
+                                <line x1="8" y1="10" x2="16" y2="10" />
+                                <line x1="8" y1="14" x2="12" y2="14" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-medium text-gray-900">Research</h3>
+                        <p class="text-sm text-gray-500 truncate">15 articles</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="group">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <div class="w-full h-full rounded-lg bg-green-100 group-hover:bg-green-200 flex items-center justify-center p-8">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-green-600">
+                                <circle cx="12" cy="12" r="8" />
+                                <line x1="12" y1="8" x2="12" y2="16" />
+                                <line x1="8" y1="12" x2="16" y2="12" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-medium text-gray-900">Community</h3>
+                        <p class="text-sm text-gray-500 truncate">8 articles</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="group">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <div class="w-full h-full rounded-lg bg-red-100 group-hover:bg-red-200 flex items-center justify-center p-8">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-red-600">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-medium text-gray-900">Education</h3>
+                        <p class="text-sm text-gray-500 truncate">12 articles</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="group">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <div class="w-full h-full rounded-lg bg-yellow-100 group-hover:bg-yellow-200 flex items-center justify-center p-8">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-yellow-600">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-medium text-gray-900">Events</h3>
+                        <p class="text-sm text-gray-500 truncate">6 articles</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="group">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <div class="w-full h-full rounded-lg bg-purple-100 group-hover:bg-purple-200 flex items-center justify-center p-8">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-purple-600">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M20.4 14.5L16 10 4 20" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-medium text-gray-900">Media</h3>
+                        <p class="text-sm text-gray-500 truncate">9 articles</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="group">
+                    <div class="aspect-w-1 aspect-h-1">
+                        <div class="w-full h-full rounded-lg bg-blue-100 group-hover:bg-blue-200 flex items-center justify-center p-8">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-blue-600">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <h3 class="text-lg font-medium text-gray-900">Technical</h3>
+                        <p class="text-sm text-gray-500 truncate">14 articles</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="py-16 bg-gradient-to-r from-indigo-500 to-purple-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-2xl bg-white py-10 px-6 sm:py-12 sm:px-12 lg:flex lg:items-center lg:p-16">
+                <div class="lg:w-0 lg:flex-1">
+                    <h2 class="text-3xl font-extrabold text-gray-900">Subscribe to our newsletter</h2>
+                    <p class="mt-4 max-w-3xl text-lg text-gray-500">
+                        Get the latest updates on our research, events, and community initiatives.
+                    </p>
+                </div>
+                <div class="mt-8 lg:mt-0 lg:ml-8">
+                    <form class="sm:flex">
+                        <label for="email-address" class="sr-only">Email address</label>
+                        <input id="email-address" name="email-address" type="email" autocomplete="email" required class="w-full px-5 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter your email">
+                        <button type="submit" class="mt-3 w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0">
+                            Subscribe
+                        </button>
+                    </form>
+                    <p class="mt-3 text-sm text-gray-500">
+                        We care about your data. Read our
+                        <a href="#" class="font-medium underline">
+                            Privacy Policy
+                        </a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold">Msingi AI</h3>
+                    <p class="mt-4 text-gray-400">
+                        Building the foundation for AI innovation in Africa.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold">Quick Links</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="research.html" class="text-gray-400 hover:text-white">Research</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white">Community</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="data.html" class="text-gray-400 hover:text-white">MsingiAI Data Challenge</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold">Connect</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="https://discord.gg/2TvwPJpSj6" class="text-gray-400 hover:text-white">Discord</a></li>
+                        <li><a href="https://x.com/MsingiAI" class="text-gray-400 hover:text-white">X</a></li>
+                        <li><a href="https://github.com/Msingi-AI" class="text-gray-400 hover:text-white">GitHub</a></li>
+                        <li><a href="https://huggingface.co/msingiai" class="text-gray-400 hover:text-white">HuggingFace</a></li>
+                        <li><a href="https://www.linkedin.com/company/msingiai/" class="text-gray-400 hover:text-white">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="research.html" class="hover:text-gray-300">Research</a>
+                    <a href="community.html" class="hover:text-gray-300">Community</a>
+                    <a href="blog.html" class="hover:text-gray-300">Blog</a>
+                    <a href="data.html" class="hover:text-gray-300">Data Challenge</a>
+                </div>
+                <p> 2025 Msingi AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
