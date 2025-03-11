@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Msingi AI</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="js/blog.js" defer></script>
 </head>
 <body class="bg-gray-50">
@@ -13,7 +15,7 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href=".">
+                    <a href="." class="hover:opacity-90">
                         <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
                             <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
@@ -32,28 +34,46 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="." class="text-gray-700 hover:text-indigo-600">Home</a>
-                    <a href="research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
-                    <a href="community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
-                    <a href="data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
-                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
+                    <a href="." class="text-gray-700 hover:text-indigo-600 transition-colors">Home</a>
+                    <a href="research.html" class="text-gray-700 hover:text-indigo-600 transition-colors">Research</a>
+                    <a href="community.html" class="text-gray-700 hover:text-indigo-600 transition-colors">Community</a>
+                    <a href="blog.html" class="text-gray-700 hover:text-indigo-600 transition-colors">Blog</a>
+                    <a href="data.html" class="text-gray-700 hover:text-indigo-600 transition-colors">Data Challenge</a>
+                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">Join Us</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    <div class="relative min-h-[60vh] bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 backdrop-blur-xl"></div>
+            <div class="absolute inset-0 bg-grid-white/[0.05]"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
+                    Our Blog
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-gray-200">
+                    Insights, research, and stories from the forefront of African AI
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Featured Post -->
-    <div class="pt-24">
+    <div class="py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Featured Article</h2>
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12" data-aos="fade-up">Featured Article</h2>
             
-            <div class="bg-indigo-50 rounded-xl overflow-hidden shadow-xl transform transition duration-300 hover:shadow-2xl">
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl transform transition duration-300 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="100">
                 <a href="posts/html/first-post.html" class="block">
                     <div class="grid grid-cols-1 lg:grid-cols-2">
                         <div class="p-8 md:p-12">
                             <div class="uppercase tracking-wide text-sm text-indigo-700 font-semibold">Research</div>
-                            <h3 class="mt-2 text-2xl font-bold text-gray-900 hover:text-indigo-600">Pan-African Transfer Learning - Building AI That Understands Africa</h3>
+                            <h3 class="mt-2 text-2xl font-bold text-gray-900 hover:text-indigo-600 transition-colors">Pan-African Transfer Learning - Building AI That Understands Africa</h3>
                             <p class="mt-4 text-gray-600">Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape.</p>
                             <div class="mt-6">
                                 <div class="flex items-center">
@@ -86,31 +106,31 @@
     </div>
 
     <!-- Latest Posts -->
-    <section class="py-12">
+    <section class="py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Latest Posts</h2>
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12" data-aos="fade-up">Latest Posts</h2>
             
             <!-- Blog Posts Container -->
-            <div id="blog-posts" class="mt-6">
+            <div id="blog-posts" class="mt-6 grid gap-8">
                 <!-- Posts will be dynamically loaded here -->
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <div id="categories" class="py-16 bg-white">
+    <div id="categories" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Categories</h2>
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12" data-aos="fade-up">Categories</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg p-6 text-white transform transition duration-300 hover:scale-105">
+                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-8 text-white transform transition duration-300 hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-xl font-bold mb-4">Research Papers</h3>
                     <p class="text-indigo-100">Explore our latest research in AI and machine learning.</p>
                 </div>
-                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg p-6 text-white transform transition duration-300 hover:scale-105">
+                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-8 text-white transform transition duration-300 hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-xl font-bold mb-4">Tutorials</h3>
                     <p class="text-indigo-100">Step-by-step guides for implementing AI solutions.</p>
                 </div>
-                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg p-6 text-white transform transition duration-300 hover:scale-105">
+                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-8 text-white transform transition duration-300 hover:scale-105 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-xl font-bold mb-4">Case Studies</h3>
                     <p class="text-indigo-100">Real-world applications of our technology.</p>
                 </div>
@@ -119,62 +139,62 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Brand -->
                 <div class="col-span-1">
-                    <svg viewBox="0 0 400 100" width="150" height="40" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="8" fill="#FFFFFF"/>
-                        <circle cx="90" cy="30" r="8" fill="#FFFFFF"/>
-                        <circle cx="90" cy="70" r="8" fill="#FFFFFF"/>
-                        <circle cx="130" cy="50" r="8" fill="#FFFFFF"/>
-                        <path d="M58 50 L82 30" stroke="#FFFFFF" stroke-width="2"/>
-                        <path d="M58 50 L82 70" stroke="#FFFFFF" stroke-width="2"/>
-                        <path d="M98 30 L122 50" stroke="#FFFFFF" stroke-width="2"/>
-                        <path d="M98 70 L122 50" stroke="#FFFFFF" stroke-width="2"/>
-                        <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
-                            fill="none" stroke="#FFFFFF" stroke-width="2"/>
-                        <path d="M130 42 L130 58 M124 50 L136 50" stroke="#FFFFFF" stroke-width="2"/>
-                        <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#FFFFFF">Msingi</text>
-                        <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#FFFFFF">AI</text>
-                    </svg>
+                    <h3 class="text-lg font-semibold mb-4">About MsingiAI</h3>
+                    <p class="text-gray-400">
+                        Democratizing AI for Africa
+                    </p>
                 </div>
-
-                <!-- Quick Links -->
                 <div class="col-span-1">
                     <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="index.html#about" class="hover:text-indigo-400">About</a></li>
-                        <li><a href="research.html" class="hover:text-indigo-400">Research</a></li>
-                        <li><a href="community.html" class="hover:text-indigo-400">Community</a></li>
-                        <li><a href="blog.html" class="hover:text-indigo-400">Blog</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="research.html" class="text-gray-400 hover:text-white transition-colors">Research</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
                     </ul>
                 </div>
-
-                <!-- Legal -->
                 <div class="col-span-1">
                     <h3 class="text-lg font-semibold mb-4">Legal</h3>
                     <ul class="space-y-2">
-                        <li><a href="privacy.html" class="hover:text-indigo-400">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="hover:text-indigo-400">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
-
-                <!-- Connect -->
                 <div class="col-span-1">
                     <h3 class="text-lg font-semibold mb-4">Connect</h3>
                     <ul class="space-y-2">
-                        <li><a href="https://github.com/Msingi-AI" class="hover:text-indigo-400">GitHub</a></li>
-                        <li><a href="https://x.com/MsingiAI" class="hover:text-indigo-400">X</a></li>
-                        <li><a href="https://discord.gg/2TvwPJpSj6" class="hover:text-indigo-400">Discord</a></li>
+                        <li><a href="https://github.com/Msingi-AI" class="text-gray-400 hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="https://x.com/MsingiAI" class="text-gray-400 hover:text-white transition-colors">X</a></li>
+                        <li><a href="https://discord.gg/2TvwPJpSj6" class="text-gray-400 hover:text-white transition-colors">Discord</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
-                <p> 2025 Msingi AI. All rights reserved.</p>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400"> 2025 Msingi AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out',
+            once: true
+        });
+
+        // Modify the existing blog.js to add AOS attributes to dynamically loaded posts
+        document.addEventListener('DOMContentLoaded', function() {
+            const originalCreatePostElement = window.createPostElement;
+            window.createPostElement = function(post) {
+                const element = originalCreatePostElement(post);
+                element.setAttribute('data-aos', 'fade-up');
+                return element;
+            };
+        });
+    </script>
 </body>
 </html>
