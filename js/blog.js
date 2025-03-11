@@ -11,8 +11,7 @@ function debug(...args) {
 // Function to get base URL for assets
 function getBaseUrl() {
     const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
-    debug('Current hostname:', hostname, 'pathname:', pathname);
+    debug('Current hostname:', hostname);
     
     // Check if we're on GitHub Pages
     if (hostname.includes('github.io')) {
@@ -30,6 +29,7 @@ function getAssetUrl(path) {
     const baseUrl = getBaseUrl();
     // Remove leading slash if path starts with one
     const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+    // For GitHub Pages, ensure we have the correct base path
     const fullUrl = baseUrl ? `${baseUrl}/${cleanPath}` : cleanPath;
     debug('Generated URL:', fullUrl, '(Base:', baseUrl, 'Path:', path, ')');
     return fullUrl;
@@ -54,10 +54,11 @@ function formatDate(dateString) {
 function createPostCard(post) {
     const formattedDate = formatDate(post.date);
     const htmlFilename = post.filename.replace('.md', '.html');
+    const postUrl = getAssetUrl('posts/html/' + htmlFilename);
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="${getAssetUrl('posts/html/' + htmlFilename)}" class="block">
+            <a href="${postUrl}" class="block">
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-600 mb-4">
                         <time datetime="${post.date}">${formattedDate}</time>
@@ -119,11 +120,15 @@ async function loadBlogPosts() {
 
     try {
         debug('Fetching posts index...');
-        // Keep index.json in the posts directory for better organization
         const indexUrl = getAssetUrl('posts/index.json');
         debug('Index URL:', indexUrl);
         
-        const response = await fetch(indexUrl);
+        const response = await fetch(indexUrl, {
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
+            }
+        });
         debug('Response status:', response.status);
         
         if (!response.ok) {
