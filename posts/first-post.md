@@ -108,14 +108,16 @@ You can contribute to this groundbreaking research:
 3. Follow our research updates
 4. Participate in data collection
 
-## About the Author
+## About the Research Team
 
-Kiplangat Korir leads our Pan-African Transfer Learning research initiative, bringing expertise in:
+Led by Dr. Janet Nkatha, our research team combines expertise in:
 - Computational Linguistics
 - Machine Learning
 - African Languages
 - Cultural Studies
 - Data Science
+
+Together, we're building AI that truly understands and serves African communities.
 
 ## Next Steps
 

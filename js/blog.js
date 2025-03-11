@@ -14,34 +14,9 @@ function getAssetUrl(path) {
     return `${getBaseUrl()}${path}`;
 }
 
-// Function to fetch and parse markdown content
-async function fetchMarkdownPost(filename) {
-    try {
-        const url = getAssetUrl(`/posts/${filename}`);
-        console.log('Fetching markdown file:', url);
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            console.error(`Failed to fetch ${filename}: ${response.status}`);
-            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
-        }
-        
-        const text = await response.text();
-        console.log('Successfully fetched markdown:', filename);
-        console.log('Content:', text.substring(0, 100) + '...'); // Log first 100 chars
-        return text;
-    } catch (error) {
-        console.error('Error fetching markdown:', error);
-        throw error;
-    }
-}
-
 // Function to parse markdown frontmatter
 function parseFrontMatter(markdown) {
-    if (!markdown) {
-        console.error('No markdown content provided');
-        return null;
-    }
+    if (!markdown) return null;
     
     const match = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
     if (!match) {
@@ -80,8 +55,6 @@ function formatDate(dateString) {
 
 // Function to get excerpt from content
 function getExcerpt(content, maxLength = 200) {
-    if (!content) return '';
-    
     const plainText = content
         .replace(/#+\s[^\n]+/g, '') // Remove headers
         .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just text
@@ -99,11 +72,17 @@ function getExcerpt(content, maxLength = 200) {
 // Function to create post card HTML
 function createPostCard(postData, filename) {
     const formattedDate = formatDate(postData.date);
+    const titleSlug = postData.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+    
     const excerpt = postData.excerpt || getExcerpt(postData.content);
+    const htmlFilename = filename.replace('.md', '.html');
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="post.html?post=${filename}" class="block">
+            <a href="${getAssetUrl('/posts/html/' + htmlFilename)}" class="block">
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-600 mb-4">
                         <time datetime="${postData.date}">${formattedDate}</time>
@@ -164,14 +143,13 @@ async function loadBlogPosts() {
         console.log('Fetching posts index...');
         const indexUrl = getAssetUrl('/posts/index.json');
         console.log('Index URL:', indexUrl);
+        const response = await fetch(indexUrl);
         
-        const indexResponse = await fetch(indexUrl);
-        
-        if (!indexResponse.ok) {
-            throw new Error(`Failed to fetch posts index: ${indexResponse.status}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch posts index: ${response.status}`);
         }
         
-        const data = await indexResponse.json();
+        const data = await response.json();
         console.log('Posts index data:', data);
         const posts = data.posts || [];
 
@@ -189,12 +167,6 @@ async function loadBlogPosts() {
             try {
                 console.log('Processing post:', post.filename);
                 const markdown = await fetchMarkdownPost(post.filename);
-                
-                if (!markdown) {
-                    console.error('No markdown content received for:', post.filename);
-                    continue;
-                }
-                
                 const postData = parseFrontMatter(markdown);
                 
                 if (!postData) {
@@ -210,11 +182,6 @@ async function loadBlogPosts() {
                 continue;
             }
         }
-        
-        // If no posts were successfully loaded, show error
-        if (grid.children.length === 0) {
-            showError(postsContainer, 'Failed to load any blog posts. Please try again.');
-        }
     } catch (error) {
         console.error('Error loading blog posts:', error);
         showError(postsContainer, 'Error loading blog posts. Please try again.');
@@ -226,3 +193,21 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing blog system...');
     loadBlogPosts();
 });
+
+// Function to fetch and parse markdown content
+async function fetchMarkdownPost(filename) {
+    try {
+        const url = getAssetUrl(`/posts/${filename}`);
+        console.log('Fetching markdown file:', url);
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${filename}: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log('Successfully fetched markdown:', filename);
+        return text;
+    } catch (error) {
+        console.error('Error fetching markdown:', error);
+        throw error;
+    }
+}
