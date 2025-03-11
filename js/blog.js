@@ -17,9 +17,7 @@ function getBaseUrl() {
     // Check if we're on GitHub Pages
     if (hostname.includes('github.io')) {
         debug('Using GitHub Pages base URL');
-        // Extract the repository name from the pathname
-        const repoName = pathname.split('/')[1];
-        return `/${repoName}`;
+        return '/msingi-ai.github.io';
     }
     
     // For local development
@@ -30,7 +28,7 @@ function getBaseUrl() {
 // Function to get asset URL with proper path handling
 function getAssetUrl(path) {
     const baseUrl = getBaseUrl();
-    // Remove leading slash if path starts with one and we have a base URL
+    // Remove leading slash if path starts with one
     const cleanPath = path.startsWith('/') ? path.substring(1) : path;
     const fullUrl = baseUrl ? `${baseUrl}/${cleanPath}` : cleanPath;
     debug('Generated URL:', fullUrl, '(Base:', baseUrl, 'Path:', path, ')');
@@ -121,8 +119,8 @@ async function loadBlogPosts() {
 
     try {
         debug('Fetching posts index...');
-        // Fixed: Look for index.json in the html subfolder
-        const indexUrl = getAssetUrl('posts/html/index.json');
+        // Keep index.json in the posts directory for better organization
+        const indexUrl = getAssetUrl('posts/index.json');
         debug('Index URL:', indexUrl);
         
         const response = await fetch(indexUrl);
