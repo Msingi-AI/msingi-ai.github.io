@@ -121,6 +121,7 @@ async function loadBlogPosts() {
 
     try {
         debug('Fetching posts index...');
+        // Fixed: Look for index.json in the html subfolder
         const indexUrl = getAssetUrl('posts/html/index.json');
         debug('Index URL:', indexUrl);
         
