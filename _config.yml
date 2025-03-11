@@ -1,0 +1,38 @@
+title: Msingi AI
+description: Building AI that speaks Africa's languages
+baseurl: /msingi-ai.github.io
+url: https://msingi-ai.github.io
+
+# Build settings
+markdown: kramdown
+permalink: /posts/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /posts/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Msingi AI Research Team"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .github
+  - README.md
+  - LICENSE
+  - scripts

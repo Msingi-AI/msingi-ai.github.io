@@ -1,15 +1,9 @@
 // Function to get base URL for assets
 function getBaseUrl() {
-    // Check if we're on GitHub Pages or localhost
     if (window.location.hostname.includes('github.io')) {
         return '/msingi-ai.github.io';
     }
     return '';
-}
-
-// Function to get asset URL
-function getAssetUrl(path) {
-    return `${getBaseUrl()}${path}`;
 }
 
 // Function to format date
@@ -30,11 +24,11 @@ function formatDate(dateString) {
 // Function to create post card HTML
 function createPostCard(post) {
     const formattedDate = formatDate(post.date);
-    const htmlFilename = post.filename.replace('.md', '.html');
+    const postUrl = `${getBaseUrl()}/posts/${post.url}`;
     
     return `
         <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="${getAssetUrl('/posts/html/' + htmlFilename)}" class="block">
+            <a href="${postUrl}" class="block">
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-600 mb-4">
                         <time datetime="${post.date}">${formattedDate}</time>
@@ -92,21 +86,18 @@ async function loadBlogPosts() {
     `;
 
     try {
-        console.log('Fetching posts index...');
-        const indexUrl = getAssetUrl('/posts/index.json');
-        console.log('Index URL:', indexUrl);
-        const response = await fetch(indexUrl);
+        console.log('Fetching posts data...');
+        const response = await fetch(`${getBaseUrl()}/posts.json`);
         
         if (!response.ok) {
-            throw new Error(`Failed to fetch posts index: ${response.status}`);
+            throw new Error(`Failed to fetch posts: ${response.status}`);
         }
         
-        const data = await response.json();
-        console.log('Posts index data:', data);
-        const posts = data.posts || [];
+        const posts = await response.json();
+        console.log('Posts data:', posts);
 
-        if (posts.length === 0) {
-            console.log('No posts found in index');
+        if (!posts || posts.length === 0) {
+            console.log('No posts found');
             postsContainer.innerHTML = '<p class="text-center text-gray-600 py-12">No blog posts available.</p>';
             return;
         }
@@ -115,11 +106,11 @@ async function loadBlogPosts() {
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
         const grid = postsContainer.firstChild;
 
-        // Create post cards directly from index.json data
-        for (const post of posts) {
-            console.log('Creating post card for:', post.filename);
+        // Create post cards
+        posts.forEach(post => {
+            console.log('Creating post card for:', post.title);
             grid.innerHTML += createPostCard(post);
-        }
+        });
     } catch (error) {
         console.error('Error loading blog posts:', error);
         showError(postsContainer, 'Error loading blog posts. Please try again.');

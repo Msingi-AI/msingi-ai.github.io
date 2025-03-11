@@ -1,9 +1,14 @@
+---
+layout: default
+title: Blog
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Msingi AI Blog - Latest News and Research</title>
+    <title>{{ page.title }} - {{ site.title }}</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
     <script src="js/blog.js" defer></script>
@@ -14,28 +19,30 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
-                        <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
-                        <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
-                        <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
-                        <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
-                        <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
-                        <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
-                        <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
-                        <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
-                            fill="none" stroke="#4F46E5" stroke-width="2"/>
-                        <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
-                        <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
-                        <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
-                    </svg>
+                    <a href="{{ site.baseurl }}/">
+                        <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
+                            <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
+                            <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
+                                fill="none" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
+                            <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
+                            <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
+                        </svg>
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
-                    <a href="research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
-                    <a href="community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
-                    <a href="data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
+                    <a href="{{ site.baseurl }}/" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="{{ site.baseurl }}/research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="{{ site.baseurl }}/community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="{{ site.baseurl }}/blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="{{ site.baseurl }}/data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
                     <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
                 </div>
             </div>
@@ -67,25 +74,26 @@
             <h2 class="text-3xl font-extrabold text-gray-900 mb-12">Featured Article</h2>
             
             <div class="bg-indigo-50 rounded-xl overflow-hidden shadow-xl transform transition duration-300 hover:shadow-2xl">
-                <a href="posts/html/first-post.html" class="block">
+                {% assign featured_post = site.posts.first %}
+                <a href="{{ site.baseurl }}{{ featured_post.url }}" class="block">
                     <div class="grid grid-cols-1 lg:grid-cols-2">
                         <div class="p-8 md:p-12">
                             <div class="uppercase tracking-wide text-sm text-indigo-700 font-semibold">Research</div>
                             <h3 class="mt-1 text-2xl font-bold text-gray-900 hover:text-indigo-600">
-                                Pan-African Transfer Learning - Building AI That Understands Africa
+                                {{ featured_post.title }}
                             </h3>
                             <p class="mt-4 text-gray-600">
-                                Today, we're excited to announce Msingi AI's ambitious research initiative focused on Pan-African Transfer Learning. This groundbreaking project aims to revolutionize how AI models learn and adapt across Africa's diverse linguistic and cultural landscape.
+                                {{ featured_post.excerpt }}
                             </p>
                             <div class="mt-6">
                                 <div class="flex items-center">
-                                    <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center">
+                                    <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
                                         <span class="text-white font-medium">KK</span>
                                     </div>
                                     <div class="ml-3">
-                                        <p class="text-sm font-medium text-gray-900">Kiplangat Korir</p>
+                                        <p class="text-sm font-medium text-gray-900">{{ featured_post.author }}</p>
                                         <div class="flex space-x-1 text-sm text-gray-500">
-                                            <time datetime="2025-03-10">March 10, 2025</time>
+                                            <time datetime="{{ featured_post.date | date: '%Y-%m-%d' }}">{{ featured_post.date | date: '%B %d, %Y' }}</time>
                                             <span>· 10 min read</span>
                                         </div>
                                     </div>
