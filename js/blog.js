@@ -11,12 +11,15 @@ function debug(...args) {
 // Function to get base URL for assets
 function getBaseUrl() {
     const hostname = window.location.hostname;
-    debug('Current hostname:', hostname);
+    const pathname = window.location.pathname;
+    debug('Current hostname:', hostname, 'pathname:', pathname);
     
     // Check if we're on GitHub Pages
     if (hostname.includes('github.io')) {
         debug('Using GitHub Pages base URL');
-        return '/msingi-ai.github.io';
+        // Extract the repository name from the pathname
+        const repoName = pathname.split('/')[1];
+        return `/${repoName}`;
     }
     
     // For local development
@@ -28,7 +31,7 @@ function getBaseUrl() {
 function getAssetUrl(path) {
     const baseUrl = getBaseUrl();
     // Remove leading slash if path starts with one and we have a base URL
-    const cleanPath = baseUrl && path.startsWith('/') ? path.substring(1) : path;
+    const cleanPath = path.startsWith('/') ? path.substring(1) : path;
     const fullUrl = baseUrl ? `${baseUrl}/${cleanPath}` : cleanPath;
     debug('Generated URL:', fullUrl, '(Base:', baseUrl, 'Path:', path, ')');
     return fullUrl;
