@@ -16,7 +16,7 @@ function getBaseUrl() {
     // Check if we're on GitHub Pages
     if (hostname.includes('github.io')) {
         debug('Using GitHub Pages base URL');
-        return '/msingi-ai.github.io';
+        return '';  // No need for prefix since we're at root
     }
     
     // For local development
@@ -29,8 +29,8 @@ function getAssetUrl(path) {
     const baseUrl = getBaseUrl();
     // Remove leading slash if path starts with one
     const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-    // For GitHub Pages, ensure we have the correct base path
-    const fullUrl = `${baseUrl}/${cleanPath}`;
+    // Join base URL and clean path
+    const fullUrl = baseUrl ? `${baseUrl}/${cleanPath}` : cleanPath;
     debug('Generated URL:', fullUrl);
     return fullUrl;
 }
@@ -124,28 +124,28 @@ async function loadBlogPosts() {
         const indexUrl = getAssetUrl('posts/index.json');
         debug('Index URL:', indexUrl);
         
-        // First try to fetch as text to inspect the response
-        const response = await fetch(indexUrl);
+        const response = await fetch(indexUrl, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
         debug('Response status:', response.status);
-        debug('Response type:', response.headers.get('content-type'));
         
         if (!response.ok) {
             throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
-
-        // Get the response text first
+        
         const text = await response.text();
-        debug('Response text:', text.substring(0, 100) + '...');
-
-        // Try to parse as JSON
+        debug('Raw response:', text);
+        
         let data;
         try {
             data = JSON.parse(text);
         } catch (e) {
-            debug('Failed to parse JSON:', e);
-            throw new Error('Failed to parse server response as JSON. Please check the server configuration.');
+            debug('JSON parse error:', e);
+            throw new Error('Failed to parse posts index as JSON. Please check the file format.');
         }
-
+        
         debug('Posts index data:', data);
         const posts = data.posts || [];
 
@@ -168,7 +168,7 @@ async function loadBlogPosts() {
         debug('Successfully loaded all blog posts');
     } catch (error) {
         console.error('Error loading blog posts:', error);
-        showError(postsContainer, `Error loading blog posts: ${error.message}`, error);
+        showError(postsContainer, `Error loading blog posts: ${error.message}`);
     }
 }
 
