@@ -5,76 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Msingi AI</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <script>
-        async function loadBlogPosts() {
-            const posts = [
-                {
-                    title: "Msingi AI Launches $10M Funding Round to Build Africa's Foundational AI Models",
-                    date: "March 12, 2025",
-                    author: "Kiplangat Korir",
-                    excerpt: "We're officially launching our $10 million funding round to build foundational AI models for African languages from scratch, empowering the next generation of African AI innovation.",
-                    link: "post.html?post=posts/funding-announcement.md",
-                    featured: true
-                },
-                {
-                    title: "Pan-African Transfer Learning - Building AI That Understands Africa",
-                    date: "March 11, 2025",
-                    author: "Kiplangat Korir",
-                    excerpt: "Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape.",
-                    link: "post.html?post=posts/first-post.md",
-                    featured: false
-                },
-                {
-                    title: "MsingiAI Data Challenge - Building Africa's Language Resources",
-                    date: "March 11, 2025",
-                    author: "Msingi AI Research Team",
-                    excerpt: "Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies.",
-                    link: "post.html?post=posts/data-challenge.md",
-                    featured: false
-                }
-            ];
-
-            const featuredContainer = document.getElementById('featured-posts');
-            const regularContainer = document.getElementById('regular-posts');
-
-            // Clear loading states
-            featuredContainer.innerHTML = '';
-            regularContainer.innerHTML = '';
-
-            // Render posts
-            posts.forEach(post => {
-                const postHtml = `
-                    <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-[1.02]">
-                        <div class="p-8">
-                            <div class="mb-4">
-                                <a href="${post.link}" class="text-2xl font-bold text-gray-900 hover:text-indigo-600 transition duration-300">
-                                    ${post.title}
-                                </a>
-                            </div>
-                            <div class="flex items-center text-gray-600 text-sm mb-4">
-                                <span class="mr-4">By ${post.author}</span>
-                                <time>${post.date}</time>
-                            </div>
-                            <p class="text-gray-600 mb-6">
-                                ${post.excerpt}
-                            </p>
-                            <a href="${post.link}" class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-300">
-                                Read More
-                            </a>
-                        </div>
-                    </article>
-                `;
-
-                if (post.featured) {
-                    featuredContainer.innerHTML += postHtml;
-                } else {
-                    regularContainer.innerHTML += postHtml;
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', loadBlogPosts);
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="js/blog.js" defer></script>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
@@ -82,7 +15,7 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href=".">
+                    <a href="." class="hover:opacity-90">
                         <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
                             <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
@@ -130,32 +63,59 @@
         </div>
     </div>
 
-    <!-- Blog Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Featured Posts -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured</h2>
-            <div id="featured-posts" class="grid gap-8">
-                <!-- Featured posts will be inserted here -->
-                <div class="text-center py-12">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
-                    <p class="mt-4 text-gray-600">Loading posts...</p>
-                </div>
+    <!-- Featured Post -->
+    <div class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12" data-aos="fade-up">Featured Article</h2>
+            
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl transform transition duration-300 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+                <a href="posts/html/first-post.html" class="block">
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <div class="p-8 md:p-12">
+                            <div class="uppercase tracking-wide text-sm text-indigo-700 font-semibold">Research</div>
+                            <h3 class="mt-2 text-2xl font-bold text-gray-900 hover:text-indigo-600 transition-colors">Pan-African Transfer Learning - Building AI That Understands Africa</h3>
+                            <p class="mt-4 text-gray-600">Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape.</p>
+                            <div class="mt-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <span class="sr-only">Kiplangat Korir</span>
+                                        <div class="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center">
+                                            <span class="text-white font-semibold text-lg">KK</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">Kiplangat Korir</p>
+                                        <div class="flex space-x-1 text-sm text-gray-500">
+                                            <time datetime="2025-03-10">March 10, 2025</time>
+                                            <span aria-hidden="true">&middot;</span>
+                                            <span>10 min read</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative lg:h-full">
+                            <div class="h-56 lg:absolute lg:h-full lg:w-full">
+                                <div class="h-full w-full bg-gradient-to-br from-indigo-600 to-indigo-800"></div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </section>
-
-        <!-- Regular Posts -->
-        <section>
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Posts</h2>
-            <div id="regular-posts" class="grid gap-8 md:grid-cols-2">
-                <!-- Regular posts will be inserted here -->
-                <div class="text-center py-12 col-span-2">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
-                    <p class="mt-4 text-gray-600">Loading posts...</p>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
+
+    <!-- Latest Posts -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-12" data-aos="fade-up">Latest Posts</h2>
+            
+            <!-- Blog Posts Container -->
+            <div id="blog-posts" class="mt-6 grid gap-8">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
 
     <!-- Categories Section -->
     <div id="categories" class="py-24 bg-white">
@@ -219,7 +179,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({
             duration: 1000,
