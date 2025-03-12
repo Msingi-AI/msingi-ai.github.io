@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Msingi AI Blog Post</title>
+    <title>Blog Post - Msingi AI</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
-    <script>
-        marked.use({
-            breaks: true,
-            gfm: true
-        });
-    </script>
     <script src="js/post.js" defer></script>
 </head>
 <body class="bg-gray-50">
@@ -21,7 +15,7 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="/">
+                    <a href="..">
                         <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
                             <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
@@ -40,11 +34,11 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-gray-700 hover:text-indigo-600">Home</a>
-                    <a href="research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
-                    <a href="community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
-                    <a href="data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
+                    <a href=".." class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="../research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="../community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="../blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="../data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
                     <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
                 </div>
             </div>
@@ -54,12 +48,14 @@
     <!-- Post Content -->
     <div class="pt-24">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="post-content" class="py-16">
-                <!-- Post will be loaded here -->
-                <div class="text-center py-12">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
-                    <p class="mt-4 text-gray-600">Loading post...</p>
-                </div>
+            <!-- Title Section -->
+            <div id="post-title" class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+                <!-- Title content will be inserted here by JavaScript -->
+            </div>
+            
+            <!-- Content Section -->
+            <div id="post-content" class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Post content will be inserted here by JavaScript -->
             </div>
         </div>
     </div>

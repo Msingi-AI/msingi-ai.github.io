@@ -95,10 +95,6 @@ Ready to help build AI that truly understands Africa? Here's how:
 3. Follow our research updates to stay informed on breakthroughs
 4. Participate in data collection – your language contributions matter more than you know
 
-## About the Research Team
-
-Our team isn't just technically brilliant – they understand Africa's heart. Led by Dr. Janet Nkatha, our researchers bring a unique combination of computational expertise and cultural depth. They're not just building algorithms; they're creating bridges between technologies and communities.
-
 ## The Revolution Starts Now
 
 This announcement isn't the finish line – it's the starting gun. In the coming weeks, we'll share opportunities to participate in building this new foundation for African NLP.
