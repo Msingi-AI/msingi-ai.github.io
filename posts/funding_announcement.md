@@ -47,7 +47,7 @@ We're grateful to our investors who recognize both the ethical imperative and th
 
 This is just the beginning of our journey. We invite language experts, AI researchers, community organizations, and forward-thinking institutions to join us in building technology that honors and elevates African languages.
 
-For more information about partnership opportunities or to join our team, please contact us at investments.msingiai@gmail.com.
+For more information about partnership opportunities or to join our team, please contact us at information.msingiai@gmail.com.
 
 Together, we're building the foundation for an AI future where African languages and cultures take their rightful place.
 
