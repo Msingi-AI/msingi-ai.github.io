@@ -16,10 +16,9 @@ function getBaseUrl() {
     // Check if we're on GitHub Pages
     if (hostname.includes('github.io')) {
         debug('Using GitHub Pages base URL');
-        return '/msingi-ai.github.io';  // Add repository name for GitHub Pages
+        return '/msingi-ai.github.io';
     }
     
-    // For local development
     debug('Using local development base URL');
     return '';
 }
@@ -27,10 +26,8 @@ function getBaseUrl() {
 // Function to get asset URL with proper path handling
 function getAssetUrl(path) {
     const baseUrl = getBaseUrl();
-    // Remove leading slash if path starts with one
     const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-    // Join base URL and clean path
-    const fullUrl = baseUrl ? `${baseUrl}/${cleanPath}` : cleanPath;
+    const fullUrl = `${baseUrl}${baseUrl && !cleanPath.startsWith('/') ? '/' : ''}${cleanPath}`;
     debug('Generated URL:', fullUrl);
     return fullUrl;
 }
@@ -124,28 +121,14 @@ async function loadBlogPosts() {
         const indexUrl = getAssetUrl('posts/index.json');
         debug('Index URL:', indexUrl);
         
-        const response = await fetch(indexUrl, {
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
+        const response = await fetch(indexUrl);
         debug('Response status:', response.status);
         
         if (!response.ok) {
             throw new Error(`Failed to fetch posts index: ${response.status} ${response.statusText}`);
         }
         
-        const text = await response.text();
-        debug('Raw response:', text);
-        
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch (e) {
-            debug('JSON parse error:', e);
-            throw new Error('Failed to parse posts index as JSON. Please check the file format.');
-        }
-        
+        const data = await response.json();
         debug('Posts index data:', data);
         const posts = data.posts || [];
 
@@ -156,7 +139,6 @@ async function loadBlogPosts() {
         }
 
         // Filter out the featured post
-        const featuredPost = posts.find(post => post.filename === 'funding-announcement.md');
         const regularPosts = posts.filter(post => post.filename !== 'funding-announcement.md');
 
         // Clear container and create grid for post cards
@@ -164,10 +146,10 @@ async function loadBlogPosts() {
         const grid = postsContainer.firstChild;
 
         // Create post cards for regular posts
-        for (const post of regularPosts) {
+        regularPosts.forEach(post => {
             debug('Creating post card for:', post.filename);
             grid.innerHTML += createPostCard(post);
-        }
+        });
         
         debug('Successfully loaded all blog posts');
     } catch (error) {
