@@ -8,30 +8,6 @@ function debug(...args) {
     }
 }
 
-// Function to get base URL for assets
-function getBaseUrl() {
-    const hostname = window.location.hostname;
-    debug('Current hostname:', hostname);
-    
-    // Check if we're on GitHub Pages
-    if (hostname.includes('github.io')) {
-        debug('Using GitHub Pages base URL');
-        return '/msingi-ai.github.io';
-    }
-    
-    debug('Using local development base URL');
-    return '';
-}
-
-// Function to get asset URL with proper path handling
-function getAssetUrl(path) {
-    const baseUrl = getBaseUrl();
-    const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-    const fullUrl = `${baseUrl}${baseUrl && !cleanPath.startsWith('/') ? '/' : ''}${cleanPath}`;
-    debug('Generated URL:', fullUrl);
-    return fullUrl;
-}
-
 // Function to format date
 function formatDate(dateString) {
     try {
@@ -51,7 +27,7 @@ function formatDate(dateString) {
 function createPostCard(post) {
     const formattedDate = formatDate(post.date);
     const htmlFilename = post.filename.replace('.md', '.html');
-    const postUrl = getAssetUrl(`posts/html/${htmlFilename}`);
+    const postUrl = `posts/html/${htmlFilename}`;
     debug('Creating post card with URL:', postUrl);
     
     return `
@@ -118,10 +94,7 @@ async function loadBlogPosts() {
 
     try {
         debug('Fetching posts index...');
-        const indexUrl = getAssetUrl('posts/index.json');
-        debug('Index URL:', indexUrl);
-        
-        const response = await fetch(indexUrl);
+        const response = await fetch('posts/index.json');
         debug('Response status:', response.status);
         
         if (!response.ok) {
@@ -158,7 +131,7 @@ async function loadBlogPosts() {
     }
 }
 
-// Initialize AOS
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     debug('DOM loaded, initializing blog system...');
     AOS.init({
