@@ -1,25 +1,28 @@
 {
   "posts": [
     {
-      "filename": "funding_announcement.md",
+      "filename": "funding-announcement.md",
       "title": "MsingiAI Announces $10 Million Funding Round to Revolutionize AI for African Languages",
       "date": "2025-03-13",
       "author": "Msingi AI Team",
-      "excerpt": "Today, we are proud to announce that MsingiAI is raising $10 million in funding to accelerate our mission of building AI technologies that truly understand and serve African languages and cultures."
+      "excerpt": "MsingiAI is raising $10 million in funding to accelerate our mission of building AI technologies that truly understand and serve African languages and cultures.",
+      "featured": true
     },
     {
       "filename": "data-challenge.md",
       "title": "MsingiAI Data Challenge - Building Africa's Language Resources",
       "date": "2025-03-11",
       "author": "Msingi AI Research Team",
-      "excerpt": "Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies."
+      "excerpt": "Join our initiative to create the largest open-source dataset of African languages, powering the next generation of AI technologies.",
+      "featured": false
     },
     {
       "filename": "first-post.md",
       "title": "Pan-African Transfer Learning - Building AI That Understands Africa",
       "date": "2025-03-11",
       "author": "Kiplangat Korir",
-      "excerpt": "Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape."
+      "excerpt": "Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape.",
+      "featured": true
     }
   ]
 }
