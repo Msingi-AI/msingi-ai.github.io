@@ -27,7 +27,7 @@ function formatDate(dateString) {
 function createPostCard(post) {
     const formattedDate = formatDate(post.date);
     const htmlFilename = post.filename.replace('.md', '.html');
-    const postUrl = `posts/html/${htmlFilename}`;
+    const postUrl = `../posts/html/${htmlFilename}`;
     debug('Creating post card with URL:', postUrl);
     
     return `
@@ -94,7 +94,7 @@ async function loadBlogPosts() {
 
     try {
         debug('Fetching posts index...');
-        const response = await fetch('posts/index.json');
+        const response = await fetch('../posts/index.json');
         debug('Response status:', response.status);
         
         if (!response.ok) {
