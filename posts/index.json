@@ -1,6 +1,13 @@
 {
   "posts": [
     {
+      "filename": "funding-announcement.md",
+      "title": "MsingiAI Announces $10 Million Funding Round to Revolutionize AI for African Languages",
+      "date": "2025-03-12",
+      "author": "MsingiAI Team",
+      "excerpt": "MsingiAI secures $10 million in funding to accelerate the development of AI technologies that understand and serve African languages and cultures."
+    },
+    {
       "filename": "data-challenge.md",
       "title": "MsingiAI Data Challenge - Building Africa's Language Resources",
       "date": "2025-03-11",

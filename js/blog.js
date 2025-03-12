@@ -16,7 +16,7 @@ function getBaseUrl() {
     // Check if we're on GitHub Pages
     if (hostname.includes('github.io')) {
         debug('Using GitHub Pages base URL');
-        return '';  // No need for prefix since we're at root
+        return '/msingi-ai.github.io';  // Add repository name for GitHub Pages
     }
     
     // For local development
@@ -58,7 +58,7 @@ function createPostCard(post) {
     debug('Creating post card with URL:', postUrl);
     
     return `
-        <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1" data-aos="fade-up">
             <a href="${postUrl}" class="block">
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-600 mb-4">
@@ -66,7 +66,7 @@ function createPostCard(post) {
                         <span class="mx-2">·</span>
                         <span>By ${post.author}</span>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600">
+                    <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                         ${post.title}
                     </h2>
                     <p class="text-gray-600 line-clamp-3">
@@ -155,12 +155,16 @@ async function loadBlogPosts() {
             return;
         }
 
+        // Filter out the featured post
+        const featuredPost = posts.find(post => post.filename === 'funding-announcement.md');
+        const regularPosts = posts.filter(post => post.filename !== 'funding-announcement.md');
+
         // Clear container and create grid for post cards
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
         const grid = postsContainer.firstChild;
 
-        // Create post cards directly from index.json data
-        for (const post of posts) {
+        // Create post cards for regular posts
+        for (const post of regularPosts) {
             debug('Creating post card for:', post.filename);
             grid.innerHTML += createPostCard(post);
         }
@@ -172,8 +176,13 @@ async function loadBlogPosts() {
     }
 }
 
-// Load posts when the page loads
+// Initialize AOS
 document.addEventListener('DOMContentLoaded', () => {
     debug('DOM loaded, initializing blog system...');
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
     loadBlogPosts();
 });
