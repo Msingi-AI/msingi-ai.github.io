@@ -1,6 +1,6 @@
 ---
 title: Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech
-date: 2025-03-17
+date: 2025-03-18
 author: Msingi AI Research Team
 excerpt: Introducing Sauti Ya Kenya, our groundbreaking initiative to create a Text-to-Speech system that truly captures the authentic sound and character of Kenyan Swahili.
 ---
