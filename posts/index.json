@@ -1,6 +1,21 @@
 {
   "posts": [
     {
+      "filename": "sauti-ya-kenya.md",
+      "title": "Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech",
+      "date": "2025-03-17",
+      "author": "Msingi AI Research Team",
+      "excerpt": "Introducing Sauti Ya Kenya, our groundbreaking initiative to create a Text-to-Speech system that truly captures the authentic sound and character of Kenyan Swahili.",
+      "featured": true
+    },
+    {
+      "filename": "finetuning_article.md",
+      "title": "Why Finetuning Falls Short for African AI",
+      "date": "2025-03-16",
+      "author": "Kiplangat Korir",
+      "excerpt": "Africa doesn't need slightly adjusted versions of Silicon Valley's technological visions; it needs a fundamental reimagining of AI development that centers African data, expertise, and priorities from the ground up."
+    },
+    {
       "filename": "funding_announcement.md",
       "title": "MsingiAI Announces $10 Million Funding Round to Revolutionize AI for African Languages",
       "date": "2025-03-13",
