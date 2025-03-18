@@ -6,6 +6,8 @@
     <title>Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech - Msingi AI</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="../../js/social-share.js"></script>
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
@@ -54,6 +56,16 @@
                         <time datetime="2025-03-17">March 18, 2025</time>
                     </div>
                     <div class="prose prose-indigo max-w-none">
+                        <!-- Share buttons -->
+                        <div class="flex items-center space-x-4 mb-8">
+                            <span class="text-gray-600">Share this article:</span>
+                            <button onclick="shareOnLinkedIn()" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </button>
+                            <button onclick="shareOnX()" class="text-gray-800 hover:text-gray-600 transition-colors">
+                                <i class="fab fa-x-twitter text-xl"></i>
+                            </button>
+                        </div>
                         <p>Have you ever asked ChatGPT or any other AI assistant to speak Swahili? The result is jarring – an artificial voice that sounds more like a tourist attempting Swahili than a native speaker. The accent is distinctly foreign, the rhythm is off, and the natural flow of our language is lost. Even worse, when these systems attempt to handle common Kenyan expressions or switch between Swahili and English as we naturally do, they fail completely.</p>
 <p>This isn't just a minor inconvenience. As AI becomes increasingly integrated into our daily lives, the lack of authentic Kenyan Swahili voice technology creates a significant barrier. Current Text-to-Speech (TTS) systems, including those from major tech companies, are trained primarily on Western languages and accents. When they attempt Swahili, they apply these foreign patterns to our language, resulting in speech that sounds unnatural and often difficult to understand.</p>
 <p>Today, we're excited to announce Sauti Ya Kenya, our initiative to create a truly authentic Kenyan Swahili Text-to-Speech system. This isn't about making minor adjustments to existing foreign models. Instead, we're building from the ground up, focusing on how Kenyan Swahili is actually spoken in our communities.</p>
