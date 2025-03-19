@@ -1,13 +1,6 @@
 {
   "posts": [
     {
-      "filename": "bias-fairness-african-ai.md",
-      "title": "Addressing Bias in African AI Models",
-      "author": "Kiplangat Korir",
-      "date": "2025-03-20",
-      "excerpt": "An exploration of bias in AI models and our initiative to ensure African language technologies work equitably for all users."
-    },
-    {
       "filename": "sauti-ya-kenya.md",
       "title": "Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech",
       "date": "2025-03-18",
