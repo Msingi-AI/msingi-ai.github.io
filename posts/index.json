@@ -1,15 +1,6 @@
 {
   "posts": [
     {
-      "id": "kolmogorov-arnold-networks",
-      "title": "Kolmogorov-Arnold Networks: A Promising Direction for Low-Resource African NLP",
-      "author": "Kiplangat Korir",
-      "date": "2025-03-19",
-      "tags": ["Research", "Neural Networks", "Low-Resource NLP", "African Languages"],
-      "summary": "A position paper exploring how Kolmogorov-Arnold Networks could potentially revolutionize NLP for low-resource African languages through their unique mathematical properties and adaptive capabilities.",
-      "url": "posts/kolmogorov-arnold-networks.html"
-    },
-    {
       "filename": "sauti-ya-kenya.md",
       "title": "Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech",
       "date": "2025-03-18",
