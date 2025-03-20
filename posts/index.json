@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "filename": "bias-in-african-ai.md",
+      "title": "Addressing Bias in African AI Models - A MsingiAI Priority",
+      "date": "2025-03-20",
+      "author": "Kiplangat Korir",
+      "excerpt": "Why MsingiAI is making bias detection and fairness a cornerstone of our African language AI development, and how we plan to tackle these crucial challenges.",
+      "featured": true
+    },
+    {
       "filename": "sauti-ya-kenya.md",
       "title": "Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech",
       "date": "2025-03-18",
