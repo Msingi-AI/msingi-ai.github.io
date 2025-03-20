@@ -51,9 +51,16 @@
             <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
                 <div class="p-8">
                     <h1 class="text-4xl font-bold text-gray-900 mb-4">{{title}}</h1>
-                    <div class="flex items-center text-gray-600">
-                        <span class="mr-4">By {{author}}</span>
-                        <time datetime="{{date}}">{{date}}</time>
+                    <div class="flex items-center text-gray-600 mb-8">
+                        <div class="flex items-center">
+                            <img src="../../images/authors/{{author_img}}" 
+                                alt="{{author}}" 
+                                class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <span class="font-medium text-gray-900 block">{{author}}</span>
+                                <time datetime="{{date}}" class="text-sm">{{date}}</time>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
