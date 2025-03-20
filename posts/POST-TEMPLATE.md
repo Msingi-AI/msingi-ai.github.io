@@ -1,6 +1,6 @@
 ---
 title: Your Post Title Here
-date: YYYY-MM-DD
+date: MM-DD-YYYY
 author: Your Name
 excerpt: A brief 1-2 sentence summary of your article
 ---

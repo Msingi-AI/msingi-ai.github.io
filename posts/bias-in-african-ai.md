@@ -1,6 +1,6 @@
 ---
 title: Addressing Bias in African AI Models - A MsingiAI Priority
-date: 2025-03-20
+date: 03-20-2025
 author: Kiplangat Korir
 excerpt: Why MsingiAI is making bias detection and fairness a cornerstone of our African language AI development, and how we plan to tackle these crucial challenges.
 ---
