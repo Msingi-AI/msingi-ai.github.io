@@ -50,11 +50,11 @@ def create_html(frontmatter, content):
     
     # Handle author image
     if author == 'Kiplangat Korir':
-        author_img = 'kiplangat-korir.jpg'
+        author_img = 'IMG_20230808_105044.jpg'
     elif author == 'Msingi AI Research Team':
-        author_img = 'msingi-team.jpg'
+        author_img = 'msingi-small-logo.png'
     else:
-        author_img = 'default-author.jpg'
+        author_img = 'msingi-small-logo.png'  # Default to team logo
     html = html.replace('{{author_img}}', author_img)
     
     return html
