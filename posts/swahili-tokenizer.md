@@ -24,7 +24,7 @@ Our tokenizer is based on Byte-Pair Encoding (BPE) and has been trained on over 
 
 Real-World Tokenization Examples
 -----------------------------
-![alt text](<carbon (11).png>)
+![carbon (11)](https://github.com/user-attachments/assets/9ca8b918-bc43-4364-b580-2581a08b2be2)
 
 Here's a look at how our tokenizer processes Swahili sentences:
 
