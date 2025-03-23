@@ -24,34 +24,33 @@ Our tokenizer is based on Byte-Pair Encoding (BPE) and has been trained on over 
 
 Real-World Tokenization Examples
 -----------------------------
-Here is a snippet demonstrating how we tested our tokenizer:
-![alt text](<carbon (11).png>)
+![carbon (11)](https://github.com/user-attachments/assets/9ca8b918-bc43-4364-b580-2581a08b2be2)
 
 Here's a look at how our tokenizer processes Swahili sentences:
 
 ### Example 1: Simple Greeting
 Original text: Habari ya leo?  
 Tokens: ['H', 'a', 'bari', 'Ġya', 'Ġleo', '?']  
-Decoded text: Habari ya leo? ✅
+Decoded text: Habari ya leo? 
 
-✅ Preserved "bari" as a unit rather than splitting it into "H", "a", and "bari" separately.  
-✅ Recognized "ya" and "leo" as distinct words rather than merging them incorrectly.
+ Preserved "bari" as a unit rather than splitting it into "H", "a", and "bari" separately.  
+ Recognized "ya" and "leo" as distinct words rather than merging them incorrectly.
 
 ### Example 2: Common Conversation Sentence
 Original text: Ninafurahi kukutana nawe.  
 Tokens: ['N', 'ina', 'furahi', 'Ġkukutana', 'Ġnawe', '.']  
-Decoded text: Ninafurahi kukutana nawe. ✅
+Decoded text: Ninafurahi kukutana nawe. 
 
-✅ Recognized "ina" as an important verb prefix, which is crucial for proper conjugation.  
-✅ Kept "kukutana" and "nawe" intact instead of breaking them into meaningless segments.
+ Recognized "ina" as an important verb prefix, which is crucial for proper conjugation.  
+ Kept "kukutana" and "nawe" intact instead of breaking them into meaningless segments.
 
 ### Example 3: Proper Nouns and Punctuation
 Original text: Karibu Tanzania, nchi nzuri.  
 Tokens: ['K', 'a', 'ribu', 'Ġ', 'T', 'a', 'nzania', ',', 'Ġnchi', 'Ġnzuri', '.']  
-Decoded text: Karibu Tanzania, nchi nzuri. ✅
+Decoded text: Karibu Tanzania, nchi nzuri. 
 
-✅ Recognized "Tanzania" as a proper noun while breaking it down logically.  
-✅ Preserved punctuation marks and spacing correctly.
+ Recognized "Tanzania" as a proper noun while breaking it down logically.  
+ Preserved punctuation marks and spacing correctly.
 
 Why This Matters for Msingi1 and Sauti Ya Kenya
 --------------------------------------------
@@ -70,4 +69,4 @@ Now that our tokenizer is working correctly, we are integrating it into the trai
 - Low-resource words
 - Real-world conversational patterns
 
-This is just the beginning! 🚀 Stay tuned for updates as we refine our Swahili NLP models and bring more inclusive AI tools to the African tech ecosystem.
+This is just the beginning!  Stay tuned for updates as we refine our Swahili NLP models and bring more inclusive AI tools to the African tech ecosystem.

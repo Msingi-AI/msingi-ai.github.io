@@ -14,7 +14,7 @@
       "date": "2025-03-20",
       "author": "Kiplangat Korir",
       "excerpt": "Why MsingiAI is making bias detection and fairness a cornerstone of our African language AI development, and how we plan to tackle these crucial challenges.",
-      "featured": true
+      "featured": false
     },
     {
       "filename": "sauti-ya-kenya.md",
@@ -22,7 +22,7 @@
       "date": "2025-03-18",
       "author": "Msingi AI Research Team",
       "excerpt": "Introducing Sauti Ya Kenya, our groundbreaking initiative to create a Text-to-Speech system that truly captures the authentic sound and character of Kenyan Swahili.",
-      "featured": true
+      "featured": false
     },
     {
       "filename": "finetuning_article.md",
@@ -30,7 +30,7 @@
       "date": "2025-03-16",
       "author": "Kiplangat Korir",
       "excerpt": "Africa doesn't need slightly adjusted versions of Silicon Valley's technological visions; it needs a fundamental reimagining of AI development that centers African data, expertise, and priorities from the ground up.",
-      "featured": true
+      "featured": false
     },
     {
       "filename": "funding_announcement.md",
@@ -38,7 +38,7 @@
       "date": "2025-03-13",
       "author": "Msingi AI Team",
       "excerpt": "MsingiAI is raising $10 million in funding to accelerate our mission of building AI technologies that truly understand and serve African languages and cultures.",
-      "featured": true
+      "featured": false
     },
     {
       "filename": "data-challenge.md",
@@ -54,7 +54,7 @@
       "date": "2025-03-11",
       "author": "Kiplangat Korir",
       "excerpt": "Announcing Msingi AI's groundbreaking research initiative on Pan-African Transfer Learning, aimed at creating AI models that truly understand and adapt to Africa's diverse linguistic and cultural landscape.",
-      "featured": true
+      "featured": false
     }
   ]
 }
