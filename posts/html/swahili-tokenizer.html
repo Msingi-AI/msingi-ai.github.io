@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Swahili Tokenizer - The Foundation of Msingi1 and Sauti Ya Kenya - Msingi AI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
+    <script src="../../js/social-share.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../.." class="hover:opacity-90">
+                        <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
+                            <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
+                            <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
+                                fill="none" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
+                            <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
+                            <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../.." class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="../../research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="../../community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                    <a href="../../data.html" class="text-gray-700 hover:text-indigo-600">Data Challenge</a>
+                    <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Join Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <div class="pt-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Title Section -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+                <div class="p-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Building a Swahili Tokenizer - The Foundation of Msingi1 and Sauti Ya Kenya</h1>
+                    <div class="flex items-center text-gray-600 mb-8">
+                        <div class="flex items-center">
+                            <img src="../../images/authors/IMG_20230808_105044.jpg" 
+                                alt="Kiplangat Korir" 
+                                class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <span class="font-medium text-gray-900 block">Kiplangat Korir</span>
+                                <time datetime="January 24, 2025" class="text-sm">January 24, 2025</time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Section -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <div class="prose prose-indigo max-w-none">
+                        <h2>Why a Swahili-Specific Tokenizer Matters</h2>
+<p>Swahili is a rich and expressive language spoken by millions across East Africa. However, existing language models often struggle with its unique morphology, leading to poor performance in NLP applications. Many models are trained on datasets that do not fully capture the structure of Swahili words, resulting in unnatural translations, misinterpretations, and incorrect pronunciations in Text-to-Speech (TTS) systems.</p>
+<p>To address this, MsingiAI has developed a specialized Swahili tokenizer as part of our Msingi1 language model and Sauti Ya Kenya, our Text-to-Speech (TTS) initiative. This tokenizer is designed to better capture the linguistic patterns of Swahili, ensuring more accurate AI-powered communication tools.</p>
+<h2>How Our Swahili Tokenizer Works</h2>
+<p>Our tokenizer is based on Byte-Pair Encoding (BPE) and has been trained on over 1.4 million Swahili words to identify the most common linguistic patterns. Unlike generic tokenizers, which often break Swahili words in unnatural ways, our model:</p>
+<ul>
+<li>Preserves common prefixes and suffixes (e.g., "ku-", "wa-", "ni-")</li>
+<li>Maintains word boundaries using a special marker ("Ġ")</li>
+<li>Optimizes for subword tokenization to handle agglutinative structures</li>
+<li>Recognizes proper nouns and diacritics for accurate text representation</li>
+</ul>
+<h2>Real-World Tokenization Examples</h2>
+<p>Here is a snippet demonstrating how we tested our tokenizer:
+<img alt="alt text" src="carbon (11).png" /></p>
+<p>Here's a look at how our tokenizer processes Swahili sentences:</p>
+<h3>Example 1: Simple Greeting</h3>
+<p>Original text: Habari ya leo?<br />
+Tokens: ['H', 'a', 'bari', 'Ġya', 'Ġleo', '?']<br />
+Decoded text: Habari ya leo? ✅</p>
+<p>✅ Preserved "bari" as a unit rather than splitting it into "H", "a", and "bari" separately.<br />
+✅ Recognized "ya" and "leo" as distinct words rather than merging them incorrectly.</p>
+<h3>Example 2: Common Conversation Sentence</h3>
+<p>Original text: Ninafurahi kukutana nawe.<br />
+Tokens: ['N', 'ina', 'furahi', 'Ġkukutana', 'Ġnawe', '.']<br />
+Decoded text: Ninafurahi kukutana nawe. ✅</p>
+<p>✅ Recognized "ina" as an important verb prefix, which is crucial for proper conjugation.<br />
+✅ Kept "kukutana" and "nawe" intact instead of breaking them into meaningless segments.</p>
+<h3>Example 3: Proper Nouns and Punctuation</h3>
+<p>Original text: Karibu Tanzania, nchi nzuri.<br />
+Tokens: ['K', 'a', 'ribu', 'Ġ', 'T', 'a', 'nzania', ',', 'Ġnchi', 'Ġnzuri', '.']<br />
+Decoded text: Karibu Tanzania, nchi nzuri. ✅</p>
+<p>✅ Recognized "Tanzania" as a proper noun while breaking it down logically.<br />
+✅ Preserved punctuation marks and spacing correctly.</p>
+<h2>Why This Matters for Msingi1 and Sauti Ya Kenya</h2>
+<p>Having a well-optimized tokenizer is a critical step in training better Swahili language models and TTS systems. Our tokenizer ensures that:</p>
+<ul>
+<li><strong>Msingi1</strong> (Swahili Language Model) can generate fluent Swahili text with accurate grammar.</li>
+<li><strong>Sauti Ya Kenya</strong> (TTS System) can produce natural, accent-free Swahili speech by understanding phonetic structures.</li>
+</ul>
+<h2>What's Next?</h2>
+<p>Now that our tokenizer is working correctly, we are integrating it into the training process for Msingi1 and Sauti Ya Kenya. We'll continue optimizing it for:</p>
+<ul>
+<li>Dialect variations</li>
+<li>Low-resource words</li>
+<li>Real-world conversational patterns</li>
+</ul>
+<p>This is just the beginning! 🚀 Stay tuned for updates as we refine our Swahili NLP models and bring more inclusive AI tools to the African tech ecosystem.</p>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-gray-200 flex items-center justify-between">
+                        <a href="../../blog.html" class="text-indigo-600 hover:text-indigo-700">
+                            ← Back to Blog
+                        </a>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="shareOnLinkedIn()" class="text-blue-600 hover:text-blue-700 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M15.8 0H4.2C1.88 0 0 1.88 0 4.2v11.6C0 18.12 1.88 20 4.2 20h11.6c2.32 0 4.2-1.88 4.2-4.2V4.2C20 1.88 18.12 0 15.8 0zM6.5 17H3.8V7.5h2.7V17zM5.15 6.2c-.87 0-1.57-.7-1.57-1.57s.7-1.57 1.57-1.57 1.57.7 1.57 1.57-.7 1.57-1.57 1.57zm11.85 10.8h-2.7v-4.63c0-1.1-.02-2.52-1.53-2.52-1.53 0-1.77 1.2-1.77 2.44V17h-2.7V7.5h2.58v1.18h.04c.4-.75 1.37-1.53 2.82-1.53 3.02 0 3.57 1.98 3.57 4.56V17z"/>
+                                </svg>
+                                Share on LinkedIn
+                            </button>
+                            <button onclick="shareOnX()" class="text-gray-800 hover:text-gray-900 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                                Share on X
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
