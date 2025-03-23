@@ -9,6 +9,14 @@
       "featured": true
     },
     {
+      "filename": "swahili-tokenizer.md",
+      "title": "Building a Swahili Tokenizer - The Foundation of Msingi1 and Sauti Ya Kenya",
+      "date": "2025-01-24",
+      "author": "Kiplangat Korir",
+      "excerpt": "A deep dive into MsingiAI's specialized Swahili tokenizer, designed to better capture the linguistic patterns and improve AI-powered communication tools for East Africa.",
+      "featured": true
+    },
+    {
       "filename": "sauti-ya-kenya.md",
       "title": "Sauti Ya Kenya - Building Authentic Kenyan Swahili Text-to-Speech",
       "date": "2025-03-18",
