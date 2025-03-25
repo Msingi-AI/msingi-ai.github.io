@@ -30,8 +30,11 @@ Africa's linguistic diversity is one of its greatest cultural treasures, with ov
 
 ### More Than Just Credentials
 We're not just seeking perfect GPAs or impressive resumes. We're looking for:
+
 - Dreamers who see beyond current technological limitations
+
 - Problem-solvers who understand local contexts
+
 - Innovators who can transform challenges into breakthrough technologies
 
 ### Academic Researchers
@@ -54,9 +57,13 @@ We're not just seeking perfect GPAs or impressive resumes. We're looking for:
 ## Application Process
 
 This isn't just an application. It's an invitation to be part of something transformative. We're accepting applications on a rolling basis, looking for candidates who demonstrate:
+
 - Technical brilliance
+
 - Cultural understanding
+
 - A genuine passion for solving real-world problems
+
 - The courage to reimagine what's possible
 
 ### How to Apply
@@ -64,9 +71,13 @@ Send your application to information.msingiai@gmail.com with the subject line "V
 
 **CV/Resume**: Highlighting your technical experience and achievements
 **Research Statement** (2-3 pages):
-   - Your vision for African language technology
-   - Specific problems you want to tackle
-   - How you plan to contribute to the MsingiAI community
+
+- Your vision for African language technology
+
+- Specific problems you want to tackle
+
+- How you plan to contribute to the MsingiAI community
+
 **Code Portfolio**: Links to your GitHub/projects
 **Writing Sample**: Any published papers or technical blog posts (optional)
 **Reference Letters**: 2 letters from academic or professional references
