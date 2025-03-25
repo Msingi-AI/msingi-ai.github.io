@@ -62,14 +62,14 @@ This isn't just an application. It's an invitation to be part of something trans
 ### How to Apply
 Send your application to information.msingiai@gmail.com with the subject line "Vanguard Fellowship Application". Please include:
 
-1. **CV/Resume**: Highlighting your technical experience and achievements
-2. **Research Statement** (2-3 pages):
+**CV/Resume**: Highlighting your technical experience and achievements
+**Research Statement** (2-3 pages):
    - Your vision for African language technology
    - Specific problems you want to tackle
    - How you plan to contribute to the MsingiAI community
-3. **Code Portfolio**: Links to your GitHub/projects
-4. **Writing Sample**: Any published papers or technical blog posts (optional)
-5. **Reference Letters**: 2 letters from academic or professional references
+**Code Portfolio**: Links to your GitHub/projects
+**Writing Sample**: Any published papers or technical blog posts (optional)
+**Reference Letters**: 2 letters from academic or professional references
 
 Applications are reviewed on a rolling basis, and we aim to respond within 2-3 weeks.
 
