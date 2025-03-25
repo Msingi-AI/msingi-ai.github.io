@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "filename": "vanguard-fellowship.md",
+      "title": "Announcing the MsingiAI Vanguard Fellowship: Shaping Africa's AI Future",
+      "date": "2025-03-26",
+      "author": "Kiplangat Korir",
+      "excerpt": "Join the next generation of AI researchers shaping the future of African language technology through our prestigious Vanguard Fellowship program.",
+      "featured": true
+    },
+    {
       "filename": "swahili-tokenizer.md",
       "title": "Building a Swahili Tokenizer - The Foundation of Msingi1 and Sauti Ya Kenya",
       "date": "2025-01-24",
