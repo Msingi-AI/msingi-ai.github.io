@@ -65,7 +65,9 @@ Send your application to information.msingiai@gmail.com with the subject line "V
 1. **CV/Resume**: Highlighting your technical experience and achievements
 2. **Research Statement** (2-3 pages):
    a) Your vision for African language technology
+
    b) Specific problems you want to tackle
+   
    c) How you plan to contribute to the MsingiAI community
 3. **Code Portfolio**: Links to your GitHub/projects
 4. **Writing Sample**: Any published papers or technical blog posts (optional)
