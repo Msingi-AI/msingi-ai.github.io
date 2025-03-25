@@ -1,9 +1,9 @@
 ---
-title: "Announcing the MsingiAI Vanguard Fellowship: Shaping Africa's AI Future"
-date: "2025-03-26"
-author: "Kiplangat Korir"
+title: Announcing the MsingiAI Vanguard Fellowship: Shaping Africa's AI Future
+date: 2025-03-26
+author: Kiplangat Korir
 featured: true
-excerpt: "Join the next generation of AI researchers shaping the future of African language technology through our prestigious Vanguard Fellowship program."
+excerpt: Join the next generation of AI researchers shaping the future of African language technology through our prestigious Vanguard Fellowship program.
 coverImage: "fellowship-banner.png"
 ---
 
@@ -81,4 +81,3 @@ Visit our [Fellowship Page](/fellowship.html) to learn more and apply. Together,
 
 **This is more than a fellowship. This is a movement.**
 
-#AI #Africa #Fellowship #Research #MachineLearning #NLP
