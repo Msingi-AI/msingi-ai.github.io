@@ -67,27 +67,26 @@ This isn't just an application. It's an invitation to be part of something trans
 - The courage to reimagine what's possible
 
 ### How to Apply
-Send your application to information.msingiai@gmail.com with the subject line "Vanguard Fellowship Application". Please include:
 
-**CV/Resume**: Highlighting your technical experience and achievements
-**Research Statement** (2-3 pages):
+Applications for the Vanguard Fellowship will open on **April 15, 2025**. When applications open, you'll need to send your application to information.msingiai@gmail.com with the subject line "Vanguard Fellowship Application". The application package should include:
 
-- Your vision for African language technology
+1. **CV/Resume**: Highlighting your technical experience and achievements
+2. **Research Statement** (2-3 pages):
+   a) Your vision for African language technology
 
-- Specific problems you want to tackle
+   b) Specific problems you want to tackle
+   
+   c) How you plan to contribute to the MsingiAI community
+3. **Code Portfolio**: Links to your GitHub/projects
+4. **Writing Sample**: Any published papers or technical blog posts (optional)
+5. **Reference Letters**: 2 letters from academic or professional references
 
-- How you plan to contribute to the MsingiAI community
-
-**Code Portfolio**: Links to your GitHub/projects
-**Writing Sample**: Any published papers or technical blog posts (optional)
-**Reference Letters**: 2 letters from academic or professional references
-
-Applications are reviewed on a rolling basis, and we aim to respond within 2-3 weeks.
+Applications will be reviewed on a rolling basis, and we aim to respond within 2-3 weeks of submission.
 
 ## Join Us
 
 Your language matters. Your context matters. Your innovation matters.
 
-Visit our [Fellowship Page](/fellowship.html) to learn more and apply. Together, let's build AI technology that speaks every African language – literally and metaphorically.
+Visit our [Fellowship Page](/fellowship.html) to learn more about the program and prepare your application materials. Together, let's build AI technology that speaks every African language – literally and metaphorically.
 
 **This is more than a fellowship. This is a movement.**
