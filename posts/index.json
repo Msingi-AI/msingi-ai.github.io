@@ -1,12 +1,20 @@
 {
   "posts": [
     {
+      "filename": "team-post.md",
+      "title": "Welcoming New Team Members to MsingiAI",
+      "date": "2025-04-10",
+      "author": "Kiplangat Korir",
+      "excerpt": "Welcoming New Team Members to MsingiAI.",
+      "type": "Featured Article"
+    },
+    {
       "filename": "vanguard-fellowship.md",
       "title": "The MsingiAI Vanguard Fellowship",
       "date": "2025-03-26",
       "author": "Kiplangat Korir",
       "excerpt": "Join the next generation of AI researchers shaping the future of African language technology through our prestigious Vanguard Fellowship program.",
-      "type": "Featured Article"
+      "type": "Article"
     },
     {
       "filename": "essential-ai-papers.md",
