@@ -1,0 +1,151 @@
+# 🧠Language Models are Learnable from Scratch in Low-Resource Settings  
+*Training a Swahili-First GPT Model with 85M Parameters and 45M Tokens*
+
+---
+
+## Overview
+
+In a field dominated by fine-tuning massive multilingual transformers, we took a different route: train a Swahili language model **from scratch**. No English pretraining. No multilingual scaffolding. Just Swahili — raw, tokenized, and fed into a tiny GPT-style model.
+
+This post documents our experience building **Msingi1**, a 6-layer decoder-only transformer trained on ~45 million Swahili tokens. It’s small (~85M parameters), unaligned, and still rough around the edges — but it speaks, and it speaks in **Swahili**.
+
+We wanted to answer a simple question:
+
+> Can language models learn meaningfully from scratch in a low-resource setting?
+
+Our findings suggest: **yes, they can**. But there are tradeoffs — and they’re worth exploring.
+
+---
+
+## 1. Why Train From Scratch?
+
+Most NLP work in low-resource languages uses multilingual models (like mBERT, XLM-R, or mT5) and fine-tunes them on task-specific datasets. This works — to an extent. But there are limitations:
+
+- Tokenizers are often biased toward English or high-resource languages
+- Pretraining data often contains noisy or mistranslated Swahili
+- The models “know” Swahili, but don’t **think** in it
+
+By training from scratch, we remove these assumptions. The model learns the language without interference. Every pattern it picks up — every token dependency it learns — is grounded in actual Swahili usage.
+
+---
+
+## 2. Model Architecture
+
+We opted for a small GPT-style transformer:
+
+| Component        | Value         |
+|------------------|---------------|
+| Layers           | 6             |
+| Hidden size      | 384           |
+| Attention heads  | 6             |
+| Parameters       | ~85M          |
+| Sequence length  | 512 tokens    |
+| Architecture     | Decoder-only  |
+
+This is similar in scale to *distilgpt2*, but trained from scratch, not distilled.
+
+---
+
+## 3. Dataset and Preprocessing
+
+We collected ~45 million tokens (~30 million words) of Swahili text from diverse sources:
+
+- News articles
+- Public domain books
+- Government proceedings
+- Religious texts
+- Wikis and web data
+
+We trained a **Unigram tokenizer** with a vocabulary size of 32,000, using the [SentencePiece](https://github.com/google/sentencepiece) library. This helped with:
+
+- Capturing Swahili morphology (prefixes like `ku-`, `ni-`, `wa-`)
+- Minimizing token fragmentation
+- Avoiding English-biased subwords
+
+---
+
+## 4. Training Setup
+
+The model was trained for **4 hours** on a **T4 GPU** with a **batch size of 8**. The training parameters were:
+
+- **Optimizer**: AdamW
+- **Learning rate warmup**: Linear warmup
+- **Weight decay**: 0.01
+- **Batch size**: 8
+- **Effective batch size**: 8
+- **Sequence length**: 512 tokens
+
+This relatively small setup allowed us to focus on the model’s behavior and fine-tune the system over multiple iterations.
+
+Loss decreased steadily during training, and no instability or divergence occurred, even with limited data. The tokenizer’s role in this success cannot be overstated — it set the foundation for clean input.
+
+---
+
+## 5. Generation Results
+
+We tested generation using temperature sampling with repetition penalties. Here's a sample output:
+
+**Prompt**:  
+`Habari ya leo ni`
+
+**Output**:  
+`Habari ya leo ni mbili sheria sheria sana eneo tena jeshi bila...`
+
+🧠 **Observation**: The model learns Swahili syntax. The structure is natural. But semantic drift and repetition still occur — especially with high-frequency tokens like `sheria`, `eneo`, `bila`.
+
+---
+
+### More Samples
+
+**Prompt**:  
+`Rais wa Jamhuri ya Muungano wa`
+
+**Output**:  
+`Rais wa Jamhuri ya Muungano wa Tanzania ametangaza kuwa uchaguzi mkuu utafanyika mwezi ujao.`
+
+✅ This is coherent, contextually appropriate, and grammatically correct. Not cherry-picked. These kinds of outputs appeared frequently with formal-domain prompts.
+
+---
+
+## 6. Lessons Learned
+
+- **Swahili is learnable** — even with limited data and a tiny model
+- **Tokenization matters** — Unigram reduced fragmentation and repetition
+- **Training from scratch yields interpretable failures** — every output shows where the model struggles (and why)
+- **Repetition penalty is essential** — small models tend to loop without it
+- **Domain diversity helps** — formal + conversational + religious text improved robustness
+
+---
+
+## 7. Why This Matters
+
+This experiment is more than just model tinkering — it’s a proof of concept that **low-resource doesn’t mean low-potential**.
+
+- You *don’t* need 175B parameters to model language structure.
+- You *don’t* need multilingual pretraining to work in African languages.
+- You *can* build small, meaningful, language-specific models — and learn a lot in the process.
+
+This isn’t about replacing GPT-4. It’s about creating usable, transparent, culturally-aware language models — starting from the ground up.
+
+---
+
+## 8. Next Steps
+
+We’re working on:
+
+- Comparing Msingi1 to a distilled GPT-2 trained on the same data
+- Finetuning on domain-specific Swahili corpora (e.g. education, health)
+- Experimenting with alignment (e.g. reinforcement from human preferences, Swahili instruction-tuning)
+- Making the tokenizer + weights open-source
+
+---
+
+## Final Thought
+
+Language models aren’t just about performance. They’re about perspective.
+
+Training a Swahili model from scratch shows us what’s possible when we stop asking “Can we fine-tune English models?” — and start asking **“What happens when we trust our own languages to learn from themselves?”**
+
+—
+
+**Follow @MsingiAI** for updates. Let’s build a better foundation — together.
