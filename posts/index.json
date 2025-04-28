@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "filename": "small-scale-pretraining.md",
+      "title": "Small-Scale Pretraining of Language Models: A Deep Dive into Efficient AI Development",
+      "date": "2025-04-29",
+      "author": "Kiplangat Korir",
+      "excerpt": "A deep dive into the power of small-scale pretraining in building efficient language models, highlighting how even limited resources can drive innovation and accessibility.",
+      "type": "Featured Article"
+    },
+    {
       "filename": "msingi1.md",
       "title": "Language Models are Learnable from Scratch in Low-Resource Settings",
       "date": "2025-04-18",

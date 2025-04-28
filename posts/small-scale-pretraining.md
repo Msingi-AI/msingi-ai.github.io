@@ -17,30 +17,30 @@ But what if we could train smaller models using smaller datasets without sacrifi
 
 Our research project is designed to answer a few key questions about small-scale pretraining:
 
-1. **How does model size impact data efficiency?**  
+**How does model size impact data efficiency?**  
    - Can smaller models trained on limited datasets outperform larger models trained on the same amount of data?
 
-2. **What are the most effective architectural improvements for small models?**  
+**What are the most effective architectural improvements for small models?**  
    - For example, we will explore the impact of **rotary embeddings**, which could make small-scale models more efficient in terms of both computation and generalization.
 
-3. **How do smaller models perform on downstream tasks like text classification, question answering, and text generation?**  
+**How do smaller models perform on downstream tasks like text classification, question answering, and text generation?**  
    - We will test the generalization ability of small models trained on a small corpus to see how well they perform on a variety of tasks beyond just language modeling.
 
-4. **What are the scaling laws for small models?**  
+**What are the scaling laws for small models?**  
    - Do the same scaling laws that apply to large models (i.e., model performance improves with larger data and more parameters) hold for smaller models as well?
 
-5. **How does training efficiency scale?**  
+**How does training efficiency scale?**  
    - We want to identify how quickly small models can be trained on limited resources and if they can be trained efficiently, even with fewer computational resources.
 
 ### Key Areas of Focus
 
-#### 1. **Model Architectures**
+#### **Model Architectures**
 We’ll be experimenting with different transformer-based architectures, ranging from small models with **20M parameters** to larger models with **160M parameters**. This will allow us to examine how performance varies as we scale the model size up or down. We’ll also be testing **rotary position embeddings**, a technique that has shown promise for improving efficiency in attention mechanisms, particularly in smaller models.
 
-#### 2. **Dataset Sizes**
+#### **Dataset Sizes**
 One of the main goals is to evaluate how small datasets (10GB - 100GB) impact model training. In traditional large-scale pretraining, large amounts of data are critical. But how do smaller datasets affect smaller models? We’ll experiment with datasets of varying sizes to determine the sweet spot for training small models, where the model gets the best performance with the least amount of data.
 
-#### 3. **Efficient Training**
+#### **Efficient Training**
 Training large models requires considerable time and computational power. We want to identify strategies that allow small models to be trained efficiently with limited compute. **Gradient checkpointing**, **optimizers like Lion or LAMB**, and **mixed precision training** are some of the techniques we will experiment with to improve training efficiency.
 
 ### Our Approach
