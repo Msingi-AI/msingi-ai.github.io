@@ -263,11 +263,46 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-2">Msingi1: Advanced Swahili Language Model</h3>
                         <p class="text-gray-600 mb-4">
-                            Our flagship open-source Swahili language model using Mixture of Experts (MoE) architecture. Built with PyTorch and FastMoE, Msingi1 delivers efficient and scalable natural language processing for Swahili text generation and understanding.
+                            Our flagship open-source Swahili language model built as a decoder-only transformer. Designed for efficiency and performance in resource-constrained environments while delivering high-quality natural language processing for Swahili text generation and understanding.
                         </p>
+                        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-4">
+                            <h4 class="text-sm font-semibold text-indigo-800 mb-2">Current Architecture</h4>
+                            <ul class="space-y-2 text-sm text-indigo-700">
+                                <li class="flex items-start">
+                                    <svg class="w-4 h-4 text-indigo-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                    12 layers, 768 hidden size, 12 attention heads
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-4 h-4 text-indigo-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                    ~110M parameters (with 32K vocabulary)
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-4 h-4 text-indigo-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                    2048 token context length
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-4 h-4 text-indigo-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                    Rotary Position Embeddings (RoPE)
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-4 h-4 text-indigo-600 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                    </svg>
+                                    Pre-norm transformer with GELU activation
+                                </li>
+                            </ul>
+                        </div>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">NLP</span>
-                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">MoE</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">Transformer</span>
                             <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">PyTorch</span>
                             <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">Swahili</span>
                         </div>
