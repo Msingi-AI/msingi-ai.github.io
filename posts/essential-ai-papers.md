@@ -169,6 +169,4 @@ These papers are vital for:
 
 This reading list is designed to give you a strong foundation in AI research, with a special focus on African language technology. Remember that the field moves quickly, so stay updated with new papers and developments.
 
-Want to contribute to African language AI research? Consider applying for our [Vanguard Fellowship](/fellowship.html).
 
-#AI #Research #Papers #MachineLearning #AfricanAI

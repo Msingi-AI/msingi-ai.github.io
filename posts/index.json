@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "filename": "developing_swahili_benchmarks.md",
+      "title": "Developing Standardized Benchmarks for Swahili NLP: A Comprehensive Framework",
+      "date": "2025-05-24",
+      "author": "Kiplangat Korir",
+      "excerpt": "A Comprehensive Framework for Developing Standardized Benchmarks for Swahili NLP.",
+      "type": "Research Guide"
+    },
+    {
       "filename": "small-scale-pretraining.md",
       "title": "Small-Scale Pretraining of Language Models: A Deep Dive into Efficient AI Development",
       "date": "2025-04-29",
