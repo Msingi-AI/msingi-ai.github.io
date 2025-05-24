@@ -50,7 +50,7 @@ def create_html(frontmatter, content):
     
     # Handle author image
     if author == 'Kiplangat Korir':
-        author_img = 'IMG_20230808_105044.jpg'
+        author_img = 'IMG_20230808_105044.png'
     elif author == 'Msingi AI Research Team':
         author_img = 'msingi-small-logo.png'
     else:
