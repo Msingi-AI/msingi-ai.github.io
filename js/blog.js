@@ -155,6 +155,13 @@ async function loadBlogPosts() {
             return;
         }
 
+        // Sort posts by date in descending order (newest first)
+        posts.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB - dateA; // Descending order
+        });
+
         // Clear container and create grid for post cards
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
         const grid = postsContainer.firstChild;
