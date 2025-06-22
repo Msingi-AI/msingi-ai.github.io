@@ -168,10 +168,12 @@ async function loadBlogPosts() {
         const grid = postsContainer.querySelector('.grid');
 
         // Create post cards directly from index.json data
-        for (const post of posts) {
+        const postCards = posts.map(post => {
             debug('Creating post card for:', post.filename);
-            grid.innerHTML += createPostCard(post);
-        }
+            return createPostCard(post);
+        }).join('');
+        
+        grid.innerHTML = postCards;
         
         debug('Successfully loaded all blog posts');
     } catch (error) {
