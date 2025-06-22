@@ -163,8 +163,9 @@ async function loadBlogPosts() {
         });
 
         // Clear container and create grid for post cards
+        postsContainer.innerHTML = '';
         postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
-        const grid = postsContainer.firstChild;
+        const grid = postsContainer.querySelector('.grid');
 
         // Create post cards directly from index.json data
         for (const post of posts) {
