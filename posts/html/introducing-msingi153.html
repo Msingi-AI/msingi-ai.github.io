@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing Msingi1: A Foundation Language Model for Swahili - Msingi AI</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@tailwindcss/typography@0.4.1/dist/typography.min.css" rel="stylesheet">
+    <script src="../../js/social-share.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="../.." class="hover:opacity-90">
+                        <svg viewBox="0 0 400 100" width="200" height="50" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="30" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="70" r="8" fill="#4F46E5"/>
+                            <circle cx="130" cy="50" r="8" fill="#4F46E5"/>
+                            <path d="M58 50 L82 30" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M58 50 L82 70" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 30 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M98 70 L122 50" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 35 C140 35, 145 45, 145 50 C145 55, 140 65, 130 65 C120 65, 115 55, 115 50 C115 45, 120 35, 130 35" 
+                                fill="none" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M130 42 L130 58 M124 50 L136 50" stroke="#4F46E5" stroke-width="2"/>
+                            <text x="160" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#1F2937">Msingi</text>
+                            <text x="280" y="60" font-family="Arial" font-weight="bold" font-size="36" fill="#4F46E5">AI</text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../.." class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="../../research.html" class="text-gray-700 hover:text-indigo-600">Research</a>
+                    <a href="../../community.html" class="text-gray-700 hover:text-indigo-600">Community</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-indigo-600">Blog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <div class="pt-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Title Section -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+                <div class="p-8">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Introducing Msingi1: A Foundation Language Model for Swahili</h1>
+                    <div class="flex items-center text-gray-600 mb-8">
+                        <div class="flex items-center">
+                            <img src="../../images/authors/msingi-small-logo.png" 
+                                alt="MsingiAI Research Team" 
+                                class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <span class="font-medium text-gray-900 block">MsingiAI Research Team</span>
+                                <time datetime="June 18, 2025" class="text-sm">June 18, 2025</time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Section -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <div class="prose prose-indigo max-w-none">
+                        <p>We're excited to announce that Msingi1, a 153-million parameter transformer language model designed specifically for Swahili, will be released soon. The name "Msingi" — meaning "foundation" in Swahili — reflects our vision of creating a solid base for Swahili language AI applications.</p>
+<p>Think of Msingi1 as a smaller, more focused cousin to models like GPT-2, but purpose-built for one of Africa's most important languages. While the global AI community has made tremendous strides with English-dominant models, there's been a significant gap in high-quality language models for African languages. Msingi1 represents our first step toward bridging that gap.</p>
+<h2>The Architecture: Compact Yet Capable</h2>
+<p>Msingi1 is built on a decoder-only transformer architecture that has proven highly effective for language generation tasks. Optimized for efficiency and Swahili-specific characteristics, here are the key specifications:</p>
+<h3><strong>Model Highlights</strong></h3>
+<ul>
+<li><strong>Parameters</strong>: 153 million — large enough to capture complex linguistic patterns, small enough for practical deployment</li>
+<li><strong>Architecture</strong>: Decoder-only Transformer with 18 layers and 16 attention heads per layer</li>
+<li><strong>Training</strong>: Fully monolingual — trained entirely in Swahili from scratch</li>
+<li><strong>Tokenization</strong>: 32k Unigram tokenizer optimized for Swahili morphology</li>
+<li><strong>Hardware</strong>: Trained on A100 GPUs for optimal efficiency</li>
+<li><strong>Context Window</strong>: 1,024 tokens — sufficient for most practical applications</li>
+</ul>
+<p>This architecture strikes a deliberate balance. At 153M parameters, Msingi1 is substantial enough to understand nuanced language patterns while remaining computationally accessible for researchers, developers, and organizations across East Africa who may not have access to massive computational resources.</p>
+<h2>Training at Scale: A Billion Token Journey</h2>
+<p>Msingi1 was trained on an extensive corpus of one billion Swahili tokens, representing one of the largest dedicated Swahili language modeling efforts to date. This corpus includes:</p>
+<ul>
+<li><strong>News articles</strong> from major Swahili publications</li>
+<li><strong>Literature</strong> spanning classical and contemporary works</li>
+<li><strong>Educational materials</strong> from various academic levels</li>
+<li><strong>Web content</strong> carefully filtered for quality and authenticity</li>
+<li><strong>Conversational text</strong> reflecting modern Swahili usage</li>
+</ul>
+<h3>Beyond Standard Scaling Laws</h3>
+<p>Interestingly, our training process revealed something unexpected: we never observed the standard scaling laws(Chinchilla Rule 20:1) that typically govern language model training. Unlike English models where performance improvements follow predictable patterns as model size and data increase, Msingi1's learning curve showed unique characteristics that may be specific to Swahili's linguistic properties.</p>
+<p>This observation opens fascinating questions about how different languages might require different training approaches and whether the scaling laws established for English generalize to other linguistic families.</p>
+<h2>Why Swahili? Why Now?</h2>
+<p>Swahili isn't just another language — it's a bridge language spoken by over 200 million people across East Africa. It serves as an official language in Kenya, Tanzania, Uganda, and the Democratic Republic of Congo, and is widely used in Rwanda, Burundi, and beyond.</p>
+<h3><strong>The Impact Opportunity</strong></h3>
+<p><strong>Educational Access</strong>: Swahili-native language models can democratize access to AI-powered educational tools across East Africa, supporting learning in students' native language.</p>
+<p><strong>Economic Development</strong>: Local businesses can leverage Swahili AI for customer service, content creation, and automated translation, reducing dependency on English-only solutions.</p>
+<p><strong>Cultural Preservation</strong>: By training on authentic Swahili text, we help preserve and celebrate the language's rich literary and cultural traditions.</p>
+<p><strong>Research Advancement</strong>: Msingi1 provides a foundation for computational linguistics research in Bantu languages, potentially unlocking insights applicable to hundreds of related languages.</p>
+<h2>Technical Innovation: Swahili-First Design</h2>
+<p>Building Msingi1 required several innovations specific to Swahili's linguistic characteristics:</p>
+<h3><strong>Tokenization Strategy</strong></h3>
+<p>Swahili's agglutinative nature — where words are formed by adding multiple affixes — required a sophisticated tokenization approach. Our 32,000-piece vocabulary was carefully optimized to capture Swahili's morphological richness while maintaining computational efficiency.</p>
+<h3><strong>Training Methodology</strong></h3>
+<p>We developed training procedures that account for Swahili's relatively smaller digital corpus compared to English. This involved innovative data augmentation techniques and careful corpus curation to maximize learning from available text.</p>
+<h3><strong>Evaluation Framework</strong></h3>
+<p>Standard language model evaluation metrics, developed primarily for English, don't always translate directly to Swahili. We created evaluation benchmarks that properly assess the model's understanding of Swahili-specific linguistic phenomena.</p>
+<h2>How Msingi1 Works: The Art of Dreaming Text</h2>
+<p>Msingi1 doesn't "understand" in the way humans do — it dreams up text, one token at a time, based on the prompts we give it. But the results are starting to feel surprisingly grounded and expressive.</p>
+<h3><strong>See It in Action</strong></h3>
+<p>Here's a simple example of what Msingi1 can do:</p>
+<p><strong>Prompt:</strong>
+"Habari ya leo, jina langu ni..."</p>
+<p><strong>Generated Sample:</strong>
+"Habari ya leo, jina langu ni Juma. Nimekuja hapa kwa ajili ya mahojiano ya kazi. Nina uzoefu wa miaka mitano katika sekta ya teknolojia, hasa katika utengenezaji wa programu za simu..."</p>
+<p>Not bad for a model trained from scratch on pure Swahili! The model naturally continues the conversation in a contextually appropriate way, creating a coherent narrative about someone introducing themselves for a job interview and discussing their technology background.</p>
+<p>This example showcases several key capabilities:
+- <strong>Contextual awareness</strong>: Understanding that "Habari ya leo" starts a greeting
+- <strong>Cultural appropriateness</strong>: Using natural Swahili conversational patterns
+- <strong>Coherent narrative</strong>: Building a logical story about professional experience
+- <strong>Domain knowledge</strong>: Demonstrating understanding of technology and employment contexts</p>
+<h2>What's Next: Instruction Fine-Tuning</h2>
+<p>Based on these promising results, we're now preparing for the next phase: instruction fine-tuning. This crucial step will align the model to follow natural Swahili prompts for specific tasks like:</p>
+<ul>
+<li><strong>Question &amp; Answer</strong>: Responding to queries in natural Swahili</li>
+<li><strong>Summarization</strong>: Condensing long Swahili texts into key points</li>
+<li><strong>Conversation</strong>: Engaging in natural dialogue and discussion</li>
+<li><strong>Task completion</strong>: Following instructions for various language tasks</li>
+</ul>
+<p>This next phase will transform Msingi1 from a capable text generator into a more practical assistant that can understand and respond to user intentions in Swahili.</p>
+<p>Msingi1 embodies our commitment to open science and equitable AI development. We're releasing the model with comprehensive documentation, training insights, and evaluation benchmarks to accelerate research and development in Swahili AI.</p>
+<h3><strong>What's Included</strong></h3>
+<ul>
+<li>Pre-trained model weights and architecture</li>
+<li>Training code and configuration files</li>
+<li>Evaluation scripts and benchmarks</li>
+<li>Comprehensive documentation</li>
+<li>Usage examples and tutorials</li>
+</ul>
+<p>This open approach ensures that researchers, developers, and organizations across East Africa can build upon our work, creating applications that serve their communities' specific needs.</p>
+<h2>The Road Ahead</h2>
+<p>Msingi1 is just the beginning. We envision a future where every major African language has its own foundation model, where AI applications speak to users in their native tongues, and where the benefits of artificial intelligence reach every corner of the continent.</p>
+<h3><strong>Immediate Next Steps</strong></h3>
+<ul>
+<li><strong>Community engagement</strong>: Working with Swahili linguists and cultural experts to refine the model</li>
+<li><strong>Application development</strong>: Building practical tools for education, business, and government</li>
+<li><strong>Research collaboration</strong>: Partnering with African universities and research institutions</li>
+</ul>
+<h3><strong>Long-term Vision</strong></h3>
+<ul>
+<li><strong>Multi-language expansion</strong>: Extending our approach to other major African languages</li>
+<li><strong>Larger models</strong>: Developing more capable versions as computational resources allow</li>
+<li><strong>Specialized applications</strong>: Creating domain-specific models for healthcare, education, and governance</li>
+</ul>
+<h2>Join the Foundation</h2>
+<p>Language is the foundation of human communication, and AI should speak every language that humans do. Msingi1 represents our commitment to making that vision a reality for Swahili speakers across East Africa and beyond.</p>
+<p>We invite researchers, developers, linguists, and anyone passionate about African languages to join us in this journey. Whether you're building applications, conducting research, or simply curious about Swahili AI, Msingi1 provides the foundation you need to get started.</p>
+<p>The future of AI is multilingual, multicultural, and built by diverse communities working together. With Msingi1, we're laying one more stone in that foundation.</p>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-gray-200 flex items-center justify-between">
+                        <a href="../../blog.html" class="text-indigo-600 hover:text-indigo-700">
+                            ← Back to Blog
+                        </a>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="shareOnLinkedIn()" class="text-blue-600 hover:text-blue-700 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M15.8 0H4.2C1.88 0 0 1.88 0 4.2v11.6C0 18.12 1.88 20 4.2 20h11.6c2.32 0 4.2-1.88 4.2-4.2V4.2C20 1.88 18.12 0 15.8 0zM6.5 17H3.8V7.5h2.7V17zM5.15 6.2c-.87 0-1.57-.7-1.57-1.57s.7-1.57 1.57-1.57 1.57.7 1.57 1.57-.7 1.57-1.57 1.57zm11.85 10.8h-2.7v-4.63c0-1.1-.02-2.52-1.53-2.52-1.53 0-1.77 1.2-1.77 2.44V17h-2.7V7.5h2.58v1.18h.04c.4-.75 1.37-1.53 2.82-1.53 3.02 0 3.57 1.98 3.57 4.56V17z"/>
+                                </svg>
+                                Share on LinkedIn
+                            </button>
+                            <button onclick="shareOnX()" class="text-gray-800 hover:text-gray-900 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                                Share on X
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

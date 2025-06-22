@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "filename": "introducing-msingi153.md",
+      "title": "Introducing Msingi1: A Foundation Language Model for Swahili",
+      "date": "2025-06-18",
+      "author": "MsingiAI Research Team",
+      "excerpt": "Introducing our first experimental model, Msingi153M",
+      "type": "Announcement"
+    },
+    {
       "filename": "developing_swahili_benchmarks.md",
       "title": "Developing Standardized Benchmarks for Swahili NLP: A Comprehensive Framework",
       "date": "2025-05-24",

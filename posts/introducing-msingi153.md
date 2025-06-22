@@ -1,9 +1,9 @@
 ---
-title: Introducing Msingi1: A Foundation Language Model for Swahili
+title: Introducing Msingi1153M: A Foundation Language Model for Swahili
 date: 2025-06-18
 author: MsingiAI Research Team
 type: Announcement
-excerpt: A curated list of must-read papers for aspiring AI researchers, focusing on Large Language Models, Benchmarks, Prompting, and more.
+excerpt: Introducing our experimental model 153M model.
 ---
 
 We're excited to announce that Msingi1, a 153-million parameter transformer language model designed specifically for Swahili, will be released soon. The name "Msingi" — meaning "foundation" in Swahili — reflects our vision of creating a solid base for Swahili language AI applications.
