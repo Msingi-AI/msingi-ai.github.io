@@ -1,6 +1,9 @@
 // Debug flag
 const DEBUG = true;
 
+// Verify script is loaded
+console.log('Blog.js script loaded');
+
 // Function to log debug messages
 function debug(...args) {
     if (DEBUG) {
