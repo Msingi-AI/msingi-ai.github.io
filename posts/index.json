@@ -1,6 +1,14 @@
 {
   "posts": [
     {
+      "filename": "state-of-multilingual-LLM-Safety-Research.md",
+      "title": "The State of Multilingual LLM Safety Research: From Measuring the Language Gap to Mitigating It",
+      "date": "2025-08-25",
+      "author": "Kiplangat Korir",
+      "excerpt": "A deep dive into the critical gaps in multilingual AI safety and the emerging strategies to bridge them",
+      "type": "Featured Article"
+    },
+    {
       "filename": "msingi1.md",
       "title": "Language Models are Learnable from Scratch in Low-Resource Settings",
       "date": "2025-04-18",
