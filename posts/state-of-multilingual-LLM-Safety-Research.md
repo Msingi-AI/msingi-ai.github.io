@@ -21,6 +21,7 @@ On the other hand, our safety research apparatus remains stubbornly monolingual.
 Consider the implications. When a safety researcher publishes a breakthrough in detecting harmful outputs, the evaluation typically focuses on English prompts and responses. When new alignment techniques are developed to reduce model toxicity, they're optimized against English-language datasets. When red team exercises are conducted to probe model vulnerabilities, they predominantly use English attack vectors.
 
 This English-centric approach isn't merely a matter of convenience or resource allocation; it reflects a fundamental misunderstanding of how language and culture intersect with AI safety. Harmful content, cultural sensitivities, and social norms vary dramatically across linguistic communities. A safety framework that works well for English may completely fail to capture the nuances of harm in Yoruba, the cultural taboos in Japanese contexts, or the political sensitivities in Arabic-speaking regions.
+
 The consequences of this gap are already manifesting in real-world deployments. We've seen instances where multilingual models exhibit different safety behaviors across languages, sometimes being more permissive of harmful content in certain languages while being overly restrictive in others. These inconsistencies don't just represent technical failures, they reflect deeper inequities in how we conceptualize and implement AI safety.
 
 # Measuring the Language Gap: Current State of Research
@@ -31,10 +32,6 @@ The few comprehensive studies that do exist paint a concerning picture. This pap
 
 One particularly illuminating study examined how safety filters perform across different language families. The results revealed that models were significantly more likely to generate harmful content when prompted in languages from underrepresented families, with performance degradation being most severe for languages with complex morphological structures or writing systems different from Latin script.
 
-
-Figure 1:With a set of malicious prompts written in high-resource languages like English, we translate the prompt into low-resource languages (e.g. Hausa), Compared to the high-resource case, we observe two clear outcomes: (1) the response becomes harmful, (2) the response doesn’t align with or is unrelated to the original prompt. (e.g., repeating the prompt in the response.)
-
-I borrowed the above figure from the paper The Achilles Heel of Large Language Models: Lower-Resource Languages Raise More Safety Concerns 
 The evaluation challenges run deeper than simple performance metrics. Cultural context plays a crucial role in defining what constitutes harmful or inappropriate content. Humor that's acceptable in one culture may be deeply offensive in another. Political commentary that's considered normal discourse in some contexts may constitute dangerous incitement elsewhere. These nuances are rarely captured in current evaluation frameworks, which often rely on direct translations of English-language safety prompts, an approach that fundamentally misunderstands how culture and language interact.
 
 Perhaps most concerning is the near-complete absence of safety research for truly low-resource languages. While we have some understanding of how models behave in major world languages like Spanish, French, or German, we know virtually nothing about safety performance in languages spoken by smaller but still significant populations in Africa, Asia and South America. This gap represents both a technical challenge and an ethical concern: communities speaking these languages may be exposed to higher risks from AI systems that haven't been adequately evaluated in their linguistic context.
