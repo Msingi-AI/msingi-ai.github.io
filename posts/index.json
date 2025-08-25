@@ -1,38 +1,6 @@
 {
   "posts": [
     {
-      "filename": "state-of-multilingual-LLM-Safety-Research.md",
-      "title": "The State of Multilingual LLM Safety Research: From Measuring the Language Gap to Mitigating It",
-      "date": "2025-08-25",
-      "author": "Kiplangat Korir",
-      "excerpt": "A deep dive into the critical gaps in multilingual AI safety and the emerging strategies to bridge them",
-      "type": "Featured Article"
-    },
-    {
-      "filename": "introducing-msingi153.md",
-      "title": "Introducing Msingi1: A Foundation Language Model for Swahili",
-      "date": "2025-06-18",
-      "author": "MsingiAI Research Team",
-      "excerpt": "Introducing our first experimental model, Msingi153M",
-      "type": "Announcement"
-    },
-    {
-      "filename": "developing_swahili_benchmarks.md",
-      "title": "Developing Standardized Benchmarks for Swahili NLP: A Comprehensive Framework",
-      "date": "2025-05-24",
-      "author": "Kiplangat Korir",
-      "excerpt": "A Comprehensive Framework for Developing Standardized Benchmarks for Swahili NLP.",
-      "type": "Research Guide"
-    },
-    {
-      "filename": "small-scale-pretraining.md",
-      "title": "Small-Scale Pretraining of Language Models: A Deep Dive into Efficient AI Development",
-      "date": "2025-04-29",
-      "author": "Kiplangat Korir",
-      "excerpt": "A deep dive into the power of small-scale pretraining in building efficient language models, highlighting how even limited resources can drive innovation and accessibility.",
-      "type": "Featured Article"
-    },
-    {
       "filename": "msingi1.md",
       "title": "Language Models are Learnable from Scratch in Low-Resource Settings",
       "date": "2025-04-18",
