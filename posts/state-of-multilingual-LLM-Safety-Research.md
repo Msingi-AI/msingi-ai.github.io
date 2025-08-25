@@ -31,6 +31,7 @@ The few comprehensive studies that do exist paint a concerning picture. This pap
 
 One particularly illuminating study examined how safety filters perform across different language families. The results revealed that models were significantly more likely to generate harmful content when prompted in languages from underrepresented families, with performance degradation being most severe for languages with complex morphological structures or writing systems different from Latin script.
 
+
 Figure 1:With a set of malicious prompts written in high-resource languages like English, we translate the prompt into low-resource languages (e.g. Hausa), Compared to the high-resource case, we observe two clear outcomes: (1) the response becomes harmful, (2) the response doesn’t align with or is unrelated to the original prompt. (e.g., repeating the prompt in the response.)
 
 I borrowed the above figure from the paper The Achilles Heel of Large Language Models: Lower-Resource Languages Raise More Safety Concerns 
