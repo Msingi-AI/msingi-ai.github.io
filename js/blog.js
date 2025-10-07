@@ -71,22 +71,22 @@ function createPostCard(post) {
     const categoryColor = categoryColors[category] || 'bg-indigo-100 text-indigo-800';
     
     return `
-        <article class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <a href="${postUrl}" class="block group">
-                <div class="p-8">
+        <article class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+            <a href="${postUrl}" class="block group h-full flex flex-col">
+                <div class="p-8 flex flex-col h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="inline-block px-3 py-1 text-sm font-medium ${categoryColor} rounded-full">
                             ${category}
                         </div>
                         <time class="text-sm text-gray-500" datetime="${post.date}">${formattedDate}</time>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight flex-grow-0">
                         ${post.title}
                     </h2>
-                    <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3">
+                    <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3 flex-grow">
                         ${post.excerpt}
                     </p>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between mt-auto">
                         <div class="flex items-center">
                             <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
                                 <span class="text-white font-semibold text-sm">${post.author.charAt(0)}</span>
