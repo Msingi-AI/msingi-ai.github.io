@@ -71,45 +71,57 @@ function createPostCard(post) {
     const categoryColor = categoryColors[category] || 'bg-indigo-100 text-indigo-800';
     
     return `
-        <article class="bg-white rounded-3xl border border-gray-200/50 overflow-hidden hover:shadow-xl hover:border-indigo-200 transition-all duration-300 h-full flex flex-col group">
-            <a href="${postUrl}" class="block h-full flex flex-col">
-                <!-- Header Section with Category and Date -->
-                <div class="px-8 pt-8 pb-4">
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="inline-flex items-center px-4 py-2 text-sm font-semibold ${categoryColor} rounded-full shadow-sm">
-                            ${category}
+        <article class="bg-white rounded-2xl border border-gray-200/50 overflow-hidden hover:shadow-lg hover:border-indigo-200 transition-all duration-300 group">
+            <a href="${postUrl}" class="block">
+                <div class="flex flex-col lg:flex-row">
+                    <!-- Content Section -->
+                    <div class="flex-1 p-8">
+                        <!-- Header with Category and Date -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="inline-flex items-center px-3 py-1 text-sm font-semibold ${categoryColor} rounded-full">
+                                ${category}
+                            </div>
+                            <time class="text-sm text-gray-500 font-medium" datetime="${post.date}">${formattedDate}</time>
                         </div>
-                        <time class="text-sm text-gray-500 font-medium" datetime="${post.date}">${formattedDate}</time>
+                        
+                        <!-- Title -->
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight">
+                            ${post.title}
+                        </h2>
+                        
+                        <!-- Excerpt -->
+                        <p class="text-gray-600 leading-relaxed mb-6 text-base line-clamp-2">
+                            ${post.excerpt}
+                        </p>
+                        
+                        <!-- Author and CTA -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-xs">${post.author.charAt(0)}</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900">${post.author}</p>
+                                </div>
+                            </div>
+                            <div class="inline-flex items-center text-indigo-600 group-hover:text-indigo-700 transition-colors text-sm font-semibold">
+                                Read Article
+                                <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Content Section -->
-                <div class="px-8 pb-6 flex flex-col flex-grow">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight line-clamp-2">
-                        ${post.title}
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed mb-8 line-clamp-3 text-base flex-grow">
-                        ${post.excerpt}
-                    </p>
-                </div>
-                
-                <!-- Footer Section with Author and CTA -->
-                <div class="px-8 pb-8 mt-auto">
-                    <div class="flex items-center justify-between pt-6 border-t border-gray-100">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-sm">
-                                <span class="text-white font-bold text-sm">${post.author.charAt(0)}</span>
+                    
+                    <!-- Visual Element -->
+                    <div class="w-full lg:w-64 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center lg:border-l border-gray-100">
+                        <div class="text-center p-6">
+                            <div class="w-16 h-16 bg-indigo-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
                             </div>
-                            <div>
-                                <p class="text-sm font-semibold text-gray-900">${post.author}</p>
-                                <p class="text-xs text-gray-500">Author</p>
-                            </div>
-                        </div>
-                        <div class="inline-flex items-center px-4 py-2 bg-indigo-50 text-indigo-700 rounded-full text-sm font-semibold group-hover:bg-indigo-100 transition-colors">
-                            Read Article
-                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
+                            <p class="text-indigo-600 font-medium text-sm">Research Article</p>
                         </div>
                     </div>
                 </div>

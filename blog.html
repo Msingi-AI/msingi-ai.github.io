@@ -40,31 +40,13 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        .auto-rows-fr > * {
-            height: 100%;
+        
+        /* Smooth hover effects */
+        .group:hover .group-hover\:text-indigo-600 {
+            color: rgb(79 70 229);
         }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
-        }
-        @media (min-width: 768px) {
-            .blog-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-        }
-        @media (min-width: 1280px) {
-            .blog-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2rem;
-            }
-        }
-        @media (max-width: 640px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+        .group:hover .group-hover\:text-indigo-700 {
+            color: rgb(67 56 202);
         }
     </style>
     <script src="/js/blog.js" defer></script>
@@ -169,7 +151,7 @@
 
     <!-- Latest Posts -->
     <section class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-20">
                 <div class="inline-flex items-center px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-6">
                     Latest Articles
@@ -182,8 +164,8 @@
                 </p>
             </div>
             
-            <!-- Blog Posts Container -->
-            <div id="blog-posts" class="blog-grid">
+            <!-- Blog Posts List Container -->
+            <div id="blog-posts" class="space-y-6">
                 <!-- Posts will be dynamically loaded here -->
             </div>
         </div>
