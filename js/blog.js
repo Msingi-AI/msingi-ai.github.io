@@ -60,24 +60,41 @@ function createPostCard(post) {
     const postUrl = getAssetUrl(`posts/html/${htmlFilename}`);
     debug('Creating post card with URL:', postUrl);
     
+    // Determine category and color
+    const category = post.category || 'Research';
+    const categoryColors = {
+        'Research': 'bg-indigo-100 text-indigo-800',
+        'Tutorial': 'bg-purple-100 text-purple-800',
+        'Case Study': 'bg-green-100 text-green-800',
+        'Announcement': 'bg-orange-100 text-orange-800'
+    };
+    const categoryColor = categoryColors[category] || 'bg-indigo-100 text-indigo-800';
+    
     return `
-        <article class="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-            <a href="${postUrl}" class="block">
-                <div class="p-6">
-                    <div class="flex items-center text-sm text-gray-600 mb-4">
-                        <time datetime="${post.date}">${formattedDate}</time>
-                        <span class="mx-2">·</span>
-                        <span>By ${post.author}</span>
+        <article class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <a href="${postUrl}" class="block group">
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="inline-block px-3 py-1 text-sm font-medium ${categoryColor} rounded-full">
+                            ${category}
+                        </div>
+                        <time class="text-sm text-gray-500" datetime="${post.date}">${formattedDate}</time>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight">
                         ${post.title}
                     </h2>
-                    <p class="text-gray-600 line-clamp-3">
+                    <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3">
                         ${post.excerpt}
                     </p>
-                    <div class="mt-4">
-                        <span class="inline-flex items-center text-indigo-600 hover:text-indigo-700">
-                            Read more
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-semibold text-sm">${post.author.charAt(0)}</span>
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-900">${post.author}</span>
+                        </div>
+                        <span class="inline-flex items-center text-indigo-600 group-hover:text-indigo-700 transition-colors text-sm font-medium">
+                            Read Article
                             <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
