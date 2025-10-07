@@ -28,6 +28,12 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
         .line-clamp-3 {
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -39,17 +45,25 @@
         }
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
         }
         @media (min-width: 768px) {
             .blog-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
         }
         @media (min-width: 1280px) {
             .blog-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
     </style>
@@ -154,11 +168,16 @@
     </div>
 
     <!-- Latest Posts -->
-    <section class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Latest Posts</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-6">
+                    Latest Articles
+                </div>
+                <h2 class="text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                    Insights & Research
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     Stay updated with our latest research, insights, and stories from the African AI community.
                 </p>
             </div>

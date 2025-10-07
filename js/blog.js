@@ -71,34 +71,46 @@ function createPostCard(post) {
     const categoryColor = categoryColors[category] || 'bg-indigo-100 text-indigo-800';
     
     return `
-        <article class="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-            <a href="${postUrl}" class="block group h-full flex flex-col">
-                <div class="p-8 flex flex-col h-full">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="inline-block px-3 py-1 text-sm font-medium ${categoryColor} rounded-full">
+        <article class="bg-white rounded-3xl border border-gray-200/50 overflow-hidden hover:shadow-xl hover:border-indigo-200 transition-all duration-300 h-full flex flex-col group">
+            <a href="${postUrl}" class="block h-full flex flex-col">
+                <!-- Header Section with Category and Date -->
+                <div class="px-8 pt-8 pb-4">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="inline-flex items-center px-4 py-2 text-sm font-semibold ${categoryColor} rounded-full shadow-sm">
                             ${category}
                         </div>
-                        <time class="text-sm text-gray-500" datetime="${post.date}">${formattedDate}</time>
+                        <time class="text-sm text-gray-500 font-medium" datetime="${post.date}">${formattedDate}</time>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight flex-grow-0">
+                </div>
+                
+                <!-- Content Section -->
+                <div class="px-8 pb-6 flex flex-col flex-grow">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight line-clamp-2">
                         ${post.title}
                     </h2>
-                    <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3 flex-grow">
+                    <p class="text-gray-600 leading-relaxed mb-8 line-clamp-3 text-base flex-grow">
                         ${post.excerpt}
                     </p>
-                    <div class="flex items-center justify-between mt-auto">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                                <span class="text-white font-semibold text-sm">${post.author.charAt(0)}</span>
+                </div>
+                
+                <!-- Footer Section with Author and CTA -->
+                <div class="px-8 pb-8 mt-auto">
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-sm">
+                                <span class="text-white font-bold text-sm">${post.author.charAt(0)}</span>
                             </div>
-                            <span class="ml-3 text-sm font-medium text-gray-900">${post.author}</span>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">${post.author}</p>
+                                <p class="text-xs text-gray-500">Author</p>
+                            </div>
                         </div>
-                        <span class="inline-flex items-center text-indigo-600 group-hover:text-indigo-700 transition-colors text-sm font-medium">
+                        <div class="inline-flex items-center px-4 py-2 bg-indigo-50 text-indigo-700 rounded-full text-sm font-semibold group-hover:bg-indigo-100 transition-colors">
                             Read Article
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
-                        </span>
+                        </div>
                     </div>
                 </div>
             </a>
