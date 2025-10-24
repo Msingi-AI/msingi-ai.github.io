@@ -25,538 +25,375 @@
     <link rel="canonical" href="https://msingi-ai.github.io/research.html">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
         .gradient-text {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .code-block {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 0.875rem;
-            line-height: 1.5;
+        .paper-card {
+            transition: all 0.2s ease;
+            border-radius: 12px;
         }
-        .research-card {
-            transition: all 0.3s ease;
+        .paper-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        .research-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .section-divider {
+            border-top: 1px solid #e5e7eb;
         }
     </style>
 </head>
 <body class="bg-white">
     <!-- Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed w-full z-10">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
+    <nav class="bg-white/95 backdrop-blur-md border-b border-gray-100 fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <a href="index.html" class="hover:opacity-80 transition-opacity duration-200">
-                        <img src="assets/msingiailogo.jpeg" alt="Msingi AI - Building AI That Understands Africa" class="h-8 w-auto" />
+                        <img src="assets/msingiailogo.jpeg" alt="Msingi AI" class="h-7 w-auto" />
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-10">
-                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200">About</a>
-                    <a href="research.html" class="text-indigo-600 font-medium">Research</a>
-                    <a href="community.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200">Community</a>
-                    <a href="blog.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200">Blog</a>
-                    <a href="community.html" class="bg-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-indigo-700 transition-colors duration-200">Join Us</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 text-sm font-medium transition-colors">About</a>
+                    <a href="research.html" class="text-indigo-600 text-sm font-medium">Research</a>
+                    <a href="community.html" class="text-gray-600 hover:text-indigo-600 text-sm font-medium transition-colors">Community</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-indigo-600 text-sm font-medium transition-colors">Blog</a>
+                    <a href="community.html" class="bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">Join Us</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative py-24 bg-white">
-        <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/30 to-purple-50/30"></div>
-        <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-16">
-            <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-8">
-                    MsingiAI Research Focus:<br>
-                    <span class="gradient-text">Constitutional AI for Safety and Cultural-Contextual Alignment</span>
+    <div class="relative pt-32 pb-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium mb-6">
+                    AI Safety Research
+                </span>
+                <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                    Building Culturally-Aware AI Safety Frameworks
                 </h1>
-                <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto mb-12">
-                    We're pioneering a new frontier in AI safety. While most AI safety research focuses on universal principles, we're tackling the critical gap: How can AI be truly safe when deployed across diverse cultural contexts?
+                <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                    While most AI safety research focuses on universal principles, we're tackling the critical gap: How can AI be truly safe when deployed across diverse cultural contexts?
                 </p>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <span class="inline-flex items-center px-6 py-3 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
-                        Publications Available
-                    </span>
-                    <span class="inline-flex items-center px-6 py-3 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold">
-                        Research in Progress
-                    </span>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Research Vision -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="bg-white rounded-3xl p-12 border border-gray-100">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-6">The Research Vision</h2>
-                </div>
-                <blockquote class="text-2xl text-gray-700 leading-relaxed text-center italic max-w-4xl mx-auto">
-                    "Safety is contextual. A model that's safe in San Francisco may be dangerously naive in Nairobi. We're building AI safety frameworks that understand cultural context as a first-class requirement."
-                </blockquote>
-                <div class="text-center mt-8">
-                    <p class="text-gray-600">Our work begins where Western safety frameworks end.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Active Research Tracks -->
-    <section class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Active Research Tracks</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Three interconnected research streams building the future of culturally-aware AI safety.
-                </p>
+    <!-- Publications Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-3">Publications</h2>
+                <p class="text-gray-600">Our research contributions to culturally-aware AI</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Track 1 -->
-                <div class="research-card bg-white rounded-2xl p-8 border border-gray-100">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-2xl">🎯</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Track 1: Cultural-Grounded Constitutions</h3>
-                    <p class="text-gray-600 mb-6">How do we encode cultural intelligence into AI safety systems?</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Developing the AkiliX Constitution - a safety framework for East African contexts</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Researching context-aware refusal mechanisms</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Designing culturally-appropriate harm prevention</span>
-                        </li>
-                    </ul>
-                    <div class="code-block">
-                        <div class="text-gray-500 text-sm mb-2">Example Research Direction:</div>
-                        <div class="text-gray-700"><strong>STANDARD_SAFETY:</strong> "Don't give financial advice"</div>
-                        <div class="text-gray-700"><strong>OUR_APPROACH:</strong> "Understand why 'send all savings to this mobile investment' is dangerous in the Kenyan context specifically"</div>
-                    </div>
-                </div>
-
-                <!-- Track 2 -->
-                <div class="research-card bg-white rounded-2xl p-8 border border-gray-100">
-                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-2xl">🎯</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Track 2: Alignment for Regional Values</h3>
-                    <p class="text-gray-600 mb-6">How do we align AI with Ubuntu principles and community ethics?</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Exploring collective vs individual safety paradigms</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Researching community-harm prevention (not just individual harm)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Developing cultural value embeddings</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Track 3 -->
-                <div class="research-card bg-white rounded-2xl p-8 border border-gray-100">
-                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                        <span class="text-2xl">🎯</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Track 3: Contextual Safety Benchmarks</h3>
-                    <p class="text-gray-600 mb-6">How do we measure safety across cultural contexts?</p>
-                    <ul class="space-y-3 mb-6">
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Building East African safety evaluation datasets</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Developing cultural bias detection tools</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-gray-700">Creating context-aware red teaming frameworks</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why This Research Matters -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Why This Research Matters Now</h2>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">The Problem</h3>
-                    <div class="code-block mb-8">
-                        <div class="text-gray-700 mb-4"><strong>Current AI Safety Research:</strong></div>
-                        <div class="text-green-600 mb-2">✅ Well-funded for Western contexts</div>
-                        <div class="text-green-600 mb-2">✅ Extensive publications & frameworks</div>
-                        <div class="text-red-600 mb-2">❌ Almost zero work on African cultural safety</div>
-                        <div class="text-red-600 mb-2">❌ No context-aware alignment research</div>
-                        <div class="text-red-600">❌ Missing cultural harm prevention</div>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Opportunity</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                <span class="text-white text-sm font-bold">1</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">First-Mover Advantage</h4>
-                                <p class="text-gray-600">in cultural AI safety</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                <span class="text-white text-sm font-bold">2</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Real-World Impact</h4>
-                                <p class="text-gray-600">immediately deployable</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                <span class="text-white text-sm font-bold">3</span>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-900 mb-1">Global Relevance</h4>
-                                <p class="text-gray-600">solving problems that affect 1.4 billion people</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Current Research Activities -->
-    <section class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Current Research Activities</h2>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
-                        <span class="text-2xl mr-3"></span>
-                        Live Experiments
-                    </h3>
-                    <div class="space-y-6">
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">AkiliX Constitutional Development</h4>
-                            <p class="text-gray-600">actively testing safety frameworks</p>
-                        </div>
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">Cultural Alignment Trials</h4>
-                            <p class="text-gray-600">GRPO with cultural constitutions</p>
-                        </div>
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">Safety Benchmark Creation</h4>
-                            <p class="text-gray-600">building evaluation datasets</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
-                        <span class="text-2xl mr-3"></span>
-                        Tools in Development
-                    </h3>
-                    <div class="space-y-6">
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">Cultural Context Evaluator</h4>
-                            <p class="text-gray-600">measuring safety across contexts</p>
-                        </div>
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">Regional Red Teaming Framework</h4>
-                            <p class="text-gray-600">context-aware safety testing</p>
-                        </div>
-                        <div class="bg-gray-50 rounded-xl p-6">
-                            <h4 class="font-semibold text-gray-900 mb-2">Constitutional AI Template</h4>
-                            <p class="text-gray-600">for African deployments</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Publications</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Our research contributions to culturally-aware AI and contextual grounding.
-                </p>
-            </div>
-
-            <!-- Featured Publication: Beyond Language -->
-            <div class="bg-white rounded-3xl p-12 border border-gray-100 mb-8 research-card">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2">
+            <!-- Featured Paper -->
+            <article class="paper-card bg-white border border-gray-200 p-8 mb-6">
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <div class="flex-1">
                         <div class="flex items-center gap-3 mb-4">
-                            <span class="px-4 py-1.5 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">Position Paper</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg text-xs font-semibold uppercase tracking-wide">Position Paper</span>
                             <span class="text-gray-500 text-sm">October 2025</span>
                         </div>
-                        <h3 class="text-3xl font-bold text-gray-900 mb-4">
-                            Beyond Language: Reframing LLMs in Africa Through Contextual Grounding
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">
+                            <a href="https://doi.org/10.5281/zenodo.17308189" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 transition-colors">
+                                Beyond Language: Reframing LLMs in Africa Through Contextual Grounding
+                            </a>
                         </h3>
-                        <div class="text-gray-600 mb-6">
-                            <p class="font-medium mb-2">Authors:</p>
-                            <p class="text-sm leading-relaxed">
-                                Gilbert Kiplangat Korir, Caroline Heta, Alison Okatch, Ibrahim Fadhili, Irene Jebet Korir, Moses Muiruri Njau, Asbel Rotich Kibet
-                            </p>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed mb-6">
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            <strong>Authors:</strong> Gilbert Kiplangat Korir, Caroline Heta, Alison Okatch, Ibrahim Fadhili, Irene Jebet Korir, Moses Muiruri Njau, Asbel Rotich Kibet
+                        </p>
+                        <p class="text-gray-700 mb-6 leading-relaxed">
                             This position paper reframes how AI development in Africa is approached. Current efforts emphasize language-inclusion training for Large Language Models (LLMs) to speak African languages such as Swahili, Yoruba, and Zulu. However, linguistic inclusion alone does not ensure contextual understanding. We propose a multidimensional <strong>Framework of African Contextual Dimensions</strong>—cultural-linguistic, socioeconomic, historical-political, and epistemic—to guide the design of contextually grounded AI systems.
                         </p>
-                        <div class="flex flex-wrap gap-3 mb-6">
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">African NLP</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Contextual AI</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Cultural Alignment</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Large Language Models</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Ubuntu Ethics</span>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium">African NLP</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium">Contextual AI</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium">Cultural Alignment</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium">Ubuntu Ethics</span>
                         </div>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="https://doi.org/10.5281/zenodo.17308189" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors duration-200">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                </svg>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://doi.org/10.5281/zenodo.17308189" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-5 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors">
                                 Read Paper
+                                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                </svg>
                             </a>
-                            <a href="https://zenodo.org/record/17308189" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border-2 border-gray-200 text-gray-700 rounded-lg font-medium hover:border-indigo-300 hover:text-indigo-600 transition-colors duration-200">
+                            <a href="https://zenodo.org/record/17308189" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-5 py-2.5 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
                                 View on Zenodo
                             </a>
                         </div>
                     </div>
-                    <div class="lg:col-span-1">
-                        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 border border-indigo-100">
-                            <div class="text-center mb-6">
-                                <div class="w-20 h-20 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                    </svg>
-                                </div>
-                                <h4 class="text-lg font-semibold text-gray-900 mb-2">Key Contribution</h4>
+                </div>
+            </article>
+
+            <!-- More Coming Soon -->
+            <div class="paper-card bg-gray-50 border border-gray-200 p-8 text-center">
+                <div class="text-gray-400 mb-3">
+                    <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">More Publications Coming Soon</h3>
+                <p class="text-gray-600 text-sm">We're actively working on multiple research tracks and will publish our findings as they mature.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Research Focus -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Research Focus</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                    We're pioneering Constitutional AI for Cultural Safety—building AI systems that understand cultural context as a first-class requirement.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Track 1 -->
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Cultural-Grounded Constitutions</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Developing the AkiliX Constitution—a safety framework for East African contexts with context-aware refusal mechanisms and culturally-appropriate harm prevention.
+                    </p>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Alignment for Regional Values</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Exploring collective vs individual safety paradigms, researching community-harm prevention, and developing cultural value embeddings based on Ubuntu principles.
+                    </p>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Contextual Safety Benchmarks</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Building East African safety evaluation datasets, developing cultural bias detection tools, and creating context-aware red teaming frameworks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Why This Matters -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Why This Research Matters</h2>
+                <p class="text-gray-600 text-lg">Safety is contextual. A model that's safe in San Francisco may be dangerously naive in Nairobi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">The Problem</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
                             </div>
-                            <ul class="space-y-3 text-sm text-gray-700">
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-indigo-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                    <span>Introduces multidimensional Framework of African Contextual Dimensions</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-indigo-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                    <span>Demonstrates why linguistic inclusion alone is insufficient</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-indigo-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                    <span>Provides policy recommendations for contextually grounded AI</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-5 h-5 text-indigo-600 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                    <span>Explores cultural-linguistic, socioeconomic, historical-political, and epistemic dimensions</span>
-                                </li>
-                            </ul>
-                            <div class="mt-6 pt-6 border-t border-indigo-200">
-                                <div class="text-xs text-gray-500 mb-2">DOI</div>
-                                <div class="text-sm font-mono text-indigo-600 break-all">10.5281/zenodo.17308189</div>
+                            <div>
+                                <p class="text-gray-700 font-medium">Well-funded research for Western contexts</p>
+                                <p class="text-gray-600 text-sm">Extensive publications & frameworks</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 font-medium">Almost zero work on African cultural safety</p>
+                                <p class="text-gray-600 text-sm">No context-aware alignment research</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 font-medium">Missing cultural harm prevention</p>
+                                <p class="text-gray-600 text-sm">AI safety frameworks that don't understand context</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">Our Opportunity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-sm font-bold">1</span>
+                            </div>
+                            <div>
+                                <p class="text-gray-900 font-semibold mb-1">First-Mover Advantage</p>
+                                <p class="text-gray-600 text-sm">in cultural AI safety research</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-sm font-bold">2</span>
+                            </div>
+                            <div>
+                                <p class="text-gray-900 font-semibold mb-1">Real-World Impact</p>
+                                <p class="text-gray-600 text-sm">immediately deployable solutions</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-white text-sm font-bold">3</span>
+                            </div>
+                            <div>
+                                <p class="text-gray-900 font-semibold mb-1">Global Relevance</p>
+                                <p class="text-gray-600 text-sm">solving problems affecting 1.4 billion people</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Coming Soon Section -->
-            <div class="bg-white rounded-3xl p-12 border border-gray-100 text-center">
-                <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">More Publications Coming Soon</h3>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    We're actively working on multiple research tracks and will publish our findings as they mature. Sign up for updates to be notified when new papers are released.
-                </p>
-            </div>
         </div>
     </section>
 
-    <!-- Research Methodology -->
-    <section class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- Research Approach -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Research Methodology</h2>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Research Approach</h2>
+                <p class="text-gray-600 text-lg">How we build culturally-aware AI safety</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center">
-                    <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Empirical First</h3>
-                    <p class="text-gray-600">Build, test, iterate (then publish)</p>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Empirical First</h3>
+                    <p class="text-gray-600 text-sm">Build, test, iterate—then publish</p>
                 </div>
+
                 <div class="text-center">
-                    <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Context-Grounded</h3>
-                    <p class="text-gray-600">Research driven by real African use cases</p>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Context-Grounded</h3>
+                    <p class="text-gray-600 text-sm">Research driven by real African use cases</p>
                 </div>
+
                 <div class="text-center">
-                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Open Development</h3>
-                    <p class="text-gray-600">Sharing learnings as we build</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research Questions -->
-    <section class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Current Research Questions</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    The fundamental questions driving our research forward.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-50 rounded-2xl p-8">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Mathematical Representation</h3>
-                    <p class="text-gray-600">How do we mathematically represent cultural safety boundaries?</p>
-                </div>
-                <div class="bg-gray-50 rounded-2xl p-8">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Context-Aware Refusal</h3>
-                    <p class="text-gray-600">What does "context-aware refusal" look like in practice?</p>
-                </div>
-                <div class="bg-gray-50 rounded-2xl p-8">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Cultural Alignment Metrics</h3>
-                    <p class="text-gray-600">How can we measure cultural alignment progress?</p>
-                </div>
-                <div class="bg-gray-50 rounded-2xl p-8">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Unique Safety Challenges</h3>
-                    <p class="text-gray-600">What are the unique safety challenges in African AI deployment?</p>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Open Development</h3>
+                    <p class="text-gray-600 text-sm">Sharing learnings as we build</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="bg-white rounded-3xl p-12 text-center border border-gray-100">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Join Our Research Journey</h2>
-                <blockquote class="text-xl text-gray-700 leading-relaxed mb-8 italic">
-                    "True inclusion requires contextual grounding. AI systems must align with Africa's lived realities, ethical values, and indigenous knowledge systems."
-                </blockquote>
-                <p class="text-lg text-gray-600 mb-8">
-                    We're building in the open and seeking research partners to embed African context into every stage of the AI pipeline—from dataset creation to deployment. Join us in pioneering culturally-aware AI safety frameworks.
-                </p>
-                <a href="community.html" class="inline-flex items-center px-8 py-4 bg-indigo-600 text-white rounded-full font-semibold hover:bg-indigo-700 transition-colors duration-200">
-                    Join the Research Community
-                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
+    <section class="py-20 bg-indigo-50">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Join Our Research Community</h2>
+            <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+                We're building in the open and seeking research partners to embed African context into every stage of the AI pipeline—from dataset creation to deployment.
+            </p>
+            <a href="community.html" class="inline-flex items-center px-8 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                Join the Movement
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+    <footer class="bg-white border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">About MsingiAI</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">About MsingiAI</h3>
+                    <p class="text-sm text-gray-600">
                         Building AI that truly understands Africa
                     </p>
                 </div>
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 transition-colors">About</a></li>
-                        <li><a href="research.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Research</a></li>
-                        <li><a href="community.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Community</a></li>
-                        <li><a href="blog.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Blog</a></li>
+                        <li><a href="about.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">About</a></li>
+                        <li><a href="research.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Research</a></li>
+                        <li><a href="community.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Community</a></li>
+                        <li><a href="blog.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Blog</a></li>
                     </ul>
                 </div>
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Legal</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Legal</h3>
                     <ul class="space-y-2">
-                        <li><a href="privacy.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Connect</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Connect</h3>
                     <ul class="space-y-2">
-                        <li><a href="https://github.com/Msingi-AI" class="text-gray-600 hover:text-indigo-600 transition-colors">GitHub</a></li>
-                        <li><a href="https://x.com/MsingiAI" class="text-gray-600 hover:text-indigo-600 transition-colors">X</a></li>
-                        <li><a href="https://discord.gg/2TvwPJpSj6" class="text-gray-600 hover:text-indigo-600 transition-colors">Discord</a></li>
+                        <li><a href="https://github.com/Msingi-AI" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">GitHub</a></li>
+                        <li><a href="https://x.com/MsingiAI" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">X</a></li>
+                        <li><a href="https://discord.gg/2TvwPJpSj6" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Discord</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 border-t border-gray-100 text-center">
-                <p class="text-gray-500">© 2025 Msingi AI. All rights reserved.</p>
+            <div class="mt-8 pt-8 border-t border-gray-100 text-center">
+                <p class="text-sm text-gray-500">© 2025 Msingi AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-    </script>
 </body>
 </html>
