@@ -310,12 +310,11 @@
         </div>
     </footer>
 
+    <!-- Force HTTPS -->
     <script>
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-out',
-            once: true
-        });
+        if (location.protocol !== 'https:') {
+            location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+        }
     </script>
 </body>
 </html>
