@@ -72,20 +72,36 @@
 </head>
 <body class="bg-white">
     <!-- Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 fixed w-full z-10">
+    <nav id="navbar" class="bg-white/95 backdrop-blur-md border-b border-gray-100 fixed w-full z-50 transition-transform duration-300 ease-in-out">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <a href="index.html" class="hover:opacity-80 transition-opacity duration-200">
                         <img src="assets/msingiailogo.jpeg" alt="Msingi AI - Building AI That Understands Africa" class="h-8 w-auto" />
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-10">
+                <div class="hidden md:flex items-center space-x-8">
                     <a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200">About</a>
                     <a href="research.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200">Research</a>
                     <a href="community.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200">Community</a>
                     <a href="blog.html" class="text-indigo-600 font-medium">Blog</a>
                     <a href="community.html" class="bg-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-indigo-700 transition-colors duration-200">Join Us</a>
+                </div>
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-600 hover:text-indigo-600 hover:bg-gray-100 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden border-t border-gray-100 py-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200 px-2 py-1">About</a>
+                    <a href="research.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200 px-2 py-1">Research</a>
+                    <a href="community.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-200 px-2 py-1">Community</a>
+                    <a href="blog.html" class="text-indigo-600 font-medium px-2 py-1">Blog</a>
+                    <a href="community.html" class="bg-indigo-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-indigo-700 transition-colors duration-200 text-center mt-2">Join Us</a>
                 </div>
             </div>
         </div>
@@ -268,6 +284,48 @@
                 element.setAttribute('data-aos', 'fade-up');
                 return element;
             };
+        });
+    </script>
+
+    <!-- Scroll-to-hide navigation -->
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        // Scroll behavior
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down - hide navbar
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up - show navbar
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navbar.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        mobileMenu.addEventListener('click', function(event) {
+            if (event.target.tagName === 'A') {
+                mobileMenu.classList.add('hidden');
+            }
         });
     </script>
 </body>
