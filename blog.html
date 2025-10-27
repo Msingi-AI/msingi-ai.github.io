@@ -25,9 +25,13 @@
     <link rel="canonical" href="https://msingi-ai.github.io/blog.html">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -39,14 +43,6 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-        }
-        
-        /* Smooth hover effects */
-        .group:hover .group-hover\:text-indigo-600 {
-            color: rgb(79 70 229);
-        }
-        .group:hover .group-hover\:text-indigo-700 {
-            color: rgb(67 56 202);
         }
     </style>
     <script src="/js/blog.js" defer></script>
@@ -108,184 +104,99 @@
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6 pt-8 md:pt-0">
-            <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-8">
-                    Our Blog
+    <div class="relative pt-32 pb-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="inline-block px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium mb-6">
+                    Blog
+                </span>
+                <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                    Research & Insights
                 </h1>
-                <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    Insights, research, and stories from the forefront of African AI
+                <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                    Latest developments in African AI, cultural contextual alignment, and safety research
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Featured Post -->
-    <div class="py-16 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+    <!-- Blog Posts -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <!-- Featured Post -->
+            <article class="mb-16 pb-16 border-b border-gray-200">
                 <a href="posts/html/state-of-multilingual-LLM-Safety-Research.html" class="block group">
-                    <div class="grid grid-cols-1 lg:grid-cols-2">
-                        <div class="p-12">
-                            <div class="inline-block px-3 py-1 text-sm font-medium bg-indigo-100 text-indigo-800 rounded-full mb-6">Research</div>
-                            <h3 class="text-3xl font-bold text-gray-900 leading-tight mb-6 group-hover:text-indigo-600 transition-colors">State of Multilingual LLM Safety Research</h3>
-                            <p class="text-lg text-gray-600 leading-relaxed mb-8">A deep dive into the critical gaps in multilingual AI safety and the emerging strategies to bridge them.</p>
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <div class="h-12 w-12 rounded-full bg-indigo-600 flex items-center justify-center">
-                                        <span class="text-white font-semibold text-lg">KK</span>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900">Kiplangat Korir</p>
-                                    <div class="flex space-x-1 text-sm text-gray-500">
-                                        <time datetime="2025-06-18">August 25, 2025</time>
-                                        <span aria-hidden="true">&middot;</span>
-                                        <span>15 min read</span>
-                                    </div>
-                                </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-md text-xs font-semibold uppercase tracking-wide">Featured</span>
+                        <span class="text-xs text-gray-500">Position Paper</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors">
+                        The State of Multilingual LLM Safety Research: From Measuring the Language Gap to Mitigating It
+                    </h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        A deep dive into the critical gaps in multilingual AI safety and the emerging strategies to bridge them. This research explores how current safety frameworks fail non-English languages and proposes solutions for culturally-aware AI safety.
+                    </p>
+                    <div class="flex items-center gap-4 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <div class="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-xs">KK</span>
                             </div>
+                            <span class="font-medium text-gray-900">Kiplangat Korir</span>
                         </div>
-                        <div class="relative lg:h-full">
-                            <div class="h-64 lg:absolute lg:h-full lg:w-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
-                                <div class="text-center">
-                                    <div class="w-20 h-20 bg-indigo-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                        </svg>
-                                    </div>
-                                    <p class="text-indigo-600 font-medium">Research Article</p>
-                                </div>
-                            </div>
-                        </div>
+                        <span>August 25, 2025</span>
+                        <span>15 min read</span>
                     </div>
                 </a>
-            </div>
-        </div>
-    </div>
+            </article>
 
-    <!-- Latest Posts -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-6">
-                    Latest Articles
-                </div>
-                <h2 class="text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                    Insights & Research
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    Stay updated with our latest research, insights, and stories from the African AI community.
-                </p>
-            </div>
-            
             <!-- Blog Posts List Container -->
-            <div id="blog-posts" class="space-y-6">
+            <div id="blog-posts" class="space-y-12">
                 <!-- Posts will be dynamically loaded here -->
             </div>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <div id="categories" class="py-24 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Explore by Category</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Discover content organized by topics and themes.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Research Papers</h3>
-                    <p class="text-gray-600 leading-relaxed">Explore our latest research in AI and machine learning for African contexts.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Tutorials</h3>
-                    <p class="text-gray-600 leading-relaxed">Step-by-step guides for implementing AI solutions in African contexts.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow duration-300">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Case Studies</h3>
-                    <p class="text-gray-600 leading-relaxed">Real-world applications of our AI technology across Africa.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-16">
-        <div class="max-w-6xl mx-auto px-6">
+    <footer class="bg-white border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">About MsingiAI</h3>
-                    <p class="text-gray-600">
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">About MsingiAI</h3>
+                    <p class="text-sm text-gray-600">
                         Building AI that truly understands Africa
                     </p>
                 </div>
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 transition-colors">About</a></li>
-                        <li><a href="research.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Research</a></li>
-                        <li><a href="community.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Community</a></li>
-                        <li><a href="blog.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Blog</a></li>
+                        <li><a href="about.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">About</a></li>
+                        <li><a href="research.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Research</a></li>
+                        <li><a href="community.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Community</a></li>
+                        <li><a href="blog.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Blog</a></li>
                     </ul>
                 </div>
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Legal</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Legal</h3>
                     <ul class="space-y-2">
-                        <li><a href="privacy.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="text-gray-600 hover:text-indigo-600 transition-colors">Terms of Service</a></li>
+                        <li><a href="privacy.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="col-span-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Connect</h3>
+                    <h3 class="text-sm font-semibold text-gray-900 mb-3">Connect</h3>
                     <ul class="space-y-2">
-                        <li><a href="https://github.com/Msingi-AI" class="text-gray-600 hover:text-indigo-600 transition-colors">GitHub</a></li>
-                        <li><a href="https://x.com/MsingiAI" class="text-gray-600 hover:text-indigo-600 transition-colors">X</a></li>
-                        <li><a href="https://discord.gg/2TvwPJpSj6" class="text-gray-600 hover:text-indigo-600 transition-colors">Discord</a></li>
+                        <li><a href="https://github.com/Msingi-AI" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">GitHub</a></li>
+                        <li><a href="https://x.com/MsingiAI" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">X</a></li>
+                        <li><a href="https://discord.gg/2TvwPJpSj6" class="text-sm text-gray-600 hover:text-indigo-600 transition-colors">Discord</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 border-t border-gray-100 text-center">
-                <p class="text-gray-500">© 2025 Msingi AI. All rights reserved.</p>
+            <div class="mt-8 pt-8 border-t border-gray-100 text-center">
+                <p class="text-sm text-gray-500">© 2025 Msingi AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-out',
-            once: true
-        });
-
-        // Modify the existing blog.js to add AOS attributes to dynamically loaded posts
-        document.addEventListener('DOMContentLoaded', function() {
-            const originalCreatePostElement = window.createPostElement;
-            window.createPostElement = function(post) {
-                const element = originalCreatePostElement(post);
-                element.setAttribute('data-aos', 'fade-up');
-                return element;
-            };
-        });
-    </script>
 
     <!-- Scroll-to-hide navigation -->
     <script>
