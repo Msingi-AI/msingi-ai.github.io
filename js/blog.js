@@ -71,59 +71,20 @@ function createPostCard(post) {
     const categoryColor = categoryColors[category] || 'bg-indigo-100 text-indigo-800';
     
     return `
-        <article class="bg-white rounded-2xl border border-gray-200/50 overflow-hidden hover:shadow-lg hover:border-indigo-200 transition-all duration-300 group">
-            <a href="${postUrl}" class="block">
-                <div class="flex flex-col lg:flex-row">
-                    <!-- Content Section -->
-                    <div class="flex-1 p-8">
-                        <!-- Header with Category and Date -->
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="inline-flex items-center px-3 py-1 text-sm font-semibold ${categoryColor} rounded-full">
-                                ${category}
-                            </div>
-                            <time class="text-sm text-gray-500 font-medium" datetime="${post.date}">${formattedDate}</time>
-                        </div>
-                        
-                        <!-- Title -->
-                        <h2 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors leading-tight">
-                            ${post.title}
-                        </h2>
-                        
-                        <!-- Excerpt -->
-                        <p class="text-gray-600 leading-relaxed mb-6 text-base line-clamp-2">
-                            ${post.excerpt}
-                        </p>
-                        
-                        <!-- Author and CTA -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
-                                    <span class="text-white font-bold text-xs">${post.author.charAt(0)}</span>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold text-gray-900">${post.author}</p>
-                                </div>
-                            </div>
-                            <div class="inline-flex items-center text-indigo-600 group-hover:text-indigo-700 transition-colors text-sm font-semibold">
-                                Read Article
-                                <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Visual Element -->
-                    <div class="w-full lg:w-64 bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center lg:border-l border-gray-100">
-                        <div class="text-center p-6">
-                            <div class="w-16 h-16 bg-indigo-600 rounded-2xl mx-auto mb-3 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                </svg>
-                            </div>
-                            <p class="text-indigo-600 font-medium text-sm">Research Article</p>
-                        </div>
-                    </div>
+        <article class="py-12 border-b border-gray-200">
+            <a href="${postUrl}" class="block group">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">${category}</span>
+                    <time class="text-sm text-gray-500" datetime="${post.date}">${formattedDate}</time>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                    ${post.title}
+                </h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    ${post.excerpt}
+                </p>
+                <div class="text-sm text-gray-500">
+                    <span class="font-medium text-gray-900">${post.author}</span>
                 </div>
             </a>
         </article>
@@ -206,10 +167,8 @@ async function loadBlogPosts() {
             return dateB - dateA; // Descending order
         });
 
-        // Clear container and create grid for post cards
+        // Clear container
         postsContainer.innerHTML = '';
-        postsContainer.innerHTML = '<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2"></div>';
-        const grid = postsContainer.querySelector('.grid');
 
         // Create post cards directly from index.json data
         const postCards = posts.map(post => {
@@ -217,7 +176,7 @@ async function loadBlogPosts() {
             return createPostCard(post);
         }).join('');
         
-        grid.innerHTML = postCards;
+        postsContainer.innerHTML = postCards;
         
         debug('Successfully loaded all blog posts');
     } catch (error) {
