@@ -60,21 +60,14 @@ function createPostCard(post) {
     const postUrl = getAssetUrl(`posts/html/${htmlFilename}`);
     debug('Creating post card with URL:', postUrl);
     
-    // Determine category and color
-    const category = post.category || 'Research';
-    const categoryColors = {
-        'Research': 'bg-indigo-100 text-indigo-800',
-        'Tutorial': 'bg-purple-100 text-purple-800',
-        'Case Study': 'bg-green-100 text-green-800',
-        'Announcement': 'bg-orange-100 text-orange-800'
-    };
-    const categoryColor = categoryColors[category] || 'bg-indigo-100 text-indigo-800';
+    // Only show category if it exists
+    const category = post.category || '';
     
     return `
         <article class="py-12 border-b border-gray-200">
             <a href="${postUrl}" class="block group">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">${category}</span>
+                    ${category ? `<span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded">${category}</span>` : ''}
                     <time class="text-sm text-gray-500" datetime="${post.date}">${formattedDate}</time>
                 </div>
                 <h2 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
