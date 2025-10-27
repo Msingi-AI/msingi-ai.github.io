@@ -1,12 +1,11 @@
 {
   "posts": [
     {
-      "filename": "state-of-multilingual-LLM-Safety-Research.md",
-      "title": "The State of Multilingual LLM Safety Research: From Measuring the Language Gap to Mitigating It",
-      "date": "2025-08-25",
-      "author": "Kiplangat Korir",
-      "excerpt": "A deep dive into the critical gaps in multilingual AI safety and the emerging strategies to bridge them",
-      "type": "Featured Article"
+      "filename": "beyond_language.md",
+      "title": "Beyond Language: Why African AI Needs More Than Translation",
+      "date": "2025-09-25",
+      "author": "MsingiAI Research Team",
+      "excerpt": "At MsingiAI, we're going beyond translation to make bias detection and fairness central to African language AI. Here's how we're addressing the deeper challenges shaping equitable AI development across the continent"
     },
     {
       "filename": "msingi1.md",
